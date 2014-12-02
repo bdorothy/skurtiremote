@@ -1,0 +1,16 @@
+  			{exp:mtt_favourites:form            
+            entry_id="{entry_id}" 
+            return="{current_url}"
+            form_id="wishlist"
+            entry_id = "{embed:entry_id}"
+            } 
+            <div class="alert"></div>
+            <div class="spinner"></div>
+            <i class="icon i-heart"></i>         
+			{if '{exp:mtt_favourites:saved entry_id="{entry_id}"}' == 'y'}
+            <a onClick="myfunction();" style="cursor:pointer">Add to wishlist</a>
+            {if:else}
+             <a onClick="myfunction();" style="cursor:pointer">Remove from wishlist</a>
+            {/if}
+            <div class="loader"></div>
+            {/exp:mtt_favourites:form}

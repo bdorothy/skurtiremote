@@ -1,71 +1,147 @@
-<link rel="stylesheet" type="text/css" href="{skin_url}/plugins/countdown/css/countdown.css" media="screen" />
-<script src="{skin_url}/plugins/countdown/js/countdown.min.js"></script>
- <script>
-      $(function(){
-
-$('[data-countdown]').each(function() {
-var $this = $(this), finalDate = $(this).data('countdown');
-$this.countdown(finalDate, function(event) {
-$this.html(event.strftime('%D days %H:%M:%S'));
-});
-});
-
-});
-    </script>
-<div class="container" style="margin-bottom:40px;">
-<div class="row">    
-<div id="product_view">    
 {exp:channel:entries channel="products" limit="1"}    
-{exp:cartthrob:add_to_cart_form
-entry_id="{entry_id}"
-return="/shopping-cart"
-}
-    <div class="col-xs-12">
-    {embed="widgets/breadcrumbs"  crumb1="{title}"}
-    </div>
-        
-    <div class="col-xs-12 col-sm-5">
-    asdf
-    </div>
-
-
-    <div class="col-xs-12 col-sm-7">
-   		<h1>{title}</h1>
-        <div>{product_description}</div>
-        
-        <div class="col-xs-12 col-sm-6 mt50">
-        <div class="">Product Code : {product_sku}</div>
-        <div class="sp">{exp:currency_select:converted price="{op:numeric}"}</div>
-        <div class="stock">In Stock</div>
-        <div class="stock">Delivery : {exp:siteconfig:get item="default_shipping_duration"}</div>
-        
-        {exp:cartthrob:item_options entry_id="{entry_id}" }
-		{select}
-		<option {selected} value="{option_value}">{option_name} {price}</option>
-		{/select}
-		{/exp:cartthrob:item_options}  <br>
-        
-        he Size
-            <input type="text" name="item_options[my_height]" value="" />  <br>
-Salwar Size <input type="text" name="item_options[my_weight]" value="" /> 
-
-
- 
- 
+<div class="container mb50" id="product_view">
+<div class="row">
+{embed="widgets/breadcrumbs"  crumb1="{title}"}
+</div>
+<div class="row">
+        <div class="col-md-5">
+        {pi}
+        <img id="product" src='{pi:image}' data-zoom-image="images/large/image1.jpg" class="img-responsive"/>
+        {/pi}  
         </div>
+        <div class="col-md-7">
+        <h1>{title}</h1>
+       	<!-- Attributes -->
+        <p>
+        {a}
+        {if a:an != "" && a:av != ""}
+        {if a:count == 1}
+        <table class="table table-striped" style="border:1px solid #ccc">
+        <tbody>
+		{/if}        
+        <tr>
+        <td>{a:an}</td>
+        <td> : </td>
+        <td>{a:av}</td>        
+       
+        </tr>
+        {if a:count == a:total_rows}
+        </tbody>
+        </table>
+        {/if}        
         
+        {/if}
+        {/a}
+        </p>
+        <!-- Attributes -->
+        <div class="row">
         
-        
-        
-        <div class="col-xs-12 col-sm-6 mt50">
-        <button class="btn btn-danger btn-lg">Add to Cart</button>
-        </div>       
-        <div class="clearfix"></div> 
-    
-    </div>
-{/exp:cartthrob:add_to_cart_form}    
+            <div class="col-md-6">
+            
+            <!-- Add to Wishlist -->
+            <div  class="pull-left">
+            {exp:mtt_favourites:form            
+            entry_id="{entry_id}" 
+            return="{current_url}"
+            form_id="wishlist"
+            } 
+            <span class="glyphicon glyphicon-heart" style="color:#C00"></span><div class="loader pull-left" style="display:none"></div>    
+			{if '{exp:mtt_favourites:saved entry_id="{entry_id}"}' == 'y'}
+            <input type="submit" name="wishlist" id="bt"  value="Remove from Wishlist" class="btn btn-default btn-xs" style="border:none">     
+            {if:else}
+            <input type="submit" name="wishlist" id="bt"  value="Add to Wishlist" class="btn btn-default btn-xs" style="border:none"> 
+            {/if}
+            {/exp:mtt_favourites:form}           
+            
+            </div>
+            <!-- Add to Wishlist -->
+            <div class="pull-left" style="font-size:11px; margin-top:3px">| {exp:ls_ratings:avg_score entry_id="{entry_id}"}</div>
+            <div class="clearfix"></div>
+            
+            
+            <div class="mt10">Product Code : {product_sku}</div>
+            <div class="sp">{exp:currency_select:converted price="{op:numeric}"}</div>
+            
+            {if "{exp:currency_select:get_currency_code}" != "INR"}
+            <div class="info">Extra Shipping Charges will be applicable for overseas orders.</div>
+            {/if}
+            
+       		<div class="stock">In Stock</div>
+        	<div class="stock">Delivery : {exp:siteconfig:get item="default_shipping_duration"}</div>
+            </div>
+            
+            {exp:cartthrob:add_to_cart_form
+			entry_id="{entry_id}"
+			return="/shopping-cart"
+			}
+            <div class="col-md-6 mt10"  style="border-left:1px solid #ccc">
+            <div>
+            {exp:cartthrob:item_options entry_id="{entry_id}" }
+			{select}
+			<i class="loader"></i><option {selected} value="{option_value}">{option_name} {price}</option>
+			{/select}
+			{/exp:cartthrob:item_options} 
+            </div>
+            
+            <div class="mt20">
+            <button class="btn btn-danger btn-lg">Add to Cart</button>
+            </div>
+            <div>
+            
+            <div class="mt30">
+           
+            <i class="icon i-cart"></i>100% Secure Shopping<br>
+            <i class="icon i-spinner-6"></i>Easy Returns<br>
+            <div style="margin-left:8px;"><strong style=" font-size:16px">{exp:currency_select:converted_symbol price="{op:numeric}"}</strong><span class="ml5">Lowest Price</span></div>
+            </div>
+            <i class="icon i-thumbs-up"></i>100% Quality Assured<br>
+            
+             </div>
+            
+            </div>            
+			{/exp:cartthrob:add_to_cart_form}   
+            
+            
+          </div>
+        </div>
+</div>
+</div> 
 {/exp:channel:entries}
-</div>
-</div>
-</div>
+<script>
 
+    $('#product').elevateZoom({
+    zoomType: "inner",
+cursor: "crosshair",
+zoomWindowFadeIn: 500,
+zoomWindowFadeOut: 750
+   }); 
+
+$(document).ready(function(e) { 
+
+
+/* Wishlist */		 
+$('#wishlist').ajaxForm({
+	dataType: 'json',
+	beforeSubmit: function () {
+	$(".loader").css("display","block");
+	//$(".spinner").html("Processing .... ");
+	},
+	success: function(data) {	
+	$(".loader").css("display","none");
+	window.scrollTo(0,0);
+	//$("#progress").removeClass("spinner");	
+	//alert(data.errors.toSource());
+	if (data.success) {
+	var bt = $('#bt');
+	val = bt.val();
+	bt.val(val === "Remove from Wishlist" ? "Add to Wishlist" : "Remove from Wishlist");
+	} 		 
+	 else{			
+	alert('Something went wrong');
+	};			 
+	}	
+	});
+/* Wishlist */
+
+});
+</script>

@@ -880,7 +880,7 @@ class Content_publish extends CP_Controller {
 			}
 		/*
 		/* -------------------------------------------*/
-
+		
 		return $row;
 	}
 

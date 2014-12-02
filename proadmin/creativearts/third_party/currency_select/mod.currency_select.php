@@ -170,6 +170,11 @@ class Currency_select {
 	return $prefix = $currency_code.' '.$this->get_prefix($currency_code);
 	}
 	
+	public function converted_symbol(){	
+	$currency_code = $this->get_currency_code();
+	return $prefix = $this->get_prefix($currency_code);
+	}
+	
 	// show converted currency_code
 
 	public function converted(){
@@ -196,7 +201,10 @@ class Currency_select {
 					break;
 				case "aud":
 					$prefix = "$";					
-					break;				
+					break;		
+				case "cad":
+					$prefix = "$";					
+					break;		
 				default: $prefix = "&#8377;"; 
 			}
 	return $prefix;		
@@ -230,7 +238,7 @@ class Currency_select {
 	$op = $this->EE->TMPL->fetch_param('op');
 	$sp = $this->EE->TMPL->fetch_param('sp');
 	$percent = 100 - ($sp/$op)*100;
-	return round($percent,0).'%';
+	return round($percent,0).'%	';
 	}
 	
 }

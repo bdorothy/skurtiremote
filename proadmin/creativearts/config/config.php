@@ -24,10 +24,8 @@ $config['cookie_httponly'] = 'y';
 
 $config['ip2nation'] = 'y';
 $config['ip2nation_db_date'] = '1335677198';
-$config['index_page'] = '';
 
 // END EE config items
-
 
 
 /*

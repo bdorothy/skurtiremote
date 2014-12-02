@@ -59,7 +59,7 @@ h4, h5, h6{margin-top:0px}
 .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:hover, .navbar-default .navbar-nav>.open>a:focus{color:#fcdf15}
 #topbar .cart{ max-height:300px; overflow-y:scroll}
 
-
+.loader{width:25px; height:25px; background:url(/theme/standard/skin/images/global/spinner.gif) no-repeat;}
 
 
 
@@ -155,11 +155,11 @@ p.bjqs-caption{background: rgba(0,0,0,0.5); color:#fcdf15; font-size:20px;}
 /*-------------------------------------------------------*/
 
 input[type=search] {float:left} 
-input[type=submit] {float:left} 
+/*input[type=submit] {float:left} */
 #searchtext {overflow: hidden;padding-right: .5em;} 
 
 textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="date"]:focus, input[type="month"]:focus, input[type="time"]:focus, input[type="week"]:focus, input[type="number"]:focus, input[type="email"]:focus, input[type="url"]:focus, input[type="search"]:focus, input[type="tel"]:focus, input[type="color"]:focus, .uneditable-input:focus {border-color: #5c2d51;box-shadow: none;outline: 0 none;}
-
+.info{color:#999; font-size:12px;}
 
 
 
@@ -388,6 +388,7 @@ transform: scale(1);
     font-size: 14px;
     font-weight: bold;  
     text-transform: uppercase;
+	margin-bottom:15px;
 }
 .single-widget ul li a {
     color: #333;
@@ -458,7 +459,8 @@ ul li {
 /******* PRODUCT VIEW *******/
 /*-------------------------------------------------------*/
 #product_view{margin-bottom:20px !important;}
-#product_view h1{font-size:24px; color:#000; font-weight:bold; letter-spacing:-1px;}
+#product_view h1{font-size:24px; color:#000; font-weight:bold; letter-spacing:-1px; margin-top:0px}
 #product_view .sp{font-size:26px; color:#0088CB; font-weight:bold; letter-spacing:-1px; margin:0px;}
 #product_view .stock{color:#285800; font-size:14px;}
 #product_view .description{font-size:18px;}
+#product_view hr{}
