@@ -1,0 +1,64 @@
+{preload_replace:template_group="store"}
+{preload_replace:template="index"}
+
+
+{embed="{template_group}/_header" title="Account / Purchased Items" template_group="{template_group}" template="{template}" }
+ 
+</head>
+<body data-spy="scroll" data-target=".bs-docs-sidebar">
+	{embed="{template_group}/_navbar" template_group="{template_group}" template="{template}"}
+
+	{embed="{template_group}/_subhead" template_group="{template_group}" template="{template}"}
+
+	{!-- since we're using twitter bootstrap, the main content area is designated "container", or some other specific classes depending on your requirements--}
+	<div class="container">
+		{!-- twitter bootstrap breaks up content into rows. The main section of this template is all one row. Rows can also be broken up into more rows --}
+		<div class="row">
+
+			{!-- twitter bootstrap breaks up (by default) pages into a 12 column grid. span3, span9 designate how much space these sections will take up --}
+			<div class="span3">
+				<div class="bs-docs-sidenav">
+					{embed="{template_group}/_leftnav" template_group="{template_group}" template="{template}"}
+					{embed="{template_group}/_also_purchased" template_group="{template_group}" template="{template}"}
+				</div>
+			
+			
+			</div>
+
+			<div class="span9">
+				<section id="account">
+					{exp:channel:entries channel="purchased_items" limit="30" dynamic="off" author_id="CURRENT_USER" status="open|Complete" }
+						
+						{exp:cartthrob:order_items order_id="{purchased_order_id}" entry_id="{purchased_id}" }
+							<div class="product">
+								<h3>{item:title}</h3>
+								{if item:product_thumbnail}
+								<a href="{path='{template_group}/product_detail/{item:entry_id}'}">
+									<img src="{item:product_thumbnail}" />
+								</a>
+								{/if}
+								<p>
+									Purchase Price: {item:price} (w/ tax: {item:price_plus_tax})
+								<br /><a href="{path={template_group}/product_detail/{item:entry_id}}">Review &raquo;</a>
+								<br /><a href="{path={template_group}/invoice}/{exp:cartthrob:view_encrypted_string string='{purchased_order_id}'}">View invoice &raquo; </a></p>
+								{if item:product_download_url}
+									{exp:cartthrob:download_file_form field="product_download_url" entry_id="{item:entry_id}" }
+										<input type="submit" value="Download Now!" /> 
+									{/exp:cartthrob:download_file_form}
+								{/if}
+								
+								{if purchased_license_number}
+									<p>License number: {purchased_license_number}</p>
+								{/if}
+							</div>
+						{/exp:cartthrob:order_items}
+						{if no_results}
+					        You haven't made any purchases yet. 
+					    {/if}
+					{/exp:channel:entries}
+				</section>
+				</div>
+		</div>
+	</div>
+
+	 	{embed="{template_group}/_footer" template="{template}" template_group="{template_group}"}

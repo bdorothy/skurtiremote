@@ -1,0 +1,28 @@
+{!-- VIEW CART CONTENTS / UPDATE QUANTITIES --}
+	<div class="store_block">
+		<h2>Cart Contents</h2>
+		
+	{!-- cart_items_info outputs information about your current cart, including products in the cart, weight, and prices. --}
+	{exp:cartthrob:cart_items_info}
+		{if no_results}
+		<p>Your cart is empty</p>
+		{/if}
+		{!-- outputting data that's only applicable for the first item. --}
+		{if first_row}
+			<h2>Thank You.</h2>
+			<p>Thank you for your donation commitment, please pay for your donation now.</p>
+		{/if}
+		<p>Title: {title} <br />
+
+			Personal Message: {item_options:personal_message}<br />
+			{!-- The delete URL links back to this page. 
+			The segments activate the delete_from_cart tag at the top of this template.--}
+			<a href="{path=cart_examples/include_delete_from_cart/{row_id}/{embed:template_group}/{embed:template}}">Delete</a><br />
+			</p>
+		
+		{if last_row}
+			{!-- these are just some of the variables available within the cart_items_info tag --}
+			<p><strong>Total: {cart_total}</strong></p>
+		{/if}
+	{/exp:cartthrob:cart_items_info}
+	</div>

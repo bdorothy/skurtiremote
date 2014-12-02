@@ -1,0 +1,11 @@
+{exp:channel:entries channel="products" limit="1"}
+Product Name: {title} {product_price}
+    {exp:cartthrob:add_to_cart_form return="cart_examples/single_page_checkout" entry_id="{entry_id}"}
+	Quantity <input type="text" name="quantity"/>
+	<input type="submit" /> 
+    {/exp:cartthrob:add_to_cart_form}
+{/exp:channel:entries}
+
+<br />Creates a form for adding products to the cart
+<br />NOTE: example requires "products" channel and entries
+<br />http://livecart.com/docs/tags_detail/add_to_cart_form/

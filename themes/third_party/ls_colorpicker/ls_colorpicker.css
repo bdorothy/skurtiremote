@@ -1,0 +1,90 @@
+.color{width:20px; height:20px;}
+select.colorpicker option{padding:5px;}
+.white{
+    background:#FFFFFF;
+	border:1px solid #ccc;
+}
+.silver{
+	background:#C0C0C0;
+}
+
+.grey{
+	background:#808080;
+}
+
+.black{
+	background:#000000;
+}
+
+.red{
+	background:#FF0000;
+}
+
+
+.maroon{
+	background:#800000;
+}
+
+.yellow{
+	background:#FFFF00;
+}
+
+.lime{
+	background:#00FF00;
+}
+
+.green{
+	background:#008000;
+}
+
+.aqua{
+	background:#00FFFF;
+}
+
+.teal{
+	background:#008080;
+}
+
+.blue{
+	background:#0000FF;
+}
+
+.navy{
+	background:#000080;
+}
+
+.pink{
+	background:#FF00FF;
+}
+
+.purple{
+	background:#800080;
+}
+
+.gold{
+	background:#FFD700;
+}
+
+.cream{
+	background:#FFF8DC;
+}
+
+.beige{
+	background:#F5F5DC;
+}
+
+.olive{
+	background:#808000;
+}
+
+.peach{
+	background:#FFDAB9;
+}
+
+.silver{
+	background:#C0C0C0;
+}
+
+.silver{
+	background:#C0C0C0;
+}

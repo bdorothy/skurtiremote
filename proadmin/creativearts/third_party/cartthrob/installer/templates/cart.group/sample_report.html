@@ -1,0 +1,22 @@
+Order totals made by the current logged in member
+
+<p>
+{exp:cartthrob:order_totals author_id="CURRENT_USER" status="not none" }
+Total: {total} <br />
+Transactions: {count}
+{/exp:cartthrob:order_totals}
+</p>
+
+{exp:cartthrob:order_items member_id="CURRENT_USER" }
+<div>
+<p>
+Title: {title}<br />
+Entry Id: {entry_id}<br />
+Quantity: {quantity}
+Price: {price}<br />
+    {if no_results}
+	No purchases have been made by this member
+    {/if}
+</p>
+</div>
+{/exp:cartthrob:order_items}

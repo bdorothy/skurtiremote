@@ -1,0 +1,71 @@
+{preload_replace:template_group="cart"}
+{preload_replace:template="package_detail"}
+
+{exp:channel:entries 
+	channel="store_packages" 
+	limit="1"}
+{embed="{template_group}/_header" title="{title} - Package Detail" template_group="{template_group}" template="{template}" }
+{/exp:channel:entries}
+ 
+</head>
+<body>
+	<div id="container">
+		<div id="main">
+			{embed="{template_group}/_store_header" template_group="{template_group}" template="{template}"}
+			{exp:channel:entries 
+				channel="store_packages" 
+				limit="1"}
+				<div class="product">
+					<div class="left_column">
+						<h1>{title}</h1>
+						{if packages_images}
+																<a href="{entry_id_path='{template_group}/package_detail'}"><img src="{packages_images}" /></a>
+														{/if}
+ 						{packages_description}
+ 							<p>Price: {packages_price} </p> 
+							<p>Price including tax {packages_price:plus_tax}</p> 
+						
+						{exp:cartthrob:add_to_cart_form 
+							entry_id="{entry_id}" 
+							return="{template_group}/view_cart"} 
+							<p>
+								{packages_packages}
+									<h3>{sub:title}</h3>
+									{exp:cartthrob:item_options entry_id="{sub:entry_id}"}
+										{if allow_selection}
+
+							<p>
+								            {if dynamic}
+								                <label>{option_label}</label>
+								                {input}
+								            {if:else}
+								                {if options_exist}
+								                    <label>{option_label}</label>
+								                    {select} 
+								                        <option {selected} value="{option_value}">
+								                            {option_name}{if option_price_numeric > 0} +{option_price}{/if}
+								                        </option>
+								                    {/select}
+								                    <br>
+								                {/if}
+								            {/if}
+							</p>
+										{/if}
+							        {/exp:cartthrob:item_options}
+								{/packages_packages}
+							</p>
+							<p>
+ 
+						 		<label for="product_quantity">Quantity</label>
+								<input type="text" id="product_quantity" name="quantity" size="8"  />
+ 							</p>
+							<input type="submit" value="Add to Cart" />
+
+						{/exp:cartthrob:add_to_cart_form}
+								
+					</div>
+					<div class="clear_both"></div>
+				</div>
+ 
+			{/exp:channel:entries}
+		{embed=cart/_footer_nav template="{template}" template_group="{template_group}"}

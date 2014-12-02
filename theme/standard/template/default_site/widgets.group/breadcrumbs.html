@@ -1,0 +1,15 @@
+<div class="container">
+<div class="row">    	
+        <div id="bc2" class="btn-group btn-breadcrumb">
+            <a href="{site_url}" class="btn btn-default"><i class="icon i-home-2" style="font-size:12px;"></i></a>            
+            <a href="{site_url}" class="btn btn-default"><div>Home</div></a>
+            {if embed:crumb1}
+            <a href="{site_url}{segment_1}" class="btn btn-default"><div>{embed:crumb1}</div></a>
+            {/if}
+            {if embed:crumb2}
+            <a class="btn btn-warning btn-inactive"><div>{embed:crumb2}</div></a> 
+            {/if}    
+        </div>
+</div>
+<hr>
+</div>

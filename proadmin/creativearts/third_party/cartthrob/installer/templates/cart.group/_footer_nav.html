@@ -1,0 +1,30 @@
+<div id="footer_nav">
+<p>
+	<a href="{site_url}">Home</a> 
+	&bull; <a href="{path='cart'}">Store</a>
+	&bull; <a href="{path='cart/about'}">About Us</a> 
+	&bull; <a href="{path='cart/contact'}">Contact Us</a> 
+	&bull; <a href="{path='cart/donate'}">Donate</a>	
+	&bull; <a href="{path='cart/privacy_policy'}">Privacy Policy</a>
+	&bull; <a href="{path='cart/returns'}">Return Policy</a>
+	&bull; &copy;{current_time format="%Y"}
+</p>
+</div>
+<div id="footer_logo">
+<p><img src="{theme_folder_url}third_party/cartthrob/store_themes/basic_white/images/small_store_logo.gif" /> powered by <a href="http://livecart.com">CartThrob eCommerce</a></p>
+</div>
+ 		</div>
+	</div>
+
+<div style="display:none">
+{!-- this form is used for hidden ajax submissions --}
+{exp:cartthrob:save_customer_info_form return="" id="hidden_save_customer_info_form" }
+<div class="cart_data">
+
+</div>
+<input type="submit" name="Submit" /> 
+{/exp:cartthrob:save_customer_info_form}
+</div>
+
+</body>
+</html>

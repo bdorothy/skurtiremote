@@ -1,0 +1,98 @@
+{preload_replace:template_group="store"}
+{preload_replace:template="index"}
+
+
+{embed="{template_group}/_header" title="Contact Us" template_group="{template_group}" template="{template}" }
+ 
+</head>
+<body data-spy="scroll" data-target=".bs-docs-sidebar">
+	{embed="{template_group}/_navbar" template_group="{template_group}" template="{template}"}
+
+	{embed="{template_group}/_subhead" template_group="{template_group}" template="{template}"}
+
+	{!-- since we're using twitter bootstrap, the main content area is designated "container", or some other specific classes depending on your requirements--}
+	<div class="container">
+		{!-- twitter bootstrap breaks up content into rows. The main section of this template is all one row. Rows can also be broken up into more rows --}
+		<div class="row">
+
+			{!-- twitter bootstrap breaks up (by default) pages into a 12 column grid. span3, span9 designate how much space these sections will take up --}
+			<div class="span3">
+				<div class="bs-docs-sidenav">
+					{embed="{template_group}/_leftnav" template_group="{template_group}" template="{template}"}
+					{embed="{template_group}/_also_purchased" template_group="{template_group}" template="{template}"}
+				</div>
+
+			</div>
+
+			<div class="span9">
+				<section id="about-us">
+					<div class="row">
+						<div class="span6">
+							<h1>Contact Us</h1>
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat .</p>
+							
+							{exp:email:contact_form user_recipients="false" recipients="info@mightyliverobot.com" charset="utf-8" class='form-horizontal'}
+							<fieldset id="contact_fields" class='form-horizontal'>
+
+ 							<div class="control-group">
+								<label class="control-label" for="from">
+								Your Email:
+								</label>
+								<div class="controls">
+									<div class="input-prepend">
+										<span class="add-on"><i class="icon-envelope"></i></span>
+										<input type="text" id="from" name="from"  value="{member_email}" placeholder="Your Email" />
+									</div>
+								</div>
+							</div> 
+
+
+ 							<div class="control-group">
+								<label class="control-label"  for="subject">
+								Subject
+								</label>
+								<div class="controls">
+									<input type="text" id="subject" name="subject" size="40" placeholder="Subject" />
+								</div>
+							</div> 
+
+ 
+							<div class="control-group">
+								<label class="control-label"  for="message">
+								Message
+								</label>
+								<div class="controls">
+									<textarea id="message" name="message" rows="6" >Email from: {if member_name}{member_name}{if:else}Guest{/if}, Sent at: {current_time format="%Y %m %d"}</textarea>
+								</div> 
+							</div>
+							<div class="control-group">
+							<span class="help-block">We will never pass on your details to third parties.</span>
+								<div class="form-actions">
+									
+									<button type="submit" class="btn btn-primary">Submit</button>
+								</div>
+							</div>
+							
+							</fieldset>
+							{/exp:email:contact_form}						
+						</div>
+						<div class="span3">
+							<address>
+							<h3>Address</h3>
+									 <p>
+										{if '{exp:cartthrob:view_setting store_phone="yes"}'!=''}{exp:cartthrob:view_setting store_phone="yes"}<br><br>{/if}
+										{exp:cartthrob:view_setting store_address1="yes"}<br />
+										{if '{exp:cartthrob:view_setting store_address2="yes"}'!=''}{exp:cartthrob:view_setting store_address2="yes" param="1"}<br />{/if}
+ 										{exp:cartthrob:view_setting store_city="yes"}, {exp:cartthrob:view_setting store_state="yes"}<br />
+										{exp:cartthrob:view_setting store_zip="yes"}<br>
+										{exp:cartthrob:view_setting store_country="yes"}
+										 </p>
+							</address>
+						</div>
+					</div>
+				</section>
+				</div>
+		</div>
+	</div>
+
+	 	{embed="{template_group}/_footer" template="{template}" template_group="{template_group}"}

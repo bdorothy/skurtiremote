@@ -1,0 +1,78 @@
+{preload_replace:template_group="cart"}
+{preload_replace:template="checkout"}
+ 
+{embed="{template_group}/_header" title="Checkout" template_group="{template_group}" template="{template}" }
+ 
+</head>
+<body>
+	<div id="container">
+		<div id="main">
+			{embed="{template_group}/_store_header" template_group="{template_group}" template="{template}"}
+ 					<div class="left_column">
+						<h1>Billing Information</h1>
+						{if "{exp:cartthrob:total_items_count}" > 0}
+						
+						<div id="checkout_header">
+
+							<div id="checkout_totals">
+								<table>
+									<tr>
+										<td><span class="sale_price">Total</span></td>
+										<td><span class="sale_price"><span class="cart_total">{exp:cartthrob:cart_total}</span></span></td>
+									</tr>							
+									<tr>
+										<td>Subtotal</td>
+										<td><span class="cart_subtotal">{exp:cartthrob:cart_subtotal}</span></td>
+									</tr>
+									<tr>
+										<td>Shipping</td>
+										<td><span class="cart_shipping">{exp:cartthrob:cart_shipping}</span></td>
+									</tr>
+									<tr>
+										<td>Tax</td>
+										<td><span class="cart_tax">{exp:cartthrob:cart_tax}</span></td>
+									</tr>
+									<tr>
+										<td>Discount</td>
+										<td>-<span class="cart_discount">{exp:cartthrob:cart_discount}</span></td>
+									</tr>
+								</table>
+ 							</div>
+							<div id="checkout_notes">
+								<p>Expected shipping time 
+								is 3-7 days<br /><br />
+
+								*All fields are required</p>
+							</div>
+							<div class="clear_both"></div>
+						</div>
+
+						{!-- add secure_action="yes" parameter if you want to submit this form using HTTPS:// connection --}
+						{exp:cartthrob:checkout_form 
+							return="{template_group}/order_info"}
+							
+							{if {exp:cartthrob:view_setting allow_gateway_selection="yes"}}
+								<p><label for="gateway">Select a payment method</label>
+								{exp:cartthrob:gateway_select id="gateway"}</p>
+							{/if}
+							
+							<div id="checkout_form_gateway_fields">
+							{gateway_fields}
+							</div>
+							
+						    <input type="submit" class="cart_submit_button" value="Complete Checkout" />
+						{/exp:cartthrob:checkout_form}
+
+
+						{if:else}
+							<p>You have no items in your cart. <a href="{path=cart/index}">Continue shopping</a></p>
+						{/if}
+					</div>
+					<div class="right_column">
+					{exp:cartthrob:cart_items_info limit="1" order_by="entry_id" sort="desc"}
+ 						{embed="{template_group}/_right_column" entry_id="{entry_id}" template_group="{template_group}" template="{template}"}
+					{/exp:cartthrob:cart_items_info} 						
+						
+					</div>
+					<div class="clear_both"></div>
+  				{embed=cart/_footer_nav template="{template}" template_group="{template_group}"}

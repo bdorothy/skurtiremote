@@ -1,0 +1,29 @@
+<h2>Standard Checkout</h2>
+{exp:cartthrob:checkout_form  
+	gateway="dev_template"
+	return="cart/order_info" 
+	}
+ 	
+	{gateway_fields}
+
+	<input type="submit" value="Submit" />
+{/exp:cartthrob:checkout_form}
+
+<h2>Create User During Checkout</h2>
+{exp:cartthrob:checkout_form 
+    	create_user="yes"
+	gateway="dev_template"
+	group_id="6"}
+            Username: <input type="text" class="required" name="username" value="" />
+            Email Address: <input type="text" class="required" name="email_address" value="" />
+            Screen Name: <input type="text" name="screen_name" value="" />
+            Password: <input type="password" name="password"  value="" />
+            Confirm Password: <input type="password" name="password_confirm" value="" /> 
+ 	
+	{gateway_fields}
+
+	<input type="submit" value="Submit" />
+{/exp:cartthrob:checkout_form}
+
+<br />Generates a checkout form
+<br />http://livecart.com/docs/tags_detail/checkout_form/

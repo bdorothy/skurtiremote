@@ -1,0 +1,141 @@
+{preload_replace:template_group="store"}
+{preload_replace:template="index"}
+ 
+{embed="{template_group}/_header" title="Checkout" template_group="{template_group}" template="{template}" }
+
+</head>
+<body>
+	{embed="{template_group}/_navbar" template_group="{template_group}" template="{template}"}
+
+	{embed="{template_group}/_subhead" template_group="{template_group}" template="{template}"}
+
+	{!-- since we're using twitter bootstrap, the main content area is designated "container", or some other specific classes depending on your requirements--}
+	<div class="container">
+		{!-- twitter bootstrap breaks up content into rows. The main section of this template is all one row. Rows can also be broken up into more rows --}
+		<div class="row">
+
+			{!-- twitter bootstrap breaks up (by default) pages into a 12 column grid. span3, span9 designate how much space these sections will take up --}
+			<div class="span3">
+				<div class="bs-docs-sidenav">
+					{embed="{template_group}/_leftnav" template_group="{template_group}" template="{template}"}
+			
+			{!-- we're going to load the "also purchased" info for the last item added to the cart--}
+			{exp:cartthrob:cart_items_info limit="1" order_by="entry_id" sort="desc"}
+				{embed="{template_group}/_also_purchased" template_group="{template_group}" template="{template}" entry_id="{entry_id}"}
+			{/exp:cartthrob:cart_items_info}
+			
+				</div>
+
+ 			</div>
+
+			<div class="span9">
+					<section id="checkout-section">
+					{if "{exp:cartthrob:total_items_count}" > 0}
+	 					<h1>Checkout</h1>
+
+	  					<p>{exp:cartthrob:view_setting store_shipping_estimate="yes"}</p>
+						
+						{!-- see  http://livecart.com/docs/tags/global_form_settings/index.html#inline-errors --}
+						
+						{exp:cartthrob:checkout_form 
+								error_handling="inline" 
+								class="form-horizontal"
+								required="first_name";
+								create_user="yes" group_id="5"
+								return="{template_group}/order_info"}
+
+								<div class="alert alert-info">
+									<span class="help-block">*All fields are required</span>
+								</div>
+ 
+								{!-- the next part handles inline errors. the error_handling=inline parameter is set
+									so standard error messages will not be shown
+									 --}
+								{if errors_exist}
+								<div class="control-group">
+									{!-- not a fan of inline JS, but the if_errors conditional works only inside the checkout form 
+										so if you want to use JS, you'll need to use inline JS.
+										--}
+									<script type="text/javascript">
+										jQuery(document).ready(function($){
+								 			{errors}
+												{if field_error}
+													$("#{field}").closest(".control-group").addClass("error");
+													$("#{field}").after('<span class="help-inline">{error}</span>');
+												{/if} 
+											{/errors}
+										});
+									</script>
+									{errors}
+										{if first_error}
+										<div class="alert alert-error">
+										<strong>Alert</strong> There are <span class="badge badge-warning">{error:total_results}</span> error(s). Please correct the errors listed below
+										</div>
+										{/if}
+											
+											<p>
+												{if field_error}<span class="label label-important">{field}</span>{/if} 
+												{if global_error}<span class="label label-important">Error</span>{/if} 
+												{error}
+											</p>
+ 									{/errors}
+									
+								</div>
+								{/if}
+							{if {exp:cartthrob:view_setting allow_gateway_selection="yes"}}
+							
+							{!-- note: stripe payment gateway does not work well with this gateway switching method
+								stripe adds its own JS after the form close, and even when changing the gateway, this JS 
+								is not removed, which can lead to erroneous error messages. 
+								--}
+								<div class="control-group">
+							 		<label for="gateway" class="control-label">Select a payment method</label>
+								    <div class="controls">
+										{exp:cartthrob:customer_info}{exp:cartthrob:gateway_select id="gateway" selected="{gateway}"}{/exp:cartthrob:customer_info} 
+									</div>
+			 					</div>
+							{/if}
+
+							<div id="checkout_form_gateway_fields">
+								{gateway_fields}
+							</div>
+
+							{if logged_out}
+								<fieldset>
+									<legend>Member Registration</legend>
+									{exp:cartthrob:customer_info}
+									<div class="control-group">
+										<label for="gateway" class="control-label">Username</label>
+										<div class="controls">
+											<input type="text" value="{username}" name="username" /> 
+ 										</div>
+									</div>
+									
+									<div class="control-group">
+										<label for="gateway" class="control-label">Password</label>
+										<div class="controls">
+											<input type="password" value="" name="password" /> 
+ 										</div>
+									</div>
+ 									{/exp:cartthrob:customer_info}
+								</fieldset>
+							{/if}
+							<div class="control-group">
+	 						    <div class="form-actions">
+								{!-- do not add a name attribute to your submit button if you want it to work with stripe payment gateway --}
+								    <input type="submit" id="checkout_complete" class="btn btn-success"  value="Complete Checkout" />
+								</div>
+		 					</div>
+
+	 					{/exp:cartthrob:checkout_form}
+	 			{if:else}	
+	 					<h1>Checkout</h1>
+						 <p>You have no items in your cart. </p>
+						<a href="{path={template_group}}" class="btn btn-primary btn-small">Continue shopping.</a> 
+				{/if}
+					</section>
+				</div>
+		</div>
+	</div>
+
+ 	{embed="{template_group}/_footer" template="{template}" template_group="{template_group}"}

@@ -1,0 +1,54 @@
+{preload_replace:template_group="cart_examples"}
+{preload_replace:template="software"}
+{embed=cart_examples/include_header title="Software Store" }
+
+</head>
+<body>
+ 
+	<h1>Software Store</h1>
+	<p>This page shows an example of how you can protect your downloadable products</p>
+ 
+	<div class="store_block">
+		<h2>Your Previous Software Purchases</h2>
+		{exp:channel:entries channel="purchased_items" author="CURRENT_USER" search:purchased_product_download_url="not IS_EMPTY"}
+			{if no_results}
+				<h3>You have not purchased any software, but here's a link anyway</h3>
+				{!-- this is where you would add a link to the file the customer just purchased 
+				to keep things simple, i've just added a link to a file that ships with 
+				CartThrob so you can test the download & encryption. 
+				--}
+				{exp:cartthrob:download_file_form 
+					file="{theme_folder_url}third_party/cartthrob/images/cartthrob_logo_bg.jpg" }
+					<input type="submit" value="submit" /> 
+				{/exp:cartthrob:download_file_form}
+ 			{/if}
+			{!-- 
+				There are 2 methods for providing downloads: download_file_form, and get_download_link. 
+				Download_file_form has the advantage of hiding the link. 
+				get_download_link will allow you to output an encrypted link that can be tied to a group or member id.
+				 --}
+			<a href="{exp:cartthrob:get_download_link 
+						file='{theme_folder_url}third_party/cartthrob/images/cartthrob_logo_bg.jpg'
+						member_id ='{logged_in_member_id}'}"> download {title}</a>
+			<br />
+		{/exp:channel:entries}
+	</div>	
+ 
+	
+	<div class="store_block">
+		<h2>Tags used in this template</h2>
+		<ul>
+			<li><a href="http://livecart.com/docs/tags_detail/download_file_form">download_file_form</a></li>
+			<li><a href="http://livecart.com/docs/tags_detail/get_download_link">get_download_link</a></li>
+		</ul>
+		<h2>Concepts used in this template</h2>
+		<ul>
+			<li><a href="http://livecart.com/docs/sub_pages/purchased_items_overview">Purchased Items channel</a></li>
+		</ul>
+	</div>
+	<div class="store_block">
+		{embed=cart_examples/include_footer}
+	</div>
+
+</body>
+</html>

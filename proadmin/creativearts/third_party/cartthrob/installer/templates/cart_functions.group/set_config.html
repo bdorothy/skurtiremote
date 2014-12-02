@@ -1,0 +1,11 @@
+{exp:cartthrob:set_config}
+	{if group_id == 7}
+		{set_price_field channel="products" field="product_discounted_price"}
+	{if:else}
+		{set_price_field channel="products" field="product_price"}
+	{/if}
+{/exp:cartthrob:set_config}
+
+<br />Allows you to override some cart settings on the fly
+<br />NOTE: example requires that you have a group_id:7, a "products" channel, "product_price and "product_discounted_price" fields
+<br />http://livecart.com/docs/tags_detail/set_config/

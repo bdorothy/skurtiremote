@@ -1,0 +1,157 @@
+{preload_replace:template_group="store"}
+{preload_replace:template="index"}
+ 
+{embed="{template_group}/_header" title="Checkout - Shipping" template_group="{template_group}" template="{template}" }
+
+</head>
+<body>
+	{embed="{template_group}/_navbar" template_group="{template_group}" template="{template}"}
+
+	{embed="{template_group}/_subhead" template_group="{template_group}" template="{template}"}
+
+	{!-- since we're using twitter bootstrap, the main content area is designated "container", or some other specific classes depending on your requirements--}
+	<div class="container">
+		{!-- twitter bootstrap breaks up content into rows. The main section of this template is all one row. Rows can also be broken up into more rows --}
+		<div class="row">
+
+			{!-- twitter bootstrap breaks up (by default) pages into a 12 column grid. span3, span9 designate how much space these sections will take up --}
+			<div class="span3">
+				<div class="bs-docs-sidenav">
+			{embed="{template_group}/_leftnav" template_group="{template_group}" template="{template}"}
+			
+			{!-- we're going to load the "also purchased" info for the last item added to the cart--}
+			{exp:cartthrob:cart_items_info limit="1" order_by="entry_id" sort="desc"}
+				{embed="{template_group}/_also_purchased" template_group="{template_group}" template="{template}" entry_id="{entry_id}"}
+			{/exp:cartthrob:cart_items_info}
+				</div>
+
+			</div>
+
+			<div class="span9">
+					<section id="shipping-section">
+					{if "{exp:cartthrob:total_items_count}" > 0}
+	 					<h1>Shipping</h1>
+
+	  					<p>{exp:cartthrob:view_setting store_shipping_estimate="yes"}</p>
+						
+						{!-- see  http://livecart.com/docs/tags/global_form_settings/index.html#inline-errors --}
+						
+						{exp:cartthrob:update_cart_form 
+								error_handling="inline" 
+								id="shipping_form" 
+								class="form-horizontal"
+								return="{template_group}/checkout"}
+
+								<div class="alert alert-info">
+									<span class="help-block">*All fields are required</span>
+								</div>
+								{if errors_exist}
+								<div class="control-group">
+									{!-- not a fan of inline JS, but the if_errors conditional works only inside the checkout form 
+										so if you want to use JS, you'll need to use inline JS.
+										--}
+									<script type="text/javascript">
+										jQuery(document).ready(function($){
+								 			{errors}
+												{if field_error}
+													$("#{field}").closest(".control-group").addClass("error");
+													$("#{field}").after('<span class="help-inline">{error}</span>');
+												{/if} 
+											{/errors}
+										});
+									</script>
+									{errors}
+										{if first_error}
+										<div class="alert alert-error">
+										<strong>Alert</strong> There are <span class="badge badge-warning">{error:total_results}</span> error(s). Please correct the errors listed below
+										</div>
+										{/if}
+											
+											<p>
+												{if field_error}<span class="label label-important">{field}</span>{/if} 
+												{if global_error}<span class="label label-important">Error</span>{/if} 
+												{error}
+											</p>
+ 									{/errors}
+									
+								</div>
+								{/if}
+							
+							
+							{exp:cartthrob:customer_info}
+								<div class="control-group">
+									<label class="control-label" for="shipping_first_name">Shipping First Name: </label>
+									
+		 						    <div class="controls">
+										<input type="text" name="shipping_first_name" id="shipping_first_name" value="{customer_shipping_first_name}" /><br />
+									</div>
+			 					</div>
+			
+								<div class="control-group">
+									<label  class="control-label" for="shipping_last_name">Shipping Last Name: </label>
+
+									<div class="controls">
+										<input type="text" name="shipping_last_name" id="shipping_last_name" value="{customer_shipping_last_name}" /><br />
+									</div>
+								</div>
+
+								<div class="control-group">
+									<label class="control-label" for="email_address">Email Address:</label>
+
+									<div class="controls">
+										<input type="text" id="email_address" name="email_address" value="{customer_email_address}" /><br />
+									</div>
+								</div>
+								
+								<div class="control-group">
+									<label class="control-label" for="shipping_state">Shipping State:</label>
+
+									<div class="controls">
+										{exp:cartthrob:state_select name="shipping_state" id="shipping_state" selected="{customer_shipping_state}"}<br />
+									</div>
+								</div>
+								
+								<div class="control-group">
+									<label class="control-label" for="shipping_country_code">Shipping Country:</label>
+
+									<div class="controls">
+										{exp:cartthrob:country_select name="shipping_country_code" id="shipping_country_code" selected="{customer_shipping_country_code}"}<br />
+									</div>
+								</div>	
+
+								<div class="control-group">
+									<label class="control-label" for="shipping_zip">Shipping Zip:</label>
+
+									<div class="controls">
+										<input type="text" name="shipping_zip" id="shipping_zip" value="{customer_shipping_zip}" /><br />
+									</div>
+								</div>			
+								
+								<div class="control-group">
+									
+									<div class="controls">
+									{exp:cartthrob:get_shipping_options}
+									</div>
+								</div>												
+							{/exp:cartthrob:customer_info}
+
+
+							<div class="control-group">
+	 						    <div class="form-actions">
+								    <input type="submit" class="btn btn-success" value="Continue Checkout" />
+								</div>
+		 					</div>
+
+	 					{/exp:cartthrob:update_cart_form}
+	 			{if:else}	
+
+	 					<h1>Shipping</h1>
+						 <p>You have no items in your cart. </p>
+						<a href="{path={template_group}}" class="btn btn-primary btn-small">Continue shopping.</a> 
+				{/if}
+					</section>
+				</div>
+		</div>
+	</div>
+
+ 	{embed="{template_group}/_footer" template="{template}" template_group="{template_group}"}

@@ -1,0 +1,22 @@
+
+    <h6><strong>Categories : </strong>
+    {exp:mtt_search:param:loop get="category" as="cat_id" query="{segment_3}"  backspace='2'}
+  	{exp:storecat:category_heading cat_id="{cat_id}"}
+    <a href="{exp:mtt_search:url category='{cat_id}'}">{cat_name} 
+    <i class="icon i-close" style="font-size:10px; color:#c00"></i></a> 
+    {/exp:storecat:category_heading}
+	{/exp:mtt_search:param:loop}
+    
+    </h6>
+    
+    {if "{exp:mtt_search:param get='r:rp' query='{segment_3}'}"}
+    <h6><strong>Price {exp:currency_select:converted_prefix}: </strong>
+    <a href="{exp:mtt_search:url r:rp=''}">
+    {exp:mtt_search:param get="r:rp" query="{segment_3}"} <i class="icon i-close" style="font-size:10px; color:#c00"></i>
+    </a>    
+    </h6>
+    {/if}
+    
+  
+    
+    

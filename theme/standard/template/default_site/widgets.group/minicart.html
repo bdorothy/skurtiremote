@@ -1,0 +1,57 @@
+<ul class="nav navbar-nav navbar-right">
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <i class="icon i-cart"></i>Shopping Cart ({exp:currency_select:converted price='{exp:cartthrob:cart_total:numeric}' parse="inward"}) 
+    
+    <span class="caret"></span></a>
+    <ul class="dropdown-menu cart" role="menu">  
+    
+
+    
+      
+    {exp:cartthrob:cart_items_info}
+	{if total_items > 0}
+  	{if count == "1"}
+  	<table class="table">
+  	<thead>
+        <tr>        
+          <th>#</th>
+          <th>Description</th>
+    
+        </tr>
+    </thead>
+    <tbody>
+    {/if}
+        <tr>
+        <td>
+        <a href="{site_url}view/{url_title}"><img src="{exp:carthrob_gridimage_fix:image entry_id='{entry_id}' grid_field_id ='72' grid_col_id='1' type='thumbs'}{image}{/exp:carthrob_gridimage_fix:image}" ></a></td>
+          <td><a href="{site_url}view/{url_title}">{title}</a>
+          <p> 
+          <small>
+         
+          <b>     	
+          
+          
+          {exp:currency_select:converted price="{exp:currency_select:arithmatic num1='{quantity}' num2='{item_price:numeric}'}" parse="inward"}</b> <br>
+          ( {exp:currency_select:converted price="{item_price:numeric}"} x {quantity} )</small>
+          </p></td>    
+        </tr>      
+    
+	{if count == total_results}
+      </tbody>
+	</table>
+    <li class="divider"></li>
+    <div class="text-center">   
+    <div class="m20"><a href="{site_url}checkout" class="btn btn-success"><i class="icon i-cart"></i> Proceed to Checkout</a></div>
+    </div>
+    
+    {/if}
+	{/if}
+    {if no_results}<div class="p10 mt20"><div class="alert alert-danger" role="alert">Your shopping Cart is Empty</div></div>{/if}
+	{/exp:cartthrob:cart_items_info}
+
+ 
+      
+    </ul>
+  </li>
+</ul>

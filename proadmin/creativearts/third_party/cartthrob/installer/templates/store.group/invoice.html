@@ -1,0 +1,12 @@
+{!-- the account template sends the ID of the entry encrypted. In this template, the ID is being decrypted. If found, it will load the invoice template that contains the data
+	Using this method, you can share the invoice link with someone that is not logged in.
+	 --}
+{preload_replace:template_group="store"}
+{if "{exp:cartthrob:view_decrypted_string string='{segment_3}' parse_inward='yes'}" !="" }
+	{embed="{template_group}/_invoice" entry_id="{exp:cartthrob:view_decrypted_string string='{segment_3}' parse_inward="yes"}"}
+{if:elseif entry_id}
+	{embed="{template_group}/_invoice" entry_id="{entry_id}"}
+
+{if:else}
+	Invoice could not be found
+{/if}

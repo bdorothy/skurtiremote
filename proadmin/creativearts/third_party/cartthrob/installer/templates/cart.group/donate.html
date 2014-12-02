@@ -1,0 +1,39 @@
+{preload_replace:template_group="cart"}
+{preload_replace:template="donate"}
+ 
+{embed="{template_group}/_header" title="Donate" template_group="{template_group}" template="{template}" }
+ 
+</head>
+<body>
+	<div id="container">
+		<div id="main">
+			{embed="{template_group}/_store_header" template_group="{template_group}" template="{template}"}
+
+	<div class="left_column">
+	<h1>Make a Donation</h1>
+	<p>I would like to donate to your cause.</p>
+ 
+	{exp:cartthrob:add_to_cart_form 
+	    return="{template_group}/view_cart" 
+		allow_user_price="yes"
+		title="Donation"
+		no_shipping="yes"
+		no_tax="yes"
+	    on_the_fly="true"  
+
+		}
+		<p>Donation Amount:  <input type="text" maxlength="7" size="5" name="price"></p>
+ 
+		<p>Donation Note: {item_options:input:personal_message value="" }</p>
+		</p>
+	    <input type="submit" value="Submit" />
+	{/exp:cartthrob:add_to_cart_form}
+	</div>
+	<div class="right_column">
+		<img src="{theme_folder_url}third_party/cartthrob/store_themes/basic_white/images/main_pic.jpg" />
+	</div>
+	<div class="clear_both"></div>
+
+	
+{embed=cart/_footer_nav template="{template}" template_group="{template_group}"}
+ 

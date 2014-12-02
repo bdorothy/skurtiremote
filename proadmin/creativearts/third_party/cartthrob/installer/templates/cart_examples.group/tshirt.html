@@ -1,0 +1,143 @@
+{preload_replace:template_group="cart_examples"}
+{preload_replace:template="tshirt"}
+{embed=cart_examples/include_header title="T-Shirt Store" }
+</head>
+<body>
+	<h1>T-Shirt Store</h1>
+	<p>This example shows how you can add options that your customers can select, some options affect the price, and some do not.</p>
+
+	{!-- ADD A PRODUCT --}
+    <div class="store_block">
+		<h2>Add T-Shirts</h2>
+
+		{!-- outputting products stored in one of the "products" channels. These are exactly the same as normal 
+			product channels, so the channel names may be different from what is listed below --}
+		{exp:channel:entries channel="products" limit="10"}
+			{!-- The add_to_cart_form adds 1 or more of a product to the cart --}
+			{exp:cartthrob:add_to_cart_form 
+				entry_id="{entry_id}" 
+				return="{template_group}/{template}"}
+				<p>
+					T-Shirt name: {title} Tee  -- Price: {product_price}<br />
+					Quantity: <input type="text" name="quantity" size="5" value="" /> 
+					<input type="submit" value="Add to Cart">
+					<br />
+					{item_options:select:product_size}
+						<option value="{option_value}">{option_name} {price}</option>
+					{/item_options:select:product_size}
+					{item_options:select:product_color}
+						<option value="{option_value}">{option_name} {price}</option>
+					{/item_options:select:product_color}
+					{item_options:select:product_options}
+						<option value="{option_value}">{option_name} {price}</option>
+					{/item_options:select:product_options}
+					
+					{!-- Some major magic happens here. This is the item_options variable.
+						It can be used in conjunction with a "Cartthrob Price Modifiers" field from your channel, 
+						and can automatically create and populate input and select fields with the data from that custom field. 
+						
+						A. 
+						It can be used singly like this: 
+						{item_options:select:YOUR_FIELD_NAME}
+						and a select dropdown with your values will be output
+
+						B. 
+						You can use it as a variable pair like this: 
+						 {item_options:select:YOUR_FIELD_NAME}
+							<option value="{option_value}">{option_name} $ {price}</option>
+						{/item_options:select:YOUR_FIELD_NAME}
+						option, option_name, and price are variables associated with the Cartthrob Price Modifiers custom field type.
+						Associated prices are automatically figured. 
+						
+						C.
+						OR, you can add optoions on the fly like this: 
+						<select name="item_options[whatevs]">
+							<option value="S">Small</option>
+							<option value="M">Medium</option>
+							<option value="L">Large</option>
+						</select>
+						
+						D. 
+						OR This:  
+						{item_options:select:size class="size_box" values="S:Small|M:Medium|L:Large" attr:rel="external"}
+						In both option C and D above, prices aren't modified dynamically. 
+						
+						There are lots of ways to use the item_options variable. It's one of the most powerful features of CartThrob, 
+						but possibly a bit complicated to grasp at first. Please feel free to post questions in the CartThrob forums
+						--}
+				</p>
+			{/exp:cartthrob:add_to_cart_form}
+		{/exp:channel:entries}
+	</div>
+
+	{!-- VIEW CART CONTENTS / UPDATE QUANTITIES --}
+	<div class="store_block">
+	<h2>Cart Contents</h2>
+	{!-- cart_items_info outputs information about your current cart, including products in the cart, weight, and prices. --}
+	{exp:cartthrob:cart_items_info}
+		{if no_results}
+		    <p>There is nothing in your cart</p>
+		{/if}
+		{!-- outputting data that's only applicable for the first item. --}
+		{if first_row}
+			{!-- update_cart_form allows you to edit the information of one or more items in the cart at the same time
+				as well as save customer information, and shipping options. --}
+    		{exp:cartthrob:update_cart_form 
+				return="{template_group}/{template}"
+				}
+ 		{/if}
+			<p>
+				{if item_options:product_color  } Color: {item_options:product_color}{/if} 
+				{if item_options:product_size  } Size: {item_options:product_size}{/if}
+{if item_options:product_options}{item_options:product_options:label}{/if}
+			</p>
+			<strong>{title}</strong> -- {item_price}
+			{!-- The following will generate a item_options select boxes. With the parameter row_id="true" 
+				the select boxes will automatically add the all-important row_id to the output. The final select box will look
+				something like this: 
+				<select name="item_options[1][product_size]">
+				--}
+{!--
+			{item_options:select:product_size row_id="{row_id}"}
+			{item_options:select:product_color row_id="{row_id}"}
+--}
+
+			{!-- you can reference products by entry_id and row_id. If you sell configurable 
+				items (like t-shirts with multiple sizes) you should use row_id to edit and 
+				delete items, otherwise, all items with that entry id
+				are affected, regardless of configuration --}
+				<input type="text" name="quantity[{row_id}]" size="2" value="{quantity}" />
+			{!-- This deletes one item (row_id) at a time--}
+				<input type="checkbox" name="delete[{row_id}]"> Delete this item
+			{!-- outputting data that's only applicable for the last item. --}
+			
+		{if last_row}
+			{!-- a clear_cart input can be used to remove all items in the cart --}
+	    	<input type="submit" name="clear_cart" value="Empty Cart" />
+	    	<input type="submit" value="Update Cart" />
+			{/exp:cartthrob:update_cart_form}
+		{/if}
+	{/exp:cartthrob:cart_items_info}
+	</div>
+
+ 	<div class="store_block">
+		<h2>Tags used in this template</h2>
+		<ul>
+			<li><a href="http://livecart.com/docs/tags_detail/add_to_cart_form">add_to_cart_form</a></li>
+			<li><a href="http://livecart.com/docs/tags_detail/add_to_cart_form/#var_item_options:select:your_option_name">add_to_cart_form: item_options</a></li>
+			<li><a href="http://livecart.com/docs/tags_detail/cart_items_info">cart_items_info</a></li>
+			<li><a href="http://livecart.com/docs/tags_detail/cart_items_info/#var_item_options:your_option">cart_items_info: item_options</a></li>
+			<li><a href="http://livecart.com/docs/tags_detail/submitted_order_info">submitted_order_info</a></li>
+			<li><a href="http://livecart.com/docs/tags_detail/update_cart_form">update_cart_form</a></li>
+		</ul>
+		<h2>Concepts used in this template</h2>
+		<ul>
+			<li><a href="http://livecart.com/docs/sub_pages/price_modifiers/">Price Modifiers</a></li>
+		</ul>
+	</div>
+	<div class="store_block">
+		{embed=cart_examples/include_footer}
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+<script type="text/javascript">
+$(function() {
+	$(".most_viewed").jCarouselLite({	
+		hoverPause:true,
+		visible: 3,
+		auto:1500,
+		speed:1000,	
+	});
+});
+</script>
+<div class="clearfix"></div>
+<div class="wg-container mb30">
+<div class="wg-head">
+<h2>Most Viewed Products</h2>
+</div>
+    <div class="wg-body">    
+        <div class="leads most_viewed">
+		<ul>
+            
+            {exp:channel:entries channel="products" limit="10"}
+			
+            <li>
+				<div class="thumb">
+                {pi limit="1"}
+				<a href="{site_url}view/{url_title}">                
+                <img src="{pi:image:medium}" alt="{if pi:caption}{pi:caption}{if:else}{title}{/if}" title="{if pi:caption}{pi:caption}{if:else}{title}{/if}" class="img-responsive"  style="width:125px;height:188px; padding:3px;"/>
+                </a>
+                {/pi}
+				</div>
+				
+				<div class="clearfix"></div>
+			</li>            
+            {/exp:channel:entries}
+            
+		
+        </ul>
+    </div>
+    </div>
+</div>

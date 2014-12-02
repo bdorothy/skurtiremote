@@ -1,0 +1,128 @@
+caption{
+	padding: 8px 10px 8px 10px; 
+	margin: 0px 0 2px 0;
+	color:#FFF;
+	font-size:14px;
+	font-family: 'Lucida Grande', Arial, Helvetica, sans-serif;
+	background: #2A3940; 
+}
+.ct_overview{
+	padding-left:25px;
+	width: 675px;
+}
+
+.ct_overview h2{
+	padding: 5px 0; 
+	font-size:14px;
+	font-weight:bold;
+	
+}
+.ct_overview h3{
+	padding: 5px 0; 
+	font-size:13px;
+	font-weight:bold;
+	
+}
+.ct_overview h4{
+	padding: 5px 0; 
+	font-size:12px;
+	font-weight:bold;
+}
+.ct_overview p{
+	padding: 5px 0; 
+	line-height:16px;
+}
+#ct_errors {
+    border: #CCC9A4 1px solid;
+    border-top-width: 0px;
+	background: #fff2cb url(../images/ct_subnav_bg.gif) repeat-x;
+	padding: 8px 10px 8px 10px; 
+	margin: 0px 0 10px 0;
+}
+#ct_system_error{
+	border:1px solid #bf0012;
+	background:#ffbc9f url(../images/ct_not_logged_heart.png) no-repeat right top;
+	padding:15px 45px 15px 15px;
+    font-family: 'Lucida Grande', Arial, Helvetica, sans-serif;
+	color:#18362D;
+	font-size:14px;
+	margin:0 0 10px 0;
+}
+#ct_system_error a{
+	color:#a10a0a;
+}
+#ct_system_error h4{
+    font-family: 'Lucida Grande', Arial, Helvetica, sans-serif;
+	color:#18362D;
+	font-size:18px;
+	font-weight:bold;
+	display:inline;
+	margin:0 8px 0 0;
+}
+
+
+.ct_nav {
+	//padding:			0 25px;
+	float: left;
+}
+
+.ct_nav span.button {
+	float:				  left;
+	margin-bottom:  10px;
+    margin-right: 6px;
+}
+ .ct_nav .nav_button {
+	font-weight:	normal;
+	background:		#d0d9e1;
+	color:			#34424b;
+}
+
+.ct_nav span.button a.nav_button{
+	color: #34424b;
+    font: 12px/12px Arial, 'Hevlvetica Neue', sans-serif;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+}
+.ct_nav span.button a.nav_button:hover {
+	background-color:#e11842;
+	text-decoration:none;
+	color: #fff;
+}
+.ct_nav span.button a.current {
+	background-color:#e11842;
+	text-decoration:none;
+	color: #fff;
+}
+.clear_both{
+	clear: both;
+}
+label.radio{
+	display: block;
+	margin: 0;
+	padding:  0;
+	padding-bottom: 5;
+}
+ 
+.plugin_add_new_setting{
+	 margin-top:10px;
+	 margin-bottom:10px;	
+}
+p#chart_overview{
+    background-color:white;
+    margin:0;
+    padding: 0 0 10px 10px;
+    margin-top:-5px;
+}
+form#reports_filter{
+    position: relative;
+    padding: 10px;
+    background-color:white;
+}
+form#reports_filter input.submit{
+    position: absolute;
+    right: 10px;
+}
+#reports_view{
+    background-color:white;
+    padding: 10px;
+}

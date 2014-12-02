@@ -1,0 +1,16 @@
+
+
+#holder {
+  width: 200px;
+  height: 300px;
+  margin: auto;
+}
+
+.cntSeparator { display: none; }
+
+.cntDigit {
+  margin-top: 148px !important;
+}
+
+  .cntDigit#cnt_0 { margin-left: 5px; }
+  .cntDigit#cnt_2 { margin-left: 7px; }

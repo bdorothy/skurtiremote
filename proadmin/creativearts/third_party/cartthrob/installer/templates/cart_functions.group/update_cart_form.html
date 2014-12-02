@@ -1,0 +1,18 @@
+{exp:cartthrob:cart_items_info}
+	{if first_row}
+		{exp:cartthrob:update_cart_form  return="cart/index"}
+	{/if}
+	{title}
+	<input type="text" name="quantity[{row_id}]" size="2" value="{quantity}" />
+	{!-- This deletes lets you select multiple row_ids --}
+	<input type="checkbox" name="delete[{row_id}]"> Delete this item
+	{if last_row}
+    	<input type="submit" value="Update Cart" />
+		{/exp:cartthrob:update_cart_form}
+		
+	{/if}
+{/exp:cartthrob:cart_items_info}
+
+<br />Outputs a form to update items in cart
+<br />NOTE: example requires that items be in cart
+<br />http://livecart.com/docs/tags_detail/update_cart_form/

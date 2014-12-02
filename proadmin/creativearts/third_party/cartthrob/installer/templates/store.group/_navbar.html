@@ -1,0 +1,47 @@
+<!-- Navbar
+================================================== -->
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="brand" href="{site_url}">{exp:cartthrob:view_setting store_name='yes'}</a>
+      <div class="nav-collapse collapse" style="height: 0px" >
+        <ul class="nav">
+          <li {if segment_2==""}class="active"{if:else}class=''{/if} >
+            <a href="{path='{embed:template_group}/'}">Store</a>
+          </li>
+          <li {if segment_2=="about"}class="active"{if:else}class=''{/if} >
+            <a href="{path='{embed:template_group}/about'}">About Us</a>
+          </li>
+          <li  {if segment_2=="contact"}class="active"{if:else}class=''{/if} >
+            <a href="{path='{embed:template_group}/contact'}">Contact</a>
+          </li>
+          <li  {if segment_2=="donate"}class="active"{if:else}class=''{/if} >
+            <a href="{path='{embed:template_group}/donate'}">Donate</a>
+          </li>
+          <li  {if segment_2=="view_cart"}class="active"{if:else}class=''{/if} ><a href="{path='{embed:template_group}/view_cart'}"><i class="icon-shopping-cart icon-white"></i> Cart ({exp:cartthrob:total_items_count}) <span class="cart_total">{exp:cartthrob:cart_total}</span></a>
+          </li>
+          <li  {if segment_2=="checkout" OR segment_2=="shipping"}class="active"{if:else}class=''{/if}  ><a href="{path='{embed:template_group}/{exp:cartthrob:view_setting store_checkout_page='yes'}'}"><i class="icon-barcode icon-white" ></i> Checkout</a>
+          </li>
+		{if logged_out}
+		<li  {if segment_2=="register"}class="active"{if:else}class=''{/if} ><a href="{path='member/register'}"><i class="icon-user icon-white" ></i> Create an Account</a>
+        </li>
+		<li  {if segment_2=="login"}class="active"{if:else}class=''{/if} ><a href="#login" role="button" data-toggle="modal" id="login_loader"><i class="icon-ok icon-white" ></i> Login</a>
+          </li>
+		{/if}
+		{if logged_in}
+		<li  {if segment_2=="account"}class="active"{if:else}class=''{/if} ><a href="{path='{embed:template_group}/account'}"><i class="icon-user icon-white" ></i> Welcome {screen_name}</a>
+        </li>
+		<li class=''><a href="{path='LOGOUT'}"><i class="icon-remove icon-white" ></i> Logout</a>
+          </li>
+		{/if}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+ 

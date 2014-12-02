@@ -1,0 +1,35 @@
+{exp:cartthrob:shipping_quote_info}
+	{if error_message}
+		
+You can't select a shipping method until you fix the following error: {error_message}
+
+	{if:else}
+		{!-- // display quote request if there are no errors --}
+		<h2>Select one of the available shipping methods.</h2> 
+		{exp:cartthrob:request_shipping_quote_form
+			return = "cart_examples/single_page_checkout"
+			apply_costs="TRUE"   
+			shipping_mode="rate"
+			}	
+	 		{exp:cartthrob:customer_info}
+				Zip: <input type="text" name="zip" value="{customer_zip}" /><br />
+			{/exp:cartthrob:customer_info}
+
+			{shipping_methods}
+				{if item:first_item}
+					<select name="shipping[product]">
+				{/if}
+						<option name="{item:option_value}">{item:option_title} - {item:option_price}</option>
+				{if item:last_item}
+					</select>
+				{/if}
+			{/shipping_methods}
+
+			<input type="submit" value="Apply Costs">
+		{/exp:cartthrob:request_shipping_quote_form}
+	{/if}
+{/exp:cartthrob:shipping_quote_info}
+
+<br />Outputs information regarding a shipping quote
+<br />Only relevant for "Live Rates" Plugins like UPS and FedEx. 
+<br />http://livecart.com/docs/tags_detail/shipping_quote_info/

@@ -1,0 +1,13 @@
+{exp:cartthrob:request_shipping_quote_form
+	return = "cart_functions/shipping_quote_info"
+	shipping_mode="shop"
+	}	
+	{shipping_fields}
+	<input type="submit" value="Get Costs">
+{/exp:cartthrob:request_shipping_quote_form}
+
+<br />Outputs a form for requesting shipping quotes. Only used by "Live Rates" plugins like UPS or FedEx. 
+<br />http://livecart.com/docs/tags_detail/request_shipping_quote_form/
+<br />
+<br />Use in conjunction with shipping_quote_info
+<br />http://livecart.com/docs/tags_detail/shipping_quote_info/

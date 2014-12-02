@@ -1,0 +1,61 @@
+<style>
+
+
+#myaccount-links tr.active{background-color:#ff0 !important}
+#myaccount-links .panel-heading{background-color:#0b99bd !important; color: #fff !important}
+</style>
+<div id="myaccount-links" class="mb20">
+      <div class="col-xs-12">
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                          <i class="icon i-cog-2"></i> My Account</a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse  {if segment_1 == 'myaccount' && segment_2 != 'change-password'}in{/if}">
+                        <div class="panel-body">
+                            <table class="table">
+                                <tr {if segment_1 == 'myaccount' && segment_2 == ''}class="active"{/if}>
+                                    <td>
+               <i class="icon i-pencil"></i><a href="{site_url}myaccount">My Profile</a>
+                                    </td>
+                                </tr>
+                                <tr {if segment_1 == 'myaccount' && segment_2 == 'order-history'}class="active"{/if}>
+                                    <td>
+               <i class="icon i-cart-3"></i><a href="{site_url}myaccount/order-history">My Order History</a>
+                                    </td>
+                                </tr>
+                                <tr {if segment_1 == 'myaccount' && segment_2 == 'my-wishlist'}class="active"{/if}>
+                                    <td>
+               <i class="icon i-attachment"></i><a href="{site_url}myaccount/my-wishlist">My Wishlist</a>
+                                    </td>
+                                </tr>
+                                
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                             <i class="icon i-cog-3"></i>Security</a>
+                        </h4>
+                    </div>
+                    <div id="collapseThree" class="panel-collapse collapse  {if segment_1 == 'myaccount' && segment_2 == 'change-password'}in{/if}">
+                        <div class="panel-body">
+                            <table class="table">
+                                <tr  {if segment_1 == 'myaccount' && segment_2 == 'change-password'}class="active"{/if}>
+                                    <td>
+                             <i class="icon i-attachment"></i><a href="{site_url}myaccount/change-password">Change Passwod</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>

@@ -1,0 +1,46 @@
+<div id="header">
+	{if logged_out}
+	<div id="login_form" style="display:none;">
+		<p>
+		{exp:member:login_form return="{path={segment_1}/{segment_2}/{segment_3}/{segment_4}}"}
+			<label>Username</label> <input type="text" name="username" value=""  maxlength="32" class="input" size="25" />
+			<label>Password</label> <input type="password" name="password" value="" maxlength="32" class="input" size="25" />
+			<input type="submit" name="submit" value="Submit" />
+		{/exp:member:login_form}
+		</p>
+		<p>Not a member? <a href="{path=member/register}">Create an Account</a></p>
+	</div>
+	{/if}
+	
+	<div id="header_logo">
+		<a href="{site_url}"><img src="{theme_folder_url}third_party/cartthrob/store_themes/basic_white/images/logo.gif" /></a>
+	</div>
+	<div id="header_account_info">
+		{if logged_in}
+		<p>
+			<a href="{path='cart/account'}">welcome {screen_name} &raquo;</a><br />
+			<a href="{path='LOGOUT'}">logout &raquo;</a>
+		</p>
+		{/if}
+		{if logged_out}
+		<p>
+			<a href="{path='member/register'}">Register &raquo;</a><br />
+			<a href="javascript:void(0);" id="login_bttn">Login &raquo;</a>
+		</p>
+		{/if}
+		<p>
+			<img id="cart_icon" src="{theme_folder_url}third_party/cartthrob/store_themes/basic_white/images/cart_icon.gif"/> 
+			<a href="{path="{embed:template_group}/view_cart"}">cart ({exp:cartthrob:total_items_count}) <span class="cart_total">{exp:cartthrob:cart_total}</span> &raquo;</a> <a href="{path="{embed:template_group}/shipping"}">checkout &raquo;</a>
+		</p>
+	</div>
+	<div class="clear_both"></div>
+</div>
+<div id="top_shadow"><img src="{theme_folder_url}third_party/cartthrob/store_themes/basic_white/images/top_shadow.gif" /></div>
+<div id="top_nav"> 
+	<a href="{site_url}">Home</a> 
+	&bull; <a href="{path='cart/'}">Store</a>
+	&bull; <a href="{path='cart/about'}">About Us</a> 
+	&bull; <a href="{path='cart/contact'}">Contact Us</a> 
+	&bull; <a href="{path='cart/donate'}">Donate</a>
+</div>
+<div id="top_spacer"><img src="{theme_folder_url}third_party/cartthrob/store_themes/basic_white/images/top_spacer.gif" /></div>

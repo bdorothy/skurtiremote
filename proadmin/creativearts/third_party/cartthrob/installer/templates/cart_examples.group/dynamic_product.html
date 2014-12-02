@@ -1,0 +1,80 @@
+{exp:cartthrob:add_to_cart_form 
+entry_id="123"
+quantity="2"
+on_the_fly="y"
+title="Red T-Shirt"
+price="9.95"
+shipping="4.95"
+weight="20"
+no_tax="yes"
+no_shipping="yes"
+allow_user_price="yes"
+allow_user_shipping="yes"
+allow_user_weight="yes"
+license_number="yes"
+item_options:shirt_size="XXL"
+item_options:shirt_color="red"
+expiration_date="365"
+return="cart_examples/dynamic_product"
+}
+
+<input type="submit" value="Add dynamic product to cart" /> 
+
+{/exp:cartthrob:add_to_cart_form}
+
+
+{exp:cartthrob:add_to_cart_form 
+on_the_fly="y"
+allow_user_price="yes"
+allow_user_shipping="yes"
+allow_user_weight="yes"
+license_number="yes"
+expiration_date="365"
+	return="cart_examples/dynamic_product"
+}
+
+<input type="text" name="quantity" value="2" /> 
+<input type="text" name="title" value="Red T-Shirt" />
+<input type="text" name="price" value="9.95"/>
+<input type="text" name="shipping" value="4.95"/>
+<input type="text" name="weight" value="20"/>
+<input type="text" name="item_options[shirt_size]" value="XXL"/>
+<input type="text" name="item_options[shirt_color]" value="red"/>
+
+
+<input type="submit" value="Add donation type product to cart" /> 
+
+{/exp:cartthrob:add_to_cart_form}
+
+
+
+<h2>Cart Items</h2>
+{exp:cartthrob:cart_items_info}
+entry_id                {entry_id}                <br />
+title                   {title}                   <br />
+url_title               {url_title}               <br />
+quantity                {quantity}                <br />
+row_id                  {row_id}                  <br />
+item_price              {item_price}              <br />
+item_subtotal           {item_subtotal}           <br />
+item_shipping           {item_shipping}           <br />
+item_weight             {item_weight}             <br />
+total_items             {total_items}             <br />
+total_unique_items      {total_unique_items}      <br />
+cart_total              {cart_total}              <br />
+cart_subtotal           {cart_subtotal}           <br />
+cart_tax                {cart_tax}                <br />
+cart_shipping           {cart_shipping}           <br />
+cart_tax_name           {cart_tax_name}           <br />
+cart_discount           {cart_discount}           <br />
+cart_count              {cart_count}              <br />
+entry_id_path           {entry_id_path}           <br />
+row_id_path             {row_id_path}             <br />
+item_options:shirt_size {item_options:shirt_size} <br />
+item_options:shirt_color {item_options:shirt_color}<br />
+switch                  {switch}                  <br />
+
+
+
+<hr />
+{/exp:cartthrob:cart_items_info}

@@ -1,0 +1,96 @@
+	{exp:cartthrob:also_purchased entry_id="{embed:entry_id}" limit="7"}
+		{if count==1}
+ 		<h5>Customers Also Purchased</h5>
+		<ul  class="nav nav-tabs nav-stacked">
+		{/if}
+		<li>
+			<a href="{entry_id_path='{embed:template_group}/product_detail'}">
+				<i class="icon-chevron-right pull-right"></i>
+				{title} 
+				<strong> {if product_price}{product_price}{if:elseif packages_price}{packages_price}{/if}</strong>
+				{if no_tax !="Yes"} 
+					 {if "{product_price:plus_tax}" !=""}<small><br>(inc tax: {product_price:plus_tax})</small>{/if}
+				{if:elseif packages_price}
+					<br>{packages_price:plus_tax}
+				{/if}
+			</a>
+		</li>
+		{if count==total_results}
+		</ul>
+ 		{/if}
+	{/exp:cartthrob:also_purchased}
+
+	{exp:channel:entries channel="products" limit="1" entry_id="{embed:entry_id}" }
+	{!-- new relationship syntax for EE 2.6+ --}
+	{product_related_1}
+			{if product_related_1:count==1}
+				<h5>You Might Also Like</h5>
+				<ul  class="nav nav-tabs nav-stacked">
+			{/if}
+			<li>
+				{if product_related_1:product_price}
+					<a href="{product_related_1:entry_id_path='{embed:template_group}/product_detail'}">
+						<i class="icon-chevron-right"></i>
+						{if product_related_1:product_thumbnail}<img src="{product_related_1:product_thumbnail}" />{/if}
+						{product_related_1:title}<br />
+						{product_related_1:product_price} &raquo;
+					</a>
+				{if:elseif product_related_1:packages_price}
+					<a href="{product_related_1:entry_id_path='{embed:template_group}/package_detail'}">
+						<i class="icon-chevron-right"></i>
+						{if product_related_1:packages_thumbnail}<img src="{product_related_1:packages_thumbnail}" />{/if}
+						{product_related_1:title}<br />
+						{product_related_1:packages_price} &raquo;
+					</a>
+				{/if}
+			</li>
+			{if product_related_1:count==product_related_1:total_results}
+				</ul>
+			{/if}
+	{/product_related_1}
+	{!-- end new relationship syntax --}	
+	
+	{!-- Below is the old relationship method for use with versions less than EE2.5 --}
+	{!-- start old syntax
+	{if product_related_1 OR product_related_2 OR product_related_3}
+ 		<h5>You Might Also Like</h5>
+		<ul  class="nav nav-tabs nav-stacked">
+	{/if}
+	{related_entries id="product_related_1"}
+		<li>
+			<a href="{entry_id_path='{embed:template_group}/product_detail'}">
+				<i class="icon-chevron-right"></i>
+				<img src="{product_thumbnail}" />
+				{title}<br />
+				{if product_price}{product_price}{if:elseif packages_price}{packages_price}{/if} &raquo;
+			</a>
+		</li>
+	{/related_entries}
+
+	{related_entries id="product_related_2"}
+		<li>
+			<a href="{entry_id_path='{embed:template_group}/product_detail'}">
+				<i class="icon-chevron-right"></i>
+				<img src="{product_thumbnail}" />
+				{title}<br />
+				{if product_price}{product_price}{if:elseif packages_price}{packages_price}{/if} &raquo;
+			</a>
+		</li>
+	{/related_entries}
+	
+	{related_entries id="product_related_3"}
+		<li>
+			<a href="{entry_id_path='{embed:template_group}/product_detail'}">
+				<i class="icon-chevron-right"></i>
+				<img src="{product_thumbnail}" />
+				{title}<br />
+				{if product_price}{product_price}{if:elseif packages_price}{packages_price}{/if} &raquo;
+			</a>
+		</li>
+	{/related_entries}
+	
+	{if product_related_1 OR product_related_2 OR product_related_3}
+			</ul>
+ 	{/if}	
+	end old syntax --}
+{/exp:channel:entries}

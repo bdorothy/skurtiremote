@@ -1,0 +1,26 @@
+<div id="showcasebar">
+
+<div class="container">
+<div class="row">
+<div class="col-sm-8 col-xs-12">
+{embed="widgets/showcase_manual"}
+</div>
+
+<div class="col-sm-4" id="most_viewed">
+{embed="widgets/showcase_auto"}
+
+{if logged_in}
+    {if group_id ==1 && "{exp:siteconfig:get item='allow_wholesale'}" == "yes"}
+    {embed="widgets/m_f_wholesale_request"}
+    {/if}
+{/if}
+
+{if logged_in}
+{embed="widgets/f_quick_register"}
+{/if}
+
+</div>
+
+</div>
+</div>
+</div>

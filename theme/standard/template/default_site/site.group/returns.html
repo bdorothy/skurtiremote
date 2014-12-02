@@ -1,0 +1,75 @@
+{embed="common/head_open" title="Returns" 
+description="Returns"
+}
+{embed="common/head_close"}
+{embed="common/topbar"}
+{embed="common/logobar"}
+{embed="common/mainnav"}
+
+<!-- ABOUT US -->
+<div id="static" class="container">
+<div class="row">
+{embed="widgets/breadcrumbs" crumb1="Returns"}
+<hr>
+<div class="col-xs-12 col-sm-8">
+<div class="mb20">
+
+</div>
+
+<h2><i class="icon i-spinner-6"></i> Returns</h2>
+ <div class="col-md-12">
+        <div class="well well-sm">
+          <form class="form-horizontal" action="" method="post">
+          <fieldset>
+<legend class="text-center">Please complete below form, to apply for returns, and somebody from {site_name}'s team shall get back to you soon. .</legend>
+    
+            <!-- Name input-->
+            <div class="form-group">
+              <label class="col-md-3 control-label" for="name">Name</label>
+              <div class="col-md-9">
+                <input id="name" name="name" type="text" placeholder="Your name" class="form-control">
+              </div>
+            </div>
+    
+            <!-- Email input-->
+            <div class="form-group">
+              <label class="col-md-3 control-label" for="email">Your E-mail</label>
+              <div class="col-md-9">
+                <input id="email" name="email" type="text" placeholder="Your email" class="form-control">
+              </div>
+            </div>
+    
+            <!-- Message body -->
+            <div class="form-group">
+              <label class="col-md-3 control-label" for="message">Your message</label>
+              <div class="col-md-9">
+                <textarea class="form-control" id="message" name="message" placeholder="Please enter your message here..." rows="5" style="resize:none"></textarea>
+              </div>
+            </div>
+    
+            <!-- Form actions -->
+            <div class="form-group">
+              <div class="col-md-12 text-right">
+                <button type="submit" class="btn btn-warning btn-lg">Submit</button>
+              </div>
+            </div>
+          </fieldset>
+          </form>
+        </div>
+      </div>
+</div>
+
+<div class="col-xs-12 col-sm-4">
+{embed="widgets/connect-with-us"}
+{if "{exp:siteconfig:get item='contact_us'}" != ""}
+<h2>Reach Us</h2>
+{exp:siteconfig:get item="contact_us"}
+{/if}
+</div>
+</div>
+</div>
+<!-- ABOUT US -->
+
+{embed="common/subfooter"}
+{embed="common/footer"}
+{embed="common/foot"}

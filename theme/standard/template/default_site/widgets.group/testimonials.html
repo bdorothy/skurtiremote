@@ -1,0 +1,28 @@
+<div id="testimonials">    
+                <div class="quote"><i class="icon i-quotes-left"></i><h2 style="color:#5b2c50">Customer's Feedback</h2></div>
+				<div class="carousel slide" id="fade-quote-carousel" data-ride="carousel" data-interval="3000">
+				  <!-- Carousel indicators -->
+                  <ol class="carousel-indicators">
+				    <li data-target="#fade-quote-carousel" data-slide-to="0" class="active"></li>
+				    <li data-target="#fade-quote-carousel" data-slide-to="1"></li>
+				    <li data-target="#fade-quote-carousel" data-slide-to="2"></li>
+                    <li data-target="#fade-quote-carousel" data-slide-to="3"></li>
+                    <li data-target="#fade-quote-carousel" data-slide-to="4"></li>
+				  </ol>
+				  <!-- Carousel items -->
+				  <div class="carousel-inner">
+                  {exp:channel:entries channel="store_design" limit="1"}
+                  {testimonials limit="5"}
+				    <div class="{if '{testimonials:count}' == 1}active{/if} item">
+				    	<blockquote>
+				    <p>{testimonials:testimonial}</p>
+                    <span>{testimonials:client}</span>
+				    	</blockquote>
+				    
+				    </div>
+                   {/testimonials} 
+				   {/exp:channel:entries}
+			
+				  </div>
+				</div>
+</div>			

@@ -1,0 +1,12 @@
+{exp:cartthrob:cart_items_info}
+		{exp:cartthrob:delete_from_cart_form
+			return="cart_functions/delete_from_cart_form" 
+			}
+	Title: {title}<input type="hidden" name="row_id" value="{row_id}"> 
+    	<input type="submit" value="Delete Items" />
+		{/exp:cartthrob:delete_from_cart_form}
+{/exp:cartthrob:cart_items_info}
+
+<br />Outputs a form used to delete items. You can also delete items using update_cart_form, so this is a bit redundant
+<br />NOTE: Example requires that items be added to the cart
+<br />http://livecart.com/docs/tags_detail/delete_from_cart_form/

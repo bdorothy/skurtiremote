@@ -1,0 +1,11 @@
+{exp:channel:entries channel="orders"}
+	{order_items}
+		Entry Id: {item:entry_id}<br />
+		Title: {item:title}<br />
+		Quantity: {item:quantity}<br /><br />
+	{/order_items}
+{/exp:channel:entries}
+
+<br />Outputs content from a CartThrob Order Items fieldtype
+<br />NOTE: example requires an "orders" channel, "order_items" field, and previous orders
+<br />http://livecart.com/docs/tags_detail/order_items/

@@ -1,0 +1,46 @@
+{exp:mtt_search:form 
+collection="products"
+query="{segment_3}"
+}
+
+
+
+
+{if segment_2_category_id != "" || mtt_search_mc > 1}
+
+{exp:storecat:category_heading cat_id="{segment_2_category_id}{mtt_search_mc}" style="linear"}
+<div class="container" id="category_heading">
+<div class="row">
+
+
+<div class="{if cat_image}col-sm-4{if:else}col-sm-12{/if}">
+
+<h1>{cat_name}</h1>
+{embed="widgets/breadcrumbs" crumb1="Product List" crumb2="{segment_2_category_name}"}
+{cat_description}
+{if logged_in}
+    {if group_id ==1 && "{exp:siteconfig:get item='allow_wholesale'}" == "yes"}
+    <p class="mt5 "><strong>We provide special prices to our wholesalers. <br> If you are looking to buy in bulk, consider to request us access to our wholesale area.</strong></p>
+    <a class="btn btn-success" href="{site_url}request_wholesale_area_access">
+	Request Access to Wholesale Area
+	</a>
+    {embed="widgets/m_b_wholesale_request"}
+    {/if}
+{/if}
+
+
+
+</div>
+
+{if cat_image}
+<div class="col-sm-8">
+<img src="{cat_image}" class="img-thumbnail img-responsive" alt="{cat_name}" title="{cat_name}" >
+</div>
+{/if}
+
+</div>
+</div>
+{/exp:storecat:category_heading}
+{/if}
+
+{/exp:mtt_search:form}

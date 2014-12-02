@@ -1,0 +1,110 @@
+
+
+<div class="wg-container p20 mb20">
+<div class="wg-head">
+<h2>Wholesaler's Benefits (Bulk Purchase)</h2>
+</div>
+<p style="font-size:13px; color:#333" class="mt5 p5"><strong>GOOD NEWS!</strong> to Wholesalers, {site_name} provides special prices to our wholesalers. Register below to request access to wholesale area now.</p>
+
+
+
+</div>
+<div class="clearfix"></div>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+      
+
+<form id="signInForm" class="form-horizontal"
+    data-bv-feedbackicons-valid="glyphicon glyphicon-ok"
+    data-bv-feedbackicons-invalid="glyphicon glyphicon-remove"
+    data-bv-feedbackicons-validating="glyphicon glyphicon-refresh">
+
+    <div class="form-group">
+        <label class="col-xs-12">Email Address</label>
+        <div class="col-xs-12">
+            <input type="text" class="form-control" name="email"
+                required
+                data-bv-notempty-message="Email address is required" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-xs-12">Mobile Number</label>
+        <div class="col-xs-12">
+            <input type="text" class="form-control" name="phone"
+                required
+                data-bv-notempty-message="Phone Number is required"                 
+                data-bv-numeric="true"
+                data-bv-numeric-message ="Phone Number is not a valid number"
+                maxlength="10"
+                minlength="10"
+                data-bv-stringlength-min="Phone Number has to be 10 Digits"
+                 />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-xs-12">
+            <button type="submit" class="btn btn-default">Sign in</button>
+        </div>
+    </div>
+</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+   
+
+$(document).ready(function() {
+	$('#myModal').modal('show');
+	
+    $('#signInForm').bootstrapValidator({
+	    feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+
+	// email is required
+	   fields: {
+            email: {
+                validators: {
+                    emailAddress: {
+                        message: 'The value is not a valid email address'
+                    }
+                }
+            }
+        }
+   // phone numeric and 10 digits only
+				
+		
+		
+	});
+});
+
+
+
+</script>
+
+
+
+
+

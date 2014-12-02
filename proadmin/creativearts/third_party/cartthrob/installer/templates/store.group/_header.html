@@ -1,0 +1,38 @@
+{!-- we're setting the doctype specifically like this so that we can use Twitter Bootstrap.
+http://twitter.github.com/bootstrap/scaffolding.html#global
+ --}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>{embed:title} - {site_name}</title>
+
+	{!-- ///////// SAMPLE TEMPLATE //////////////// --}
+	{!-- CT ajax uses jQuery. Include your own or EE's included version --}
+	{exp:jquery:script_tag}
+	{!-- CT uses jQuery form for ajax form submissions --}
+	<script type="text/javascript" src="{theme_folder_url}third_party/cartthrob/scripts/jquery.form.js" ></script>
+	{!-- CT sample templates  form for ajax form submissions --}
+	<script type="text/javascript" src="{path='{embed:template_group}/cart.js'}" ></script>
+
+
+	{!-- CT template CSS files --}
+	<link rel="stylesheet" type="text/css" media="all" href="{stylesheet={embed:template_group}/main.css}" />
+    
+	{!-- ///////// TWITTER BOOSTRAP //////////////// --}
+	{!-- http://twitter.github.com/bootstrap/getting-started.html --}
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	{!-- Twitter Boostrap CSS files. The sample templates use Twitter Bootstrap for layout, styles and some JS functionality. --}
+	<link href="{theme_folder_url}third_party/cartthrob/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	
+	{!-- NOTE: if you don't like things to move around on the page, comment this out. This enables responsive layout, 
+		and the contents of the page flow to fit the viewport --}
+	<link href="{theme_folder_url}third_party/cartthrob/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+<script type="text/javascript" src="{theme_folder_url}third_party/cartthrob/bootstrap/js/bootstrap.js" ></script>
+
+	<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+	<!--[if lt IE 9]>
+	  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->

@@ -1,0 +1,493 @@
+/**
+ * Mtt Search CSS file
+ *
+ * @package         mtt-search-ee_addon
+ * @version         1.1.0
+ * @author          MyTopTeacher - MTT <contact@mytopteacher.com>
+ * @link            http://mytopteacher.com/addons/mtt-search
+ * @copyright       Copyright (c) 2011, Mtt
+ */
+
+.hidden {
+	display:none;
+}
+
+/* Module homepage
+-------------------------------------------------*/
+
+#mtt-search-index fieldset {
+	float:left;
+	margin:0 14px 0 0;
+	background:#fff;
+	padding:0;
+	width:250px;
+	-webkit-border-radius:4px;
+	-moz-border-radius:4px;
+	border-radius:4px;
+}
+
+#mtt-search-index fieldset h3 {
+	font-size:14px;
+	line-height:normal;
+	padding:7px 14px;
+	margin:0;
+	border-bottom:1px dashed #ddd;
+}
+
+#mtt-search-index fieldset ul {
+	margin:7px 0;
+}
+
+#mtt-search-index fieldset a {
+	display:block;
+	padding:7px 14px;
+}
+
+#mtt-search-index fieldset a:hover {
+	background:#f6f6f6;
+}
+
+#mtt-search-index fieldset span {
+	display:block;
+	padding:7px 14px 2px;
+}
+
+#mtt-search-index fieldset code {
+	display:block;
+	padding:2px 14px 7px;
+	font:12px/normal 'consolas', 'monaco', 'lucida sans unicode', monospace;
+	cursor:pointer;
+	width:222px;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap;
+}
+
+/* Global Table listings
+-------------------------------------------------*/
+
+#mainContent table.mtt-list {
+	margin-bottom:0;
+}
+
+#mainContent table.mtt-list td:last-child img {
+	display:block;
+}
+
+#mainContent table.mtt-list tfoot td {
+	border:none;
+	background:transparent;
+	padding:14px 10px 0;
+}
+
+#mainContent table.mtt-list tfoot td:last-child {
+	border:none !important;
+}
+
+#paginationLinks {
+	margin:11px 0 0 !important;
+}
+
+/* Global table-form styles
+-------------------------------------------------*/
+
+.mtt-form input.medium {
+	width:50%;
+}
+
+.mtt-form input.small {
+	width:5em;
+}
+
+.mtt-form label + label {
+	margin-left:1.5em;
+}
+
+.mtt-form td.multiple {
+	vertical-align:top;
+}
+
+.mtt-form td p {
+	font-size:11px;
+	line-height:1.5;
+	margin-bottom:0 !important;
+}
+
+/* Collections list (progress bar)
+-------------------------------------------------*/
+
+.mtt-index {
+	padding:0 !important;
+}
+
+.mtt-index div {
+	display:none;
+	text-indent:10px;
+}
+
+.mtt-index.ready .index-options {
+	display:block;
+}
+
+.mtt-index.loading .index-progress-bar {
+	display:block;
+	white-space:nowrap;
+	background:#fda;
+	width:0%;
+	padding:7px 0;
+	text-shadow:1px 1px 1px rgba(255,255,255,0.5);
+}
+
+.mtt-index.loading.done .index-progress-bar {
+	background:#cfc;
+}
+
+/* Search filter settings
+-------------------------------------------------*/
+
+#parameters {
+	padding:0;
+}
+
+#parameters div {
+	padding:5px 10px;
+	border-bottom:1px dashed #ccc;
+}
+
+#parameters input {
+	width:25%;
+}
+
+#parameters button {
+	cursor:pointer;
+}
+
+#parameters button[type=button] {
+	border:none;
+	background:none;
+	display:inline-block;
+	padding:7px 10px;
+	margin:0;
+	text-decoration:none;
+	color:#bbb;
+	color:rgba(0,0,0,0.4);
+	text-shadow:1px 1px 1px #fff;
+	outline:none;
+}
+
+#parameters button[type=button]:hover {
+	color:#888;
+	color:rgba(0,0,0,0.6);
+}
+
+#parameters button[type=button] b {
+	font:bold 16px/1 arial;
+	margin-right:2px;
+	position:relative;
+	top:2px;
+}
+
+/* Drag shortcuts
+-------------------------------------------------*/
+
+.drag-handle {
+	cursor:move;
+	cursor:-moz-grab;
+	cursor:-webkit-grab;
+}
+
+.ui-sortable-helper .drag-handle,
+.ui-sortable-helper td {
+	cursor:-moz-grabbing;
+	cursor:-webkit-grabbing;
+}
+
+/* Search log filter
+-------------------------------------------------*/
+
+#mtt-search-filter {
+	margin-bottom:14px;
+}
+
+#mtt-search-filter input,
+#mtt-search-filter select {
+	display:inline;
+	width:auto;
+	margin-right:7px;
+}
+
+#mtt-search-filter button {
+	cursor:pointer;
+}
+
+/* Mtt Search Log
+-------------------------------------------------*/
+
+.mtt-search-log-msg {
+	margin-bottom:14px;
+	overflow:hidden;
+}
+
+.mtt-search-log-msg p {
+	margin:0;
+}
+
+.mtt-search-log-msg .submit {
+	float:right;
+	margin-left:7px;
+}
+
+#mtt-search-log td {
+	vertical-align:top;
+}
+
+#mtt-search-log li {
+	margin-top:5px;
+	display:none;
+}
+
+#mtt-search-log li:first-child {
+	display:block;
+	margin:0;
+}
+
+#mtt-search-log td.has-more {
+	cursor:pointer;
+}
+
+#mtt-search-log .open li {
+	display:block;
+}
+
+#mtt-search-log .open li span {
+	display:none;
+}
+
+#mtt-search-log .shortcut {
+	padding:5px 10px;
+}
+
+#mtt-search-log .shortcut a {
+	display:block;
+	width:16px;
+	height:16px;
+	background:transparent none -32px -64px no-repeat;
+	overflow:hidden;
+	text-indent:-999em;
+}
+
+#mtt-dialog {
+	max-height:400px;
+	padding:5px 0;
+	overflow:auto;
+}
+
+/* Find & Replace
+-------------------------------------------------*/
+
+#mtt-filters {
+	float:left;
+	width:250px;
+}
+
+#mtt-tabs li {
+	float:left;
+	margin-bottom:-1px;
+}
+
+#mtt-tabs a {
+	display:block;
+	padding:7px 14px 6px;
+}
+
+#mtt-tabs .active a {
+	padding:6px 13px;
+	border:1px solid #ddd;
+	border-bottom-color:#fff;
+	background:#fff;
+
+	-webkit-border-radius:4px 4px 0 0;
+	-moz-border-radius:4px 4px 0 0;
+	border-radius:4px 4px 0 0;
+}
+
+#mtt-tabs :not(.active) a {
+	color:rgba(0,0,0,0.5);
+}
+
+#mtt-filters fieldset.tab {
+	display:none;
+}
+
+#mtt-filters fieldset.tab.active {
+	display:block;
+}
+
+#mtt-filters fieldset {
+	padding:7px 0;
+	background:#fff;
+	clear:both;
+	border:1px solid #ddd;
+	margin-bottom:14px;
+	overflow:hidden;
+
+	-webkit-border-radius:4px;
+	-moz-border-radius:4px;
+	border-radius:4px;
+}
+
+#mtt-filters fieldset:first-of-type {
+	-webkit-border-radius:0 4px 4px 4px;
+	-moz-border-radius:0 4px 4px 4px;
+	border-radius:0 4px 4px 4px;
+}
+
+#mtt-filters .mtt-pane {
+	max-height:550px;
+	overflow:auto;
+}
+
+#mtt-filters fieldset h3 {
+	font-size:14px;
+	line-height:normal;
+	padding:7px 14px;
+	margin:0;
+	border-bottom:1px dashed #ddd;
+}
+
+#mtt-filters select {
+	margin:0 0 14px 14px;
+}
+
+#mtt-filters fieldset .mtt-boxes {
+	margin:14px 0 0;
+}
+
+#mtt-filters fieldset .mtt-boxes h4 {
+	padding:2px 14px;
+}
+
+#mtt-filters fieldset .mtt-boxes h4 span {
+	cursor:pointer;
+}
+
+#mtt-filters fieldset .mtt-boxes label {
+	display:block;
+	cursor:pointer;
+	padding:2px 14px;
+	margin:0;
+	font-weight:normal;
+	white-space:nowrap;
+	overflow:hidden;
+	max-width:220px;
+	text-overflow:ellipsis;
+}
+
+#mtt-filters fieldset .mtt-boxes label:hover {
+	background:#f6f6f6;
+	color:#000;
+}
+
+#mtt-find {
+	padding-top:1px;
+}
+
+#mtt-find,
+#mtt-preview {
+	margin-left:270px;
+}
+
+.mtt-inline-form {
+	margin-bottom:14px;
+}
+
+.mtt-inline-form label {
+	display:inline-block;
+	width:10%;
+	padding:0;
+}
+
+.mtt-inline-form input {
+	display:inline-block;
+	width:50%;
+	margin:0;
+}
+
+.mtt-inline-form .throbber {
+	vertical-align:middle;
+	margin-left:10px;
+	display:none;
+}
+
+.loading .mtt-inline-form .throbber {
+	display:inline-block;
+}
+
+#mtt-preview h2 {
+	margin:0 0 .5em;
+	padding-top:.5em;
+	border-top:1px dotted #ccc;
+	text-shadow:1px 1px 1px #fff;
+}
+
+#mtt-preview table th {
+	padding:9px 10px;
+}
+
+#mtt-preview table input {
+	margin:0;
+}
+
+#mtt-preview tbody td {
+	vertical-align:top;
+}
+
+#mtt-preview dl {
+	margin:7px -10px 0;
+	padding:7px 10px 0;
+	border-top:1px dashed #ddd;
+	border-color:rgba(0,0,0,0.1);
+	font-size:11px;
+	line-height:1.455;
+}
+
+#mtt-preview dd {
+	color:#999;
+	margin:0 20px;
+}
+
+#mtt-preview dd strong {
+	font-weight:normal;
+	color:#333;
+}
+
+#mtt-preview .mtt-feedback,
+.mtt-feedback {
+	border:1px solid #CCA;
+	background:#FFE;
+	color:#666;
+	padding:14px;
+	border-radius:4px;
+}
+
+#mtt-preview .mtt-feedback p:last-child,
+.mtt-feedback p:last-child {
+	margin-bottom:0;
+}
+
+/* Extension settings
+-------------------------------------------------*/
+
+.mtt-more-settings {
+	margin:7px -10px 0;
+	padding:7px 10px 0;
+	border-top:1px dashed #ddd;
+}
+
+.mtt-more-settings label {
+	font-weight:normal;
+	cursor:pointer;
+}
+
+td.loading {
+}

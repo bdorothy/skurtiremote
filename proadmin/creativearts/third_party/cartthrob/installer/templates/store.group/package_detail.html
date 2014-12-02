@@ -1,0 +1,115 @@
+{preload_replace:template_group="store"}
+{preload_replace:template="index"}
+
+
+{exp:channel:entries 
+	channel="store_packages" 
+	limit="1"}
+	 
+{embed="{template_group}/_header" title="{title} - Package Detail" template_group="{template_group}" template="{template}" entry_id="{entry_id}" }
+ 
+</head>
+<body data-spy="scroll" data-target=".bs-docs-sidebar">
+	{embed="{template_group}/_navbar" template_group="{template_group}" template="{template}"}
+
+	{embed="{template_group}/_subhead" template_group="{template_group}" template="{template}"}
+
+	{!-- since we're using twitter bootstrap, the main content area is designated "container", or some other specific classes depending on your requirements--}
+	<div class="container">
+		{!-- twitter bootstrap breaks up content into rows. The main section of this template is all one row. Rows can also be broken up into more rows --}
+		<div class="row">
+
+			{!-- twitter bootstrap breaks up (by default) pages into a 12 column grid. span3, span9 designate how much space these sections will take up --}
+			<div class="span3">
+				<div class="bs-docs-sidenav">
+					{embed="{template_group}/_leftnav" template_group="{template_group}" template="{template}"}
+					{embed="{template_group}/_also_purchased" template_group="{template_group}" template="{template}" entry_id="{entry_id}" }
+				</div>
+
+			</div>
+
+			<div class="span9">
+				<section id="package-info">
+					<div class="row">
+						<div class="span6">
+							<h1>{title}</h1>
+							{packages_description}
+							<h4>{packages_packages:price} <small><strong>Price</strong></small></h4>
+
+							<p>Price including tax {packages_packages:plus_tax}</p> 
+
+							{!-- using twitter bootstrap here to lay out the form niceley... hence the form-horizontal class set here --}
+							{exp:cartthrob:add_to_cart_form 
+								class='form-horizontal' 
+								entry_id="{entry_id}" 
+								no_tax="{no_tax}"
+								no_shipping = "{no_shipping}"
+								return="{template_group}/view_cart"} 
+								{packages_packages}
+
+								<div class="control-group">
+								<h3>{sub:title}</h3>
+								{exp:cartthrob:item_options row_id="{sub:row_id}"  entry_id="{entry_id}"}
+							            {if dynamic}
+							                <label class="control-label" for="{option_field}">{option_label}</label>
+							                {input}
+							            {if:else}
+							                {if options_exist}
+							                    <label class="control-label" for="{option_field}">{option_label}</label>
+											    <div class="controls">
+							                    {select} 
+							                        <option {selected} value="{option_value}">
+							                            {option_name}{if option_price_numeric != 0} +{option_price}{/if}
+							                        </option>
+							                    {/select}
+												</div>
+							                {/if}
+							            {/if}
+							        {/exp:cartthrob:item_options}
+								</div>
+								{/packages_packages}
+
+								<div class="control-group">
+								{if "{inventory}" == "0" }
+									<p><strong>This item is out of stock</strong></p>
+							 	{if:else}
+							 		<label for="product_quantity" class="control-label">Quantity</label>
+								    <div class="controls">
+										<input type="text" id="product_quantity" name="quantity" size="8"  />
+									</div>
+								{/if}
+								</div>
+
+								<div class="control-group">
+									<div class="form-actions">
+										<button type="submit" class="btn btn-primary">Add to Cart</button>
+						      		</div>
+								</div>
+							{/exp:cartthrob:add_to_cart_form}
+							
+						</div>
+ 
+						<div class="span3">
+							<ul class="thumbnails">
+								<li class="span3">						
+									<div class="thumbnail">
+									{if packages_images}
+										<img src="{packages_images}" />
+									{if:else}
+										<img src="{theme_folder_url}third_party/cartthrob/store_themes/basic_white/images/main_pic.jpg" />
+									{/if}
+									</div>
+								</li>
+							</ul>
+							
+						</div>
+						
+					</div>
+				</section>
+				</div>
+		</div>
+	</div>
+
+	 	{embed="{template_group}/_footer" template="{template}" template_group="{template_group}" entry_id="{entry_id}"}
+
+	{/exp:channel:entries}

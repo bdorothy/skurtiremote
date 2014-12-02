@@ -1,0 +1,14 @@
+{exp:channel:entries channel="products" limit="10" }
+	title: {title}<br />
+	{price_with_quantity}
+    		{if "{row_count}" == "1"}Total Rows {total_rows}<br />{/if}
+     		   <span style="{row_switch="inline|none|none"}">{from_quantity} - {up_to_quantity} {price} Row count {row_count}<br /></span>
+    		<br />
+	{/price_with_quantity} 
+<hr />
+{/exp:channel:entries}
+
+
+<br />The price with quantity fieldtype allows you to set price breaks when purchasing multiples of one item. This tag outputs the prices & their related quantities
+<br />NOTE: example requires "products" channel, a field called price_with_quantity mapped as a price field, and data in that field
+http://livecart.com/docs/tags_detail/price_with_quantity/

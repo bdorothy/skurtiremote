@@ -1,0 +1,33 @@
+<pre>
+{exp:cartthrob:cart_items_info}
+{if no_results}There's nothing in your cart{/if}
+	{entry_id}
+	{title}
+	{url_title}
+	{quantity}
+	{row_id}
+	{item_price}
+	{item_subtotal}
+	{item_shipping}
+	{item_weight}
+	{total_items}
+	{total_unique_items}
+	{cart_total}
+	{cart_subtotal}
+	{cart_tax}
+	{cart_shipping}
+	{cart_tax_name}
+	{cart_discount}
+	{cart_count}
+	{entry_id_path=product/detail}
+	{row_id_path=cart/delete_from_cart}
+	{item_options:your_option}
+	{item_options:your_option:option_name}
+	{item_options:your_option:price}
+	{switch="odd|even"}
+{/exp:cartthrob:cart_items_info}
+<pre>
+
+<br />Outputs information about items in the cart
+<br />NOTE: example requires items in cart
+<br />http://livecart.com/docs/tags_detail/cart_items_info/

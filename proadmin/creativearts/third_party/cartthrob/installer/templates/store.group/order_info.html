@@ -1,0 +1,66 @@
+{preload_replace:template_group="store"}
+{preload_replace:template="index"}
+ 
+{embed="{template_group}/_header" title="Order Results" template_group="{template_group}" template="{template}" }
+
+</head>
+<body>
+	{embed="{template_group}/_navbar" template_group="{template_group}" template="{template}"}
+
+	{embed="{template_group}/_subhead" template_group="{template_group}" template="{template}"}
+
+	{!-- since we're using twitter bootstrap, the main content area is designated "container", or some other specific classes depending on your requirements--}
+	<div class="container">
+		{!-- twitter bootstrap breaks up content into rows. The main section of this template is all one row. Rows can also be broken up into more rows --}
+		<div class="row">
+
+			{!-- twitter bootstrap breaks up (by default) pages into a 12 column grid. span3, span9 designate how much space these sections will take up --}
+			<div class="span3">
+				<div class="bs-docs-sidenav">
+					{embed="{template_group}/_leftnav" template_group="{template_group}" template="{template}"}
+			{!-- we're going to load the "also purchased" info for the last item added to the cart--}
+			{exp:cartthrob:cart_items_info limit="1" order_by="entry_id" sort="desc"}
+				{embed="{template_group}/_also_purchased" template_group="{template_group}" template="{template}" entry_id="{entry_id}"}
+			{/exp:cartthrob:cart_items_info}
+				</div>
+			
+			</div>
+
+			<div class="span9">
+			    
+				{exp:cartthrob:submitted_order_info}
+ 				        {if authorized}
+							<h1>Payment successful</h1>
+				            Your transaction is complete!<br />
+				            Transaction ID: {transaction_id}<br />
+				            Your total: {cart_total}<br />
+				            Your order ID: {order_id}<br /><br />
+
+					    <a href="{path={template_group}/account}">Order History &raquo;</a><br>
+					
+						{!-- encrypting a link to this invoice so it can be stored and shared --}
+						<a target="_blank" href="{path={template_group}/invoice}/{exp:cartthrob:view_encrypted_string string='{order_id}'}">View invoice &raquo; </a>
+					
+				        {if:elseif processing}
+							<h1>Payment is processing</h1>
+				            Your Order is Currently being processed: {error_message}<br />
+				            Transaction ID: {transaction_id}<br />
+				            <br />Order processing is generally completed within 48 hours depending on your payment method. 
+				        {if:elseif declined}
+				            <h1>Payment was declined</h1>
+							
+							Your credit card was declined: {error_message}
+				            <a href="{path={template_group}/checkout}">Try checking out again &raquo;</a>
+				        {if:elseif failed}
+				            <h1>Payment failed</h1>
+							
+							Your payment failed: {error_message}
+				            <a href="{path={template_group}/checkout}">Try checking out again &raquo;</a>
+				        {/if}
+ 				{/exp:cartthrob:submitted_order_info}
+
+				</div>
+		</div>
+	</div>
+
+ 	{embed="{template_group}/_footer" template="{template}" template_group="{template_group}"}

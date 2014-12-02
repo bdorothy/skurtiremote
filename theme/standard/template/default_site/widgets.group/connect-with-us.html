@@ -1,0 +1,50 @@
+<h2>Connect With Us</h2>
+  
+   {if "{exp:siteconfig:get item='facebook_url'}" != ""}
+                        <a class="sbtnf sbtnf-circle sbtnf-icon-white sbtnf-icon-bg-black icon-facebook" target="_blank" href="{exp:siteconfig:get item='facebook_url'}">facebook</a>
+                        {/if}
+                        
+                        
+                        {if "{exp:siteconfig:get item='twitter_url'}" != ""}
+                        <a class="sbtnf sbtnf-circle sbtnf-icon-white sbtnf-icon-bg-black icon-twitter" target="_blank" href="{exp:siteconfig:get item='twitter_url'}">twitter</a>
+                        {/if}
+
+
+						  
+                        {if "{exp:siteconfig:get item='linkedin_url'}" != ""}
+                        <a class="sbtnf sbtnf-circle sbtnf-icon-white sbtnf-icon-bg-black icon-linkedin" target="_blank" href="{exp:siteconfig:get item='linkedin_url'}">Linkedin</a>
+                        {/if}
+                        
+                        
+                        {if "{exp:siteconfig:get item='pinterest_url'}" != ""}
+                        <a class="sbtnf sbtnf-circle sbtnf-icon-white sbtnf-icon-bg-black icon-pinterest" target="_blank" href="{exp:siteconfig:get item='pinterest_url'}">Pinterest</a>
+                        {/if}
+                        
+                        
+                                              
+                        
+                        {if "{exp:siteconfig:get item='picasa_url'}" != ""}
+                        <a class="sbtnf sbtnf-circle sbtnf-icon-white sbtnf-icon-bg-black icon-google" target="_blank" href="{exp:siteconfig:get item='picasa_url'}">Picasa</a>
+                        {/if}
+                        
+                        
+                        
+ 					    {if "{exp:siteconfig:get item='youtube_url'}" != ""}
+                        <a class="sbtnf sbtnf-circle sbtnf-icon-white sbtnf-icon-bg-black icon-youtube" target="_blank" href="{exp:siteconfig:get item='youtube_url'}">Youtube</a>
+                        {/if}
+                        
+                        
+                          {if "{exp:siteconfig:get item='vimeo_url'}" != ""}
+                        <a class="sbtnf sbtnf-circle sbtnf-icon-white sbtnf-icon-bg-black icon-vimeo" target="_blank" href="{exp:siteconfig:get item='vimeo_url'}">Vimeo</a>
+                        {/if}
+                        
+                                                   
+                      	{exp:mailinglist:form list="default"}       				
+       				   <input type="text" name="email" value="{email}">
+                      <button type="submit" class="btn btn-success"><i class="icon i-arrow-right"></i>
+                       </button>
+                        <p>Recieve latest catalogs and designs in your inbox. Signup for our newsletter now.</p>      								                    	{/exp:mailinglist:form}  
+                          
+                
+                       
+                    

@@ -1,0 +1,46 @@
+{if embed:entry_id}
+	<h3>Customers Also Purchased</h3>
+	<ul>
+		{exp:cartthrob:also_purchased entry_id="{embed:entry_id}" limit="7"}
+			<li><a href="{entry_id_path="{embed:template_group}/product_detail"}">{title} <strong>{if product_price}{product_price}{if:elseif packages_price}{packages_price}{/if} &raquo;
+ &raquo; </strong>
+				{if no_tax !="Yes"} including tax: {if product_price}{product_price:plus_tax}{if:elseif packages_price}{packages_price:plus_tax}{/if} &raquo;{/if}
+				</a></li>
+		{/exp:cartthrob:also_purchased}
+	</ul>
+	<br /><br />
+	{exp:channel:entries channel="products" limit="1" entry_id="{embed:entry_id}" }
+			{if product_related_1 OR product_related_2 OR product_related_3}
+				<h3>You Might Also Like</h3>
+			{/if}
+			{related_entries id="product_related_1"}
+				<div class="related_item">
+					<a href="{entry_id_path='{embed:template_group}/product_detail'}">
+						<img src="{product_thumbnail}" />
+						{title}<br />
+						{if product_price}{product_price}{if:elseif packages_price}{packages_price}{/if} &raquo;
+					</a>
+				</div>
+			{/related_entries}
+
+			{related_entries id="product_related_2"}
+				<div class="related_item">
+					<a href="{entry_id_path='{embed:template_group}/product_detail'}">
+						<img src="{product_thumbnail}" />
+						{title}<br />
+						{if product_price}{product_price}{if:elseif packages_price}{packages_price}{/if} &raquo;
+					</a>
+				</div>
+			{/related_entries}
+
+			{related_entries id="product_related_3"}
+				<div class="related_item">
+					<a href="{entry_id_path='{embed:template_group}/product_detail'}">
+						<img src="{product_thumbnail}" />
+						{title}<br />
+						{if product_price}{product_price}{if:elseif packages_price}{packages_price}{/if} &raquo;
+					</a>
+				</div>
+			{/related_entries}
+ 	{/exp:channel:entries}
+	{/if}

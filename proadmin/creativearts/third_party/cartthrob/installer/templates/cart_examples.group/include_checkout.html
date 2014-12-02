@@ -1,0 +1,12 @@
+{!-- CHECKOUT --}
+	<div class="store_block">
+	<h2>Checkout</h2>
+	{!-- the checkout_form  outputs a checkout form--}
+	{!-- overriding the chosen gateway with the the dev_template gateway here --}
+	{exp:cartthrob:checkout_form gateway="dev_template" return="{embed:template_group}/{embed:template}/order_complete"}
+		{!-- The gateway_fields template variable to output fields required by your currently selected gateway 
+			what you see on the front end changes based on the gateway's requirements.--}
+		{gateway_fields}
+		<input type="submit" value="Checkout" />
+	{/exp:cartthrob:checkout_form}
+	</div>

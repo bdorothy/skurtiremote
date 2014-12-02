@@ -1,0 +1,98 @@
+{preload_replace:template_group="cart_examples"}
+{preload_replace:template="register_at_checkout"}
+{embed=cart_examples/include_header title="Create Member During Checkout" }
+</head>
+<body>
+	<h1>Create Member At Checkout</h1>
+	<p>Use this form to create a member during checkout. 
+		Please review the standard checkout_form first for additional details</p>
+	{if segment_3 !="order_complete"}
+		{!-- CHECKOUT --}
+		<div class="store_block">
+		<h2>Checkout</h2>
+		{!-- 
+			parameters
+			
+			group_id: the group_id you would like to add your customer to.
+			Any group_ids lower than 5 are automatically changed to 5 for security purposes. 
+			Leaving this value blank in conjunction with create_user, will make new users part of the "member" group (5).
+			create_user: whether a user should be created or not. 
+			--}
+		{if logged_out}
+			{exp:cartthrob:checkout_form 
+				group_id="6"
+				create_user="TRUE"
+				return="{template_group}/{template}/order_complete"}
+
+				{gateway_fields}
+			
+				{!-- In addition to the standard gateway fields, 
+					you will need the following fields to create a user during checkout.
+					--}
+					<p>	
+						Username: 								
+						<input type="text" name="username" />									
+					</p>
+					<p>									
+						Screen Name: <input type="text" name="screen_name" />
+					</p>									
+					<p>
+						Password: 
+						<input type="password" name="password" />
+						<input type="password" name="password_confirm" />
+					</p>									
+					<p>
+						Email: 
+						<input type="text" name="email_address" />
+					</p>	
+				<input type="submit" value="Checkout" />
+			{/exp:cartthrob:checkout_form}
+		{if:else}
+			You are logged in as {screen_name}
+			{exp:cartthrob:checkout_form 
+				return="{template_group}/{template}/order_complete"}
+
+				{gateway_fields}
+			
+				<input type="submit" value="Checkout" />
+			{/exp:cartthrob:checkout_form}
+		{/if}
+		</div>
+	{if:else}
+
+		{exp:cartthrob:submitted_order_info}
+		    <div class="store_block">
+				{if authorized}
+					Your transaction is complete!<br />
+			        Transaction ID: {transaction_id}<br />
+			        Your total: {cart_total}<br />
+			        Your order ID: {order_id}
+			    {if:elseif processing}
+					Your transaction is being processed!<br />
+			        Transaction ID: {transaction_id}<br />
+			        Your total: {cart_total}<br />
+			        Your order ID: {order_id}
+			    {if:elseif declined}
+			        Your credit card was declined: {error_message}
+			    {if:elseif failed}
+			        Your payment failed: {error_message}
+			    {if:else}
+			        Your payment failed: {error_message}
+			    {/if}
+			</div>
+		{/exp:cartthrob:submitted_order_info}
+	{/if}
+
+	<div class="store_block">
+		<h2>Tags used in this template</h2>
+		<ul>
+			<li><a href="http://livecart.com/docs/tags_detail/checkout_form">checkout_form</a></li>
+			<li><a href="http://livecart.com/docs/tags_detail/submitted_order_info">submitted_order_info</a></li>
+		</ul>
+	</div>
+	
+	<div class="store_block">
+		{embed=cart_examples/include_footer}
+	</div>
+</body>
+</html>

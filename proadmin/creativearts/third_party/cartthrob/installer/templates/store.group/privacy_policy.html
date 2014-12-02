@@ -1,0 +1,35 @@
+{preload_replace:template_group="store"}
+{preload_replace:template="index"}
+
+
+{embed="{template_group}/_header" title="Privacy Policy" template_group="{template_group}" template="{template}" }
+ 
+</head>
+<body data-spy="scroll" data-target=".bs-docs-sidebar">
+	{embed="{template_group}/_navbar" template_group="{template_group}" template="{template}"}
+
+	{embed="{template_group}/_subhead" template_group="{template_group}" template="{template}"}
+
+	{!-- since we're using twitter bootstrap, the main content area is designated "container", or some other specific classes depending on your requirements--}
+	<div class="container">
+		{!-- twitter bootstrap breaks up content into rows. The main section of this template is all one row. Rows can also be broken up into more rows --}
+		<div class="row">
+
+			{!-- twitter bootstrap breaks up (by default) pages into a 12 column grid. span3, span9 designate how much space these sections will take up --}
+			<div class="span3">
+				<div class="bs-docs-sidenav">
+					{embed="{template_group}/_leftnav" template_group="{template_group}" template="{template}"}
+					{embed="{template_group}/_also_purchased" template_group="{template_group}" template="{template}"}
+				</div>
+			</div>
+
+			<div class="span9">
+				<section id="privacy-policy">
+					<h1>Privacy Policy</h1>
+					<p>We will not share any information with any third parties</p>
+				</section>
+				</div>
+		</div>
+	</div>
+
+	 	{embed="{template_group}/_footer" template="{template}" template_group="{template_group}"}

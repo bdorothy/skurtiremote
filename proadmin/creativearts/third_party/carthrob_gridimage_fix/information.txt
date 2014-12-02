@@ -1,0 +1,29 @@
+This plugin is added for fetching grid field images. As Cartthrob as on 2.6.1 shows grid parse error :
+
+///////////////////////////////////////////////////////////
+A PHP Error was encountered
+
+Severity: Notice
+
+Message: Undefined index: 72
+
+Filename: libraries/Grid_parser.php
+
+Line Number: 157
+A PHP Error was encountered
+
+Severity: Warning
+
+Message: Cannot modify header information - headers already sent by (output started at C:\Winginx\home\skurti\public_html\proadmin\codeigniter\system\core\Exceptions.php:170)
+
+Filename: core/Common.php
+
+Line Number: 475
+///////////////////////////////////////////////////////////
+
+
+when tried to fetch image like below tag :
+{product_images}<img src="{image:thumbs}">{/product_images}
+
+
+

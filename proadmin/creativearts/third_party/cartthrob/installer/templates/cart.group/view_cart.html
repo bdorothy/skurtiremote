@@ -1,0 +1,81 @@
+{preload_replace:template_group="cart"}
+{preload_replace:template="view_cart"}
+ 
+{embed="{template_group}/_header" title="Shopping Cart" template_group="{template_group}" template="{template}" }
+ 
+</head>
+<body>
+	<div id="container">
+		<div id="main">
+			{embed="{template_group}/_store_header" template_group="{template_group}" template="{template}"}
+ 					<div class="left_column">
+						<h1>Shopping Cart</h1>
+						{if "{exp:cartthrob:total_items_count}"==0}You have no items in your cart. <a href="{path=cart/}">Continue shopping.</a>{/if}
+						{exp:cartthrob:cart_items_info}
+							{if first_row}
+					    		{exp:cartthrob:update_cart_form 
+								id="update_cart_form"
+					        		return="{template_group}/{template}"}
+							{/if}
+									<div class="product">
+										<h3>{title}</h3>
+										{if product_thumbnail}
+										<a href="{entry_id_path='{template_group}/product_detail'}"><img src="{product_thumbnail}" /></a>
+ 										{/if}										
+ 										<p>Price: {item_price} x {quantity} = {item_subtotal}</p>
+										{if no_tax !="1"}<p>Price including tax {item_price:plus_tax} x {quantity} = {item_subtotal:plus_tax}</p>{/if}
+										
+										{if !is_package}
+											{exp:cartthrob:item_options entry_id="{entry_id}" row_id="{row_id}" }
+
+												{item_options:list}
+													{if option_first_row}
+														<p> 
+														<label>{option_label}</label>
+													{/if}  
+												{/item_options:list}
+
+												{if dynamic} 
+													{item_options:input}
+												{if:else}
+												  	{item_options:select}		
+														<option {selected} value="{option_value}">{option_name} {price}</option>
+													{/item_options:select}
+												{/if}
+												 {item_options:list}
+													{if option_last_row}
+														</p> 
+													{/if}  
+												{/item_options:list}
+
+											{/exp:cartthrob:item_options}
+										{/if}
+
+										<p>
+											<label for="product_quantity_{row_id}">Quantity</label>
+											<input type="text" id="product_quantity_{row_id}" name="quantity[{row_id}]" size="8"  value="{quantity}" /> 
+										</p>
+										<p>
+											
+											<label for="delete_this_{row_id}">Delete this?</label> 
+											<input type="checkbox" id="delete_this_{row_id}" name="delete[{row_id}]">
+										</p>
+ 									</div>
+ 							
+							{if last_row}
+	
+							     <input type="submit" class='cart_submit_button' rel="cart/view_cart" value="Update" /> 
+							     <input type="submit" class='cart_submit_button' rel="cart/shipping" value="Proceed to Checkout" /> 
+
+								{/exp:cartthrob:update_cart_form}
+							{/if}
+						{/exp:cartthrob:cart_items_info}
+							
+					</div>
+					<div class="right_column">
+					{exp:cartthrob:cart_items_info limit="1" order_by="entry_id" sort="desc"}
+ 						{embed="{template_group}/_right_column" entry_id="{entry_id}" template_group="{template_group}" template="{template}"}
+					{/exp:cartthrob:cart_items_info}
+					</div>
+					<div class="clear_both"></div>
+  				{embed=cart/_footer_nav template="{template}" template_group="{template_group}"}

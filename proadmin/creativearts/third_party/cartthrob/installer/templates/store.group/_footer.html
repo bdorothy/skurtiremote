@@ -1,0 +1,70 @@
+	<!-- Footer
+	================================================== -->
+	<footer class="footer">
+	  <div class="container">
+	    <p class="pull-right"><a href="#">Back to top</a></p>
+
+	    <p>&copy;{current_time format="%Y"} {exp:cartthrob:view_setting store_name="yes"}</p>
+		<p>powered by <a href="http://livecart.com">CartThrob eCommerce</a></p>
+	
+	    <ul class="footer-links">
+		  <li><a href='{site_url}'>Home</a></li>
+	      <li class="muted">&middot;</li>
+	      <li><a href="{path='{embed:template_group}/privacy_policy'}">Privacy Policy</a></li>
+	      <li class="muted">&middot;</li>
+	      <li><a href="{path='{embed:template_group}/return_policy'}">Return Policy</a></li>
+	      <li class="muted">&middot;</li>
+		  <li><a href="{path='{embed:template_group}/about'}">About Us</a></li>
+	    </ul>
+	  </div>
+	</footer>
+	
+	{!-- this form is used for hidden ajax submissions by CartThrob. D--}
+	<div style="display:none" id="hidden_save_customer_info_form_wrapper">
+		{!-- Data input in other forms is copied to this form, and submitted 
+			if debug is turned on in the javascript file, this form should be automatically shown.
+			--}
+		{exp:cartthrob:save_customer_info_form return="" id="hidden_save_customer_info_form" }
+			<div class="cart_data">
+
+			</div>
+		<input type="submit" name="Submit" /> 
+		{/exp:cartthrob:save_customer_info_form}
+	</div>
+
+
+<div class="modal hide fade" id="login">
+		{exp:member:login_form return="{path={segment_1}/{segment_2}/{segment_3}/{segment_4}}" class="form-horizontal"}
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		<h3>Login</h3>
+	</div>
+	<div class="modal-body">
+		<label>Username</label> <input type="text" class='input-medium' name="username" value="" placeholder='Username' /> 
+		<label>Password</label> <input type="password" class='input-medium' name="password" value="" placeholder="Password"   /> 
+	</div>
+	<div class="modal-footer">
+		<a href="#" class="btn">Close</a>
+		<input type="submit" name="submit" value="Login" class="btn btn-primary" /> 
+	</div>
+	{/exp:member:login_form}
+</div>	
+
+{!-- if you've set the google analytics code in the backend, this will output the google analytics tag --}
+{if '{exp:cartthrob:view_setting store_google_code="yes"}'!=''}
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', '{exp:cartthrob:view_setting store_google_code="yes"}']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+{/if}
+</body>
+</html>

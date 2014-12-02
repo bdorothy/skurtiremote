@@ -1,0 +1,286 @@
+
+{exp:channel:entries channel="store_design" limit="1"} 
+<div id="products">
+<!-- Showcase 1 -->
+{if homepage_showcase_1}
+{homepage_showcase_1} 
+		
+        {if homepage_showcase_1:showcase_heading}
+        <h2 style="margin-left:25px; border-bottom:1px dotted #ccc; margin-right:25px; font-size:24px; color:#000; font-weight:bolder; letter-spacing:0px">						        {homepage_showcase_1:showcase_heading}
+        </h2>
+        {/if}
+
+		{homepage_showcase_1:showcase_products}
+        
+        {if "{homepage_showcase_1:showcase_products:channel_id}" == 1}
+		<div class="col-sm-4">
+        <a href="#">
+            <div class="img-overlay">
+            
+            	{homepage_showcase_1:showcase_products:pi limit="1"}
+                <img src="{homepage_showcase_1:showcase_products:pi:image:medium}" class="img-responsive img-thumbnail"/>
+                {/homepage_showcase_1:showcase_products:pi}
+               
+                <div class="project-overlay">
+                <p class="mb10">{homepage_showcase_1:showcase_products:title}</p>
+                
+         
+                 <p style="padding:4px; opacity:0.8; color:#ff0; font-size:100%">
+                 {exp:currency_select:converted price="{homepage_showcase_1:showcase_products:product_price:numeric}"}
+                 </p>
+
+                <button type="submit" class="btn btn-default mb5">
+ 				 <i class="icon i-heart"></i>Add to Wishlist
+			    </button>
+                
+                
+                
+    {exp:cartthrob:add_to_cart_form
+    entry_id="{homepage_showcase_1:showcase_products:entry_id}"
+    return="site/index"
+    price = "{exp:currency_select:converted price='{homepage_showcase_1:showcase_products:product_price:numeric}'}"
+    }     
+    <input type="text" name="quantity" size="5" value="1" />
+    <button type="submit" class="btn btn-warning mb10">
+ 				 <i class="icon i-cart"></i>Add to Cart
+	</button>
+    {/exp:cartthrob:add_to_cart_form}
+                
+                
+                
+               
+               
+              
+               
+                </div>
+            </div>            
+        </a>
+        </div>
+        
+        {/if}
+      
+          
+        {if "{homepage_showcase_1:showcase_products:channel_id}" == 8}
+         <!-- catalog -->
+        	<div class="col-sm-4">
+             <a href="#">
+            <div class="img-overlay">
+            
+            	{if homepage_showcase_1:showcase_products:catalog_cover_picture}                
+               <img src="{homepage_showcase_1:showcase_products:catalog_cover_picture}" class="img-responsive img-thumbnail"/>
+                {if:else}
+                 {homepage_showcase_1:showcase_products:catalog_products limit="1"}  
+                 {exp:carthrob_gridimage_fix:image 
+                    entry_id='{homepage_showcase_1:showcase_products:catalog_products:entry_id}' 
+                    grid_field_id ='72' 
+                    grid_col_id='1' 
+                    type='medium'
+                    }
+				<img src="{image}" class="img-responsive img-thumbnail"/>
+				 {/exp:carthrob_gridimage_fix:image}                         
+                 {/homepage_showcase_1:showcase_products:catalog_products}      
+				
+                          
+                               
+                {/if}
+                
+                <div class="catalog-overlay"></div>
+                
+                
+               
+                <div class="project-overlay">
+                <p class="mb10">{homepage_showcase_1:showcase_products:title}</p>
+                <p>{homepage_showcase_1:showcase_products:catalog_products:total_results} Products</p>
+                
+         
+                 <p style="padding:4px; opacity:0.8; color:#ff0; font-size:100%">
+                 
+                 {if "{homepage_showcase_1:showcase_products:catalog_selling_price}"}
+                 {exp:currency_select:converted price="{homepage_showcase_1:showcase_products:catalog_selling_price:numeric}" parse="inward"}
+                 {/if}
+                 
+                 </p>
+
+                <button type="submit" class="btn btn-default mb5">
+ 				 <i class="icon i-heart"></i>Add to Wishlist
+			    </button>
+ 
+   				 <button type="submit" class="btn btn-warning mb10">
+ 				 <i class="icon i-cart"></i>View Full Catalog
+				</button>
+  
+                
+                
+               
+               
+              
+               
+                </div>
+            </div>            
+        </a>
+           
+            </div>
+             <!-- catalog -->
+        {/if}
+        
+       
+        
+      {/homepage_showcase_1:showcase_products}
+      <div class="clearfix"></div> 
+{/homepage_showcase_1}
+{/if}     
+<!-- Showcase 1 -->
+
+
+
+<!-- Showcase 2 -->
+{if homepage_showcase_2}
+{homepage_showcase_2} 
+		
+        
+        {if homepage_showcase_2:showcase_heading}
+        <h2 style="margin-left:25px; border-bottom:1px dotted #ccc; margin-right:25px; font-size:24px; color:#000; font-weight:bolder; letter-spacing:0px">						        {homepage_showcase_2:showcase_heading}
+        </h2>
+        {/if}
+
+
+		{homepage_showcase_2:showcase_products}
+		<div class="col-sm-4">
+        <a href="#">
+            <div class="img-overlay">
+            
+            	{homepage_showcase_2:showcase_products:pi  limit="1"}
+                <img src="{homepage_showcase_2:showcase_products:pi:image:medium}" class="img-responsive img-thumbnail"/>
+                {/homepage_showcase_2:showcase_products:pi}
+               
+                <div class="project-overlay">
+                <p class="mb10">{homepage_showcase_2:showcase_products:title}</p>
+                
+                 <p style="padding:4px; opacity:0.8; color:#ff0; font-size:100%">{homepage_showcase_2:showcase_products:product_price}</p>
+                
+                <button type="submit" class="btn btn-default mb5">
+ 				 <i class="icon i-heart"></i>Add to Wishlist
+			    </button>
+                
+               <button type="submit" class="btn btn-warning mb10">
+ 				 <i class="icon i-cart"></i>Add to Cart
+			   </button>
+               
+              
+               
+                </div>
+            </div>            
+        </a>
+        </div>
+      {/homepage_showcase_2:showcase_products}   
+        <div class="clearfix"></div> 
+{/homepage_showcase_2}
+{/if}     
+<!-- Showcase 2 -->
+
+
+
+
+
+
+<!-- Showcase 3 -->
+{if homepage_showcase_3}
+{homepage_showcase_3} 
+		
+        
+        {if homepage_showcase_3:showcase_heading}
+        <h2 style="margin-left:25px; border-bottom:1px dotted #ccc; margin-right:25px; font-size:24px; color:#000; font-weight:bolder; letter-spacing:0px">						        {homepage_showcase_3:showcase_heading}
+        </h2>
+        {/if}
+
+
+		{homepage_showcase_3:showcase_products}
+		<div class="col-sm-4">
+        <a href="#">
+            <div class="img-overlay">
+            
+            	{homepage_showcase_3:showcase_products:pi  limit="1"}
+                <img src="{homepage_showcase_3:showcase_products:pi:image:medium}" class="img-responsive img-thumbnail"/>
+                {/homepage_showcase_3:showcase_products:pi}
+               
+                <div class="project-overlay">
+                <p class="mb10">{homepage_showcase_3:showcase_products:title}</p>
+                
+                 <p style="padding:4px; opacity:0.8; color:#ff0; font-size:100%">{homepage_showcase_3:showcase_products:product_price}</p>
+                
+                <button type="submit" class="btn btn-default mb5">
+ 				 <i class="icon i-heart"></i>Add to Wishlist
+			    </button>
+                
+               <button type="submit" class="btn btn-warning mb10">
+ 				 <i class="icon i-cart"></i>Add to Cart
+			   </button>
+               
+              
+               
+                </div>
+            </div>            
+        </a>
+        </div>
+      {/homepage_showcase_3:showcase_products}   
+        <div class="clearfix"></div> 
+{/homepage_showcase_3}
+{/if}     
+<!-- Showcase 3 -->
+
+
+
+
+
+
+<!-- Showcase 4 -->
+{if homepage_showcase_4}
+{homepage_showcase_4} 
+		
+        
+        {if homepage_showcase_4:showcase_heading}
+        <h2 style="margin-left:25px; border-bottom:1px dotted #ccc; margin-right:25px; font-size:24px; color:#000; font-weight:bolder; letter-spacing:0px">						        {homepage_showcase_4:showcase_heading}
+        </h2>
+        {/if}
+
+
+		{homepage_showcase_4:showcase_products}
+		<div class="col-sm-4">
+        <a href="#">
+            <div class="img-overlay">
+            
+            	{homepage_showcase_4:showcase_products:pi  limit="1"}
+                <img src="{homepage_showcase_4:showcase_products:pi:image:medium}" class="img-responsive img-thumbnail"/>
+                {/homepage_showcase_4:showcase_products:pi}
+               
+                <div class="project-overlay">
+                <p class="mb10">{homepage_showcase_4:showcase_products:title}</p>
+                
+                 <p style="padding:4px; opacity:0.8; color:#ff0; font-size:100%">{homepage_showcase_4:showcase_products:product_price}</p>
+                
+                <button type="submit" class="btn btn-default mb5">
+ 				 <i class="icon i-heart"></i>Add to Wishlist
+			    </button>
+                
+               <button type="submit" class="btn btn-warning mb10">
+ 				 <i class="icon i-cart"></i>Add to Cart
+			   </button>
+               
+              
+               
+                </div>
+            </div>            
+        </a>
+        </div>
+      {/homepage_showcase_4:showcase_products}   
+        <div class="clearfix"></div> 
+{/homepage_showcase_4}
+{/if}     
+<!-- Showcase 4 -->
+
+</div>
+{/exp:channel:entries}
+        
+        
+       
+   

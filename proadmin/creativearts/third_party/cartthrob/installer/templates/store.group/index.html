@@ -1,0 +1,102 @@
+{preload_replace:template_group="store"}
+{preload_replace:template="index"}
+ 
+{embed="{template_group}/_header" title="Shopping Cart" template_group="{template_group}" template="{template}" }
+ 
+</head>
+<body>
+	{embed="{template_group}/_navbar" template_group="{template_group}" template="{template}"}
+
+	{embed="{template_group}/_subhead" template_group="{template_group}" template="{template}"}
+
+	{!-- since we're using twitter bootstrap, the main content area is designated "container", or some other specific classes depending on your requirements--}
+	<div class="container">
+		{!-- twitter bootstrap breaks up content into rows. The main section of this template is all one row. Rows can also be broken up into more rows --}
+		<div class="row">
+
+			{!-- twitter bootstrap breaks up (by default) pages into a 12 column grid. span3, span9 designate how much space these sections will take up --}
+			<div class="span3">
+				<div class="bs-docs-sidenav">
+					{embed="{template_group}/_leftnav" template_group="{template_group}" template="{template}"}
+				</div>
+			</div>
+
+			<div class="span9">
+				<section id="main">
+					{exp:channel:entries channel="products" limit="30"  dynamic="no"}
+						{if count==1}<h2>Available Products</h2><ul class="thumbnails">{/if}
+							{switch="<div class='row'>||"}
+							<li class="span3">						
+ 							
+						<div class="thumbnail">
+							{if product_thumbnail}
+									<a class='' href="{entry_id_path='{template_group}/product_detail'}"><img src="{product_thumbnail}" /></a>
+							{if:else}
+							<a class='' href="{entry_id_path='{template_group}/product_detail'}"><img src="http://placehold.it/300x200" alt=""></a>
+							{/if}
+							<div class="caption">
+								<h3>{title}</h3>
+							
+								<p>
+									{if product_original_price && product_original_price > product_price}
+										<h4>{product_price} <small><strong>Sale Price</strong> <i class="icon-tags"></i></small></h4>
+											<div class="alert alert-info">
+												<del><small>Regular Price: <strong>{product_original_price}</strong></small></del>
+											</div>
+									{if:else}
+									<h4>{product_price} <small><strong>Regular Price</strong></small></h4>
+									{/if}
+
+									{if no_tax !="Yes"}<small>including tax: {product_price:plus_tax}</small>{/if}
+						
+								</p>
+								 <a class='btn btn-primary btn-mini' href="{entry_id_path={template_group}/product_detail}">Learn more &raquo;</a>
+							</div>
+						</div>
+						</li>
+						{switch="||</div>"}
+						{if count==total_results}</ul><!-- end row -->{/if}
+					{/exp:channel:entries}
+					
+					{exp:channel:entries channel="store_packages" limit="30"  dynamic="no"}
+					{if count==1}<h2>Available Packages</h2><ul class="thumbnails">{/if}
+						{switch="<div class='row'>||"}
+						
+						<li class="span3">						
+						
+						<div class="thumbnail">
+							{if packages_images}
+									<a href="{entry_id_path='{template_group}/package_detail'}"><img src="{packages_images}" /></a>
+							{if:else}
+								<a class='' href="{entry_id_path='{template_group}/package_detail'}"><img src="http://placehold.it/300x200" alt=""></a>
+							{/if}
+							<div class="caption">
+								<h3>{title}</h3>
+								{if packages_images}
+										<a href="{entry_id_path='{template_group}/package_detail'}"><img src="{packages_images}" /></a>
+								{/if}
+
+								<h4>{packages_packages:price} <small><strong>Regular Price</strong></small></h4>
+ 
+								<small>including tax: {packages_packages:plus_tax}</small>
+ 
+								<p><strong>Package Features: </strong><br />
+									{packages_packages}
+						 				- {title}<br /> 
+									{/packages_packages}
+								</p>
+								<a class='btn btn-primary btn-mini'  href="{entry_id_path={template_group}/package_detail}">Learn more &raquo;</a></p>
+							</div>
+						</div>
+						</li>
+						{switch="||</div>"}
+						
+						{if count==total_results}</ul><!-- end row -->{/if}
+						
+					{/exp:channel:entries}
+					</section>
+				</div>
+		</div>
+	</div>
+
+ 	{embed="{template_group}/_footer" template="{template}" template_group="{template_group}"}

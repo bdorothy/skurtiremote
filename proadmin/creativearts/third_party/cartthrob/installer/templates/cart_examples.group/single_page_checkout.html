@@ -1,0 +1,205 @@
+{preload_replace:template_group="cart_examples"}
+{preload_replace:template="single_page_checkout"}
+{embed=cart_examples/include_header title="Single Page Store" }
+</head>
+<body>
+ 
+	<h1>Single Page Store</h1>
+	<p>This single page is an example of how you can use one page to add, update, and delete items, as well as checkout. 
+		This is the most in depth single page sample 
+	
+	</p>
+ 	
+	{!-- ORDER COMPLETE MESSAGES --}
+	{!-- the submitted_order_info tag outputs information from the last attempted order.
+		Even if the customer leaves this page and returns, the information from the customer's 
+		last attempted purchase will be output. 
+		 --}
+	{exp:cartthrob:submitted_order_info}
+	    <div class="store_block">
+			{if authorized}
+			{!-- This content displays if the purchase was successful--}
+				Your transaction is complete!<br />
+		        Transaction ID: {transaction_id}<br />
+		        Your total: {cart_total}<br />
+		        Your order ID: {order_id}
+			{!-- This content displays if the purchase is only partly completed--}
+		    {if:elseif processing}
+				Your transaction is being processed!<br />
+		        Transaction ID: {transaction_id}<br />
+		        Your total: {cart_total}<br />
+		        Your order ID: {order_id}
+		    {if:elseif declined}
+			{!-- This content displays if the purchase was declined--}
+		        Your credit card was declined: {error_message}
+		    {if:elseif failed}
+			{!-- This content displays if the purchase completely fails--}
+		        Your payment failed: {error_message}
+		    {/if}
+		</div>
+	{/exp:cartthrob:submitted_order_info}
+
+	{!-- ADD A PRODUCT --}
+    <div class="store_block">
+	<h2>Add Products</h2>
+	{!-- outputting products stored in one of the "products" channels. 
+		Product channels are no different than standard channels. --}
+	{exp:channel:entries channel="products" limit="10"}
+ 		{!-- 
+			 The add_to_cart_form adds 1 or more of a product to the cart
+
+			parameters
+			return: the page the customer will be redirected to after adding this item to the cart
+			entry_id: the product's entry_id
+		--}
+		
+		{exp:cartthrob:add_to_cart_form 
+			entry_id="{entry_id}" 
+			return="{template_group}/{template}"}
+			<p>
+				Product name: {title} Price: {product_price}<br />
+				Quantity: <input type="text" name="quantity" size="5" value="" /> 
+				<br />
+				<input type="submit" value="Add to Cart">
+			</p>
+		{/exp:cartthrob:add_to_cart_form}
+	{/exp:channel:entries}
+	</div>
+
+	{!-- VIEW CART CONTENTS / UPDATE QUANTITIES --}
+	<div class="store_block">
+	<h2>Cart Contents</h2>
+ 
+	{!-- cart_items_info outputs information about your current cart, including products in the cart, weight, and prices. 
+		you can combine this with update_cart_form, to output cart item data, and update cart info
+		--}
+		{exp:cartthrob:cart_items_info}
+ 		
+			{if no_results}
+			    <p>There is nothing in your cart</p>
+			{/if}
+		{!-- outputting content that's only applicable for the first item. --}
+		{if first_row}
+			{!-- adding an update_cart_form to the first row. --}
+			{!-- update_cart_form allows you to edit the information of one or more items in the cart at the same time
+				as well as save customer information, and shipping options. --}
+			{exp:cartthrob:update_cart_form 
+				return="{template_group}/{template}"}
+		
+			<h3>Customer Info</h3>
+			{!-- customer_info outputs customer info that is current stored in session.
+				update_cart_form, checkout_form, save_customer_info form and other forms
+				can all save customer data.
+				 --}
+				
+			{exp:cartthrob:customer_info}
+				First Name: <input type="text" name="first_name" value="{customer_first_name}" /><br />
+				Last Name: <input type="text" name="last_name" value="{customer_last_name}" /><br />
+				Email Address:	<input type="text" name="email_address" value="{customer_email_address}" /><br />
+				State: <input type="text" name="state" value="{customer_state}" /><br />
+				Country: <input type="text" name="country_code" value="{customer_country_code}" /><br />
+				Zip: <input type="text" name="zip" value="{customer_zip}" /><br />
+			{/exp:cartthrob:customer_info}
+		    <table>
+		        <thead>
+		            <tr>
+		                <td>Item</td>
+		                <td colspan="2">Quantity</td>
+		            </tr>
+		        </thead>
+		        <tbody>
+				{/if}
+		        <tr>
+	                <td>{title}</td>
+	                <td>
+						{!-- you can reference products by entry_id and row_id. If you sell configurable 
+							items (like t-shirts with multiple sizes) you should use row_id to edit and 
+							delete items, otherwise, all items with that entry id
+							are affected, regardless of configuration --}
+                       	<input type="text" name="quantity[{row_id}]" size="2" value="{quantity}" />
+	                </td>
+	                <td>
+						{!-- This deletes one item (row_id) at a time--}
+						<input type="checkbox" name="delete[{row_id}]"> Delete this item
+	                </td>
+	            </tr>
+				{if last_row}
+				{!-- outputting content that's only applicable for the last item. --}
+		            <tr>
+		                <td>
+							{!-- these are just some of the variables available within the cart_items_info tag --}
+		                    <p>
+								Subtotal: {cart_subtotal}<br />
+			                    Shipping: {cart_shipping}<br />
+			                    Tax: {cart_tax}<br /> 
+								{!--tax is updated based on user's location. To create a default tax price, set a default tax region in the backend --}
+								Shipping Option: {shipping_option}<br />
+								Tax Name: {cart_tax_name}<br />
+								Tax %: {cart_tax_rate}<br />
+ 								Discount: {cart_discount}<br />
+			                    <strong>Total: {cart_total}</strong>
+							</p>
+							<p>
+								{!-- total quantity of all items in cart --}
+								Total Items: {exp:cartthrob:total_items_count}<br />
+								{!-- total items in cart --}
+								Total Unique Items: {exp:cartthrob:unique_items_count}
+							</p>
+		                </td>
+		                <td colspan="2">&nbsp;</td>
+		            </tr>
+		        </tbody>
+		    </table>
+			<input type="submit" value="Update Cart" />
+			{/exp:cartthrob:update_cart_form}
+		{/if}
+	{/exp:cartthrob:cart_items_info}
+	</div>
+
+	{!-- ADD COUPON --}
+	<div class="store_block">
+	<h2>Add Coupon</h2>
+	{!--  add_coupon_form tag outputs an add_coupon form--}
+	{exp:cartthrob:add_coupon_form 
+		return="{template_group}/{template}"}
+		<input type="text" name="coupon_code" /> use code 5_off if you're demoing this on CartThrob.net<br />
+		<input type="submit" value="Add" />
+	{/exp:cartthrob:add_coupon_form}
+	</div>
+	
+	{!-- CHECKOUT --}
+	<div class="store_block">
+	<h2>Checkout</h2>
+	{!-- checkout_form tag outputs a checkout form--}
+	{!-- There are many parameters available for the checkout form. 
+			gateway: you can manually set the gateway. If this parameter isn't set, the default gateway will be used
+		  --}
+	{exp:cartthrob:checkout_form 
+ 		return="{template_group}/{template}/order_complete"}
+		
+		{!-- The gateway_fields template variable to output fields required by your currently selected gateway 
+			what you see on the front end changes based on the gateway's requirements.--}
+		{gateway_fields}
+		<br />
+		<input type="submit" value="Checkout" />
+	{/exp:cartthrob:checkout_form}
+	</div>
+ 	
+	<div class="store_block">
+		<h2>Tags used in this template</h2>
+		<ul>
+			<li><a href="http://livecart.com/docs/tags_detail/add_to_cart_form">add_to_cart_form</a></li>
+			<li><a href="http://livecart.com/docs/tags_detail/add_coupon_form">add_coupon_form</a></li>
+			<li><a href="http://livecart.com/docs/tags_detail/cart_items_info">cart_items_info</a></li>
+			<li><a href="http://livecart.com/docs/tags_detail/checkout_form">checkout_form</a></li>
+			<li><a href="http://livecart.com/docs/tags_detail/customer_info">customer_info</a></li>
+			<li><a href="http://livecart.com/docs/tags_detail/save_customer_info_form">save_customer_info_form</a></li>
+			<li><a href="http://livecart.com/docs/tags_detail/submitted_order_info">submitted_order_info</a></li>
+			<li><a href="http://livecart.com/docs/tags_detail/update_cart_form">update_cart_form</a></li>
+		</ul>
+	</div>
+	<div class="store_block">
+		{embed=cart_examples/include_footer}
+	</div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+{preload_replace:template_group="cart"}
+{preload_replace:template="order_info"}
+{embed="{template_group}/_header" title="Order Results" template_group="{template_group}" template="{template}" }
+</head>
+<body>
+<div id="container">
+		<div id="main">
+			{embed="{template_group}/_store_header" template_group="{template_group}" template="{template}"}
+	<h1>Store: Order Results</h1>
+	<p></p>
+ 
+<div class="store_block">
+    <h2>The results of your order</h2>
+	
+	{exp:cartthrob:submitted_order_info}
+	    <div class="store_block">
+	        {if authorized}
+	            Your transaction is complete!<br />
+	            Transaction ID: {transaction_id}<br />
+	            Your total: {cart_total}<br />
+	            Your order ID: {order_id}<br /><br />
+	
+		    <a href="{path=cart/account}">Order History &raquo;</a>
+	        {if:elseif processing}
+	            Your Order is Currently being processed: {error_message}<br />
+	            Transaction ID: {transaction_id}<br />
+	            <br />Order processing is generally completed within 48 hours depending on your payment method. 
+	        {if:elseif declined}
+	            Your credit card was declined: {error_message}
+	            <a href="{path={template_group}/checkout}">Try checking out again &raquo;</a>
+	        {if:elseif failed}
+	            Your payment failed: {error_message}
+	            <a href="{path={template_group}/checkout}">Try checking out again &raquo;</a>
+	        {/if}
+	    </div>
+	{/exp:cartthrob:submitted_order_info}
+</div>
+
+  
+	{embed=cart/_footer_nav template="{template}" template_group="{template_group}"}

@@ -1,0 +1,59 @@
+<div class="footer-widget" id="subfooter">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-2">
+						<div class="single-widget">
+							<h2>Information</h2>
+							<ul class="nav">
+								<li><a href="{site_url}about-us">About Us</a></li>
+								<li><a href="{site_url}contact-us">Contact Us</a></li>
+								<li><a href="{site_url}privacy-policy">Privacy Policy</a></li>
+								<li><a href="{site_url}delivery-information">Delivery Information</a></li>
+								<li><a href="{site_url}terms-conditions">Terms & Conditions</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-2">
+						<div class="single-widget">
+							<h2>Help Desk</h2>
+							<ul class="nav nav-pills nav-stacked">
+								<li><a href="{site_url}contact-us">Contact Us</a></li>
+								<li><a href="{site_url}returns">Returns</a></li>
+								<li><a href="{site_url}faqs">Faqs</a></li>
+								<li><a href="{site_url}shipping-policy">Shipping Policy</a></li>								
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-2">
+						<div class="single-widget">
+							<h2>My Account</h2>
+							<ul class="nav nav-pills nav-stacked">
+                            {if logged_in}
+								<li><a href="{site_url}myaccount">My Profile</a></li>
+								<li><a href="{site_url}myaccount/order-history">Order History</a></li>
+								<li><a href="{site_url}myaccount/my-wishlist">My Wishlist</a></li>					
+							{if:else}
+                             	<li><a href="{site_url}myaccount/login">Login / Signup</a></li>
+								<li><a href="{site_url}myaccount/register">Register</a></li>		
+                             {/if} 
+                             <li><a href="{site_url}myaccount/shopping-cart">Shopping Cart</a></li>
+                             <li><a href="{site_url}register/?u=ws">Request Wholesale Access</a></li>  
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-2">
+						<div class="single-widget">
+							<h2>Payment Options</h2>
+					    <img src="{skin_url}/images/global/payment_options.png" width="172" height="125" alt=""/> </div>
+					</div>
+					<div class="col-sm-3 col-sm-offset-1">
+						<div class="single-widget">
+							{embed="widgets/connect-with-us"}
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+        
+        

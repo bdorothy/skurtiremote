@@ -1,0 +1,22 @@
+{exp:cartthrob:submitted_order_info}
+	{if authorized}
+		Your payment is a success!
+		Transaction ID: {transaction_id}
+		Your total: {cart_total}
+		Your order ID: {order_id}
+    {if:elseif processing}
+		Your transaction is being processed!<br />
+        Transaction ID: {transaction_id}<br />
+        Your total: {cart_total}<br />
+        Your order ID: {order_id}
+	{if:elseif declined}
+		Your credit card was declined: {error_message}
+	{if:elseif failed}
+		Your payment failed: {error_message}
+	{/if}
+{/exp:cartthrob:submitted_order_info}
+
+
+<br />Outputs the results of a checkout_form submission. 
+<br />NOTE: example requires that a checkout be attempted before any results will display
+<br />http://livecart.com/docs/tags_detail/submitted_order_info/

@@ -1,0 +1,80 @@
+#cluetip-close img {
+  border: 0;
+}
+#cluetip-title {
+  overflow: hidden;
+}
+#cluetip-title #cluetip-close {
+  float: right;
+  position: relative;
+}
+#cluetip-waitimage {
+  width: 43px;
+  height: 11px;
+  position: absolute;
+  background-image: url(../images/wait.gif);
+}
+
+#cluetip-extra {
+  display: none;
+}
+
+.cluetip-default {
+  background-color: #fff;
+}
+.cluetip-default #cluetip-outer {
+  position: relative;
+  margin: 0;
+  background-color: #fff;
+}
+#cluetip-title{
+	width: 100%;
+	height: 35px;
+	background:#ae1000 url(../images/ct_help_header_bg.gif) repeat-x;	
+}
+.cluetip-default h3#cluetip-title {
+	font-family: "Lucida Grande", Arial, Helvetica, sans-serif;
+	font-size: 18px;
+	font-weight:bold;
+	line-height:35px;
+	text-transform: uppercase;
+	color:#ffffff;
+	margin: 0;
+	margin-bottom: 15px;
+	padding: 0;
+	text-indent: 7px;
+	float: left;
+}
+.cluetip-default #cluetip-title a {
+  color: #d9d9c2;
+  font-size: 0.95em;
+}  
+.cluetip-default #cluetip-inner {
+  	padding: 20px 20px 10px;
+	font-family: "Lucida Grande", Arial, Helvetica, sans-serif;
+	font-size: 12px;
+}
+.cluetip-default #cluetip-inner p a{
+	color: #a10a0a;
+	text-decoration:underline;
+
+}
+.cluetip-default div#cluetip-close { 
+	width: 18px;
+	height: 18px;
+	display:block;
+	position: absolute;
+	top: 1px;
+	right: 4px;
+	float: right;
+	background:url(../images/ct_help_close_x.gif) no-repeat;
+	text-indent:-9000em;
+	text-decoration:none;
+}
+
+
+/* stupid IE6 HasLayout hack */
+.cluetip-rounded #cluetip-title,
+.cluetip-rounded #cluetip-inner {
+  zoom: 1;
+}

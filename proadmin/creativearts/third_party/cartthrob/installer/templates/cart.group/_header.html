@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>{embed:title}</title>
+	{exp:jquery:script_tag}
+	<link rel="stylesheet" type="text/css" media="all" href="{stylesheet={embed:template_group}/main.css}" />
+	<script type="text/javascript" src="{theme_folder_url}third_party/cartthrob/scripts/jquery.form.js" ></script>
+	
+	<script type="text/javascript">
+		/////////////////  CARTTHROB JS //////////////////////////	
+		// holding text used when updating totals
+		var updating = "updating..."; 
+		// if set to true, ajax form will be shown, and all json data will be printed to the console log
+		var ct_debug = false;
+		// list of all CT fields that might change
+		var ct_billing_fields = new   Array('first_name','last_name','address','address2','city','state','zip','country_code','company','phone','email_address','use_billing_info','card_type','expiration_month','expiration_year','begin_month','begin_year','currency_code','language','region');
+
+		var ct_shipping_fields = new   Array('shipping_first_name','shipping_last_name','shipping_address','shipping_address2','shipping_city','shipping_state','shipping_zip','shipping_country_code','shipping_company','shipping_option');
+		
+		
+		// setting all customer information into a variables. 
+		{exp:cartthrob:customer_info}
+			var first_name = '{customer_first_name}'; 
+			var last_name = '{customer_last_name}'; 
+			var address = '{customer_address}'; 
+			var address2 = '{customer_address2}'; 
+			var city = '{customer_city}'; 
+			var state = '{customer_state}'; 
+			var zip = '{customer_zip}'; 
+			var country_code = '{customer_country_code}'; 
+			var company = '{customer_company}'; 
+			var phone = '{customer_phone}'; 
+			var email_address = '{customer_email_address}'; 
+			var use_billing_info = '{customer_use_billing_info}'; 
+			var shipping_first_name = '{customer_shipping_first_name}'; 
+			var shipping_last_name = '{customer_shipping_last_name}'; 
+			var shipping_address = '{customer_shipping_address}'; 
+			var shipping_address2 = '{customer_shipping_address2}'; 
+			var shipping_city = '{customer_shipping_city}'; 
+			var shipping_state = '{customer_shipping_state}'; 
+			var shipping_zip = '{customer_shipping_zip}'; 
+			var shipping_country_code = '{customer_shipping_country_code}'; 
+			var shipping_company = '{customer_shipping_company}'; 
+			var card_type = '{customer_card_type}'; 
+			var expiration_month = '{customer_expiration_month}'; 
+			var expiration_year = '{customer_expiration_year}'; 
+			var begin_month = '{customer_begin_month}'; 
+			var begin_year = '{customer_begin_year}'; 
+			var currency_code = '{customer_currency_code}'; 
+			var language = '{customer_language}'; 
+			var shipping_option = '{customer_shipping_option}'; 
+			var region = '{customer_region}';
+			var gateway_name =""; 
+		{/exp:cartthrob:customer_info}
+		
+		// cartthrob form options
+		var cart_form_options = { 
+			success: update_cart,  // post-submit callback
+			dataType: 'json' 
+	    };
+	
+		// cartthrob updating function
+		function update_cart(data, statusText, xhr, $form)  {   
+ 	        if (data.success) {                                                   
+
+				// update the csrf_token hash so we don't run afoul of EE's secure forms
+				$("input[name=csrf_token]").val(data.CSRF_TOKEN);
+				// using the json data object's data to update various totals
+				$('.cart_tax')			.html( data.cart_tax );
+				$('.cart_total')		.html( data.cart_total );
+				$('.cart_shipping')		.html( data.cart_shipping );
+				$('.cart_subtotal')		.html( data.cart_subtotal );
+				$('.cart_discount')		.html( data.cart_discount );
+
+				// if debugging is turned on, all data will be output to the js console log
+				if (ct_debug)
+				{
+					$.each(data, function(index, item){
+					  console.log(index + ": " +item);
+					});  
+					$.each(data.errors, function(index, item){
+					  console.log(index + ": " +item);
+					});
+				}
+	        }  
+			return true; 
+	    }
+	
+		jQuery(document).ready(function($){
+			
+			// add use billing info to checkout fields. 
+			function add_billing_info()
+			{
+				// add use_billing_info box if it doesn't exist. hide and show shipping fields
+				if ($("fieldset.billing").length > 0 && $("fieldset.shipping").length > 0 && $("fieldset.billing > label.use_billing_info").length == 0)
+				{
+					ht = '<label class="use_billing_info">Copy billing info to shipping</label>'; 
+					if (use_billing_info == "1" || use_billing_info =="yes")
+					{
+						ht += 'Yes <input type="radio" name="use_billing_info" value="yes" checked="checked"/>';
+						ht += 'No <input type="radio" name="use_billing_info" value="no"  />' ; 
+						$("fieldset.shipping").hide(); 
+					}
+					else
+					{
+						ht += 'Yes <input type="radio" name="use_billing_info" value="yes" />';
+						ht += 'No <input type="radio" name="use_billing_info" value="no" checked="checked" />' ; 
+						$("fieldset.shipping").show(); 
+					}
+					$('fieldset.billing').append( ht );
+				}
+			}
+			add_billing_info(); 
+			
+			// showing a login form when the login button is clicked. 
+			$("#login_bttn").click(function(){
+				$("#login_form").show();
+				return false;
+			});
+			
+			$("#gateway").live('change', function(){
+				$.post("{path=cart/ajax_cart_form/}", { gateway: $(this).val()},
+					function(data) {
+						$( "#checkout_form_gateway_fields" ).empty().append( $(data) );
+			   }).complete(function() { add_billing_info();  });
+ 			}); 
+
+			
+			// when any field is updated, check to see if it's a CT form field and dynamically update 
+			$("input[type=text], input[type=radio], select").live('change', function(){
+				
+				var input_name = $(this).attr("name");    
+				var input_val = $(this).val(); 
+				
+				if ( $.inArray(input_name, ct_billing_fields) != -1 || $.inArray( input_name , ct_shipping_fields)!= -1  )
+				{
+					if (input_name =="use_billing_info")
+					{
+						input_val = $('input[name='+input_name+']:checked').val(); 
+						if (input_val== "yes" || input_val == "1")
+						{
+							$(ct_shipping_fields).each(function(index, data) {  
+								var new_value = null;
+								new_value = $(":input[name="+ data.replace("shipping_", "") +"]").val(); 
+								$(":input[name="+ data +"]").val( new_value ); 
+							});
+							use_billing_info = 1; 
+							$("fieldset.shipping").hide(); 
+						}
+						else
+						{
+							use_billing_info = 0; 
+							$("fieldset.shipping").show();
+							$(ct_shipping_fields).each(function(index, data) {  
+								var new_value = null;
+								new_value = (new Function("return " + data ))();
+								$(":input[name="+ data +"]").val( new_value ); 
+							});
+						}
+					}  
+					//var form = $(this).closest("form"); 
+					var form = $("#hidden_save_customer_info_form"); 
+					// generate a new input 
+					new_input = $("<input type='text' name='"+ input_name +"' value='"+ input_val +"' />"); 
+					// add this field to the form without classes, ids, etc. don't need em.
+					$('#hidden_save_customer_info_form > .cart_data').empty().append(new_input); 
+					 
+					// don't submit the checkout form via ajax if it's the checkout
+					if ($(form).attr("id") != "checkout_form")
+					{
+						$(form).ajaxForm(cart_form_options);
+		                $(form).submit(); 
+					}
+				}
+			});    
+			
+			// in forms where we want to direct a customer to one location 
+			// or the other based on their submit selection, we get the value set in the "rel" attribute
+			// and submit the parent form
+ 			$(".cart_submit_button").click(function(event){   
+				event.preventDefault(); 
+ 				// get the return template name
+				var return_template = $(this).attr('rel');     
+				
+				// get the form element that's connected with the submit button
+				var form = $(this).closest('form');  
+ 				// check to see if the rel was set.
+				if ( return_template )
+				{       
+ 					// check to see if the return input does not exist
+					if ($(form.attr("id") + ' > input[name=return]').length == 0)
+					{           
+						// input doesn't exist. add it. 
+						var return_input = $("<input type='hidden' name='return' value='" + return_template + "' />");
+						return_input.appendTo(form); 
+					}
+					else
+					{
+						// it exists. update it. 
+						$(form.attr("id") + ' > input[name=return]').val(return_template); 
+					}
+				}  
+				// we don't want the submit button locked into using ajaxForm
+				$(form).unbind('submit').find('input:submit,input:image,button:submit' ).unbind('click'); 
+				
+				$(form).submit(); 
+				return false; 
+			}); 
+			/////////////////  END CARTTHROB JS //////////////////////////
+ 		}); 
+	</script>

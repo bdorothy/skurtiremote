@@ -1,0 +1,67 @@
+<!-- TOP BAR -->
+<div id="topbar">
+    
+      <!-- Static navbar -->
+      <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Menu</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+           <a class="navbar-brand hidden-lg hidden-md hidden-sm visible-xs" href="#">{site_name}</a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+            
+             {if "{exp:siteconfig:get item='allow_wholesale'}" == 'yes'}
+              <li class="active"><a href="{site_url}wholesale"><i class="icon i-stack"></i>Wholesale Area</a></li>
+             {/if}
+             
+              <li><a href="{site_url}helpdesk/"><i class="icon i-support"></i> Help</a></li>
+              <li><a href="{site_url}contact-us/"><i class="icon i-envelop"></i> Contact</a></li> 
+              <li><a><i class="icon i-phone"></i>{exp:siteconfig:get item="helpline"}</a></li>             
+            </ul>
+          
+			<div class="mini_cart">
+            {embed="widgets/minicart"}
+            </div>  
+            
+            
+              <ul class="nav navbar-nav navbar-right">
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="icon i-user"></i>My Account <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                  {if logged_in}
+                  <li><a href="{site_url}myaccount/profile"><i class="icon i-cabinet"></i> My Profile</a></li>
+                  <li><a href="{site_url}myaccount/order-history"><i class="icon i-stats"></i> Order History</a></li>
+                  <li><a href="{site_url}myaccount/wishlist"><i class="icon i-attachment"></i> My Wishlist</a></li>
+                  {if:else}
+                  <li><a href="{site_url}login"><i class="icon i-arrow-right"></i> Login</a></li>
+                  <li><a href="{site_url}register"><i class="icon i-gear"></i> Register</a></li>
+                  {/if}
+                  <li class="divider"></li>
+                  <li><a href="{site_url}view-cart"><i class="icon i-cart"></i> Shopping Cart</a><li>
+                  <li><a href="{site_url}checkout"><i class="icon i-coin"></i> Checkout</a></li>
+                  
+                </ul>
+              </li>
+            </ul>
+            
+           <ul class="pull-right currency_select" style="margin-top:12px; margin-right:5px">
+           {exp:cartthrob:save_customer_info_form return="{current_url}"}
+			{exp:currency_select:select_list name="currency_code" selected="{customer_currency_code}"}
+		   {/exp:cartthrob:save_customer_info_form}
+          </ul>      
+            
+            
+            
+          </div><!--/.nav-collapse -->
+        </div><!--/.container -->
+      </nav>
+      
+</div>
+<!-- TOP BAR -->         
+            

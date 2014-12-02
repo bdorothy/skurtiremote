@@ -1,0 +1,9 @@
+{exp:channel:entries channel="store_design" limit="1"}
+<div class="row">
+<div class="col-xs-12">
+{promos limit="2"}
+{if promos:link}<a href="{promos:link}">{/if}<img style="margin-bottom:10px;margin-top:5px" src="{promos:image}" class="img-thumbnail img-responsive" alt="{promos:caption}" title="{promos:caption}" style="padding:10px;">{if promos:link}</a>{/if}
+{/promos}
+</div>
+</div>
+{/exp:channel:entries}

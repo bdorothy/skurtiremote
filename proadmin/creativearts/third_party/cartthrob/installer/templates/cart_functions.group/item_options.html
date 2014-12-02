@@ -1,0 +1,26 @@
+{exp:cartthrob:cart_items_info}
+	{if no_results}Your cart is empty{/if}
+	 <div><h2>Item: {entry_id}</h2>
+	{exp:cartthrob:item_options entry_id = "{entry_id}" row_id="{row_id}" }
+		{if no_results}
+			There are no options for this item
+		{/if}
+		Option {item_options:option_label}
+		<br />
+		{item_options:list}
+			{if dynamic}dynamically added options!{/if}
+			LIST ITEM: {if option_selected}selected{/if} {option} {option_name}  price: {price}<br />
+		{/item_options:list}
+		<br />
+		{item_options:select row_id="{row_id}" id="{option_field_name}"}
+			<option {selected} value="{option}">{option_name} {price}</option>
+		{/item_options:select}
+		<br /><br /><br />
+	{/exp:cartthrob:item_options}
+	</div>
+{/exp:cartthrob:cart_items_info}
+
+
+<br />Will pull up all item options for a specific entry. Can be used singly, or in combination with cart items info to pull up information about a specific item in the basket
+<br />NOTE: example requires "products" channel and "product_color" price modifier field
+http://livecart.com/docs/tags_detail/price_modifiers/

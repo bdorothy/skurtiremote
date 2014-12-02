@@ -1,0 +1,71 @@
+<link rel="stylesheet" type="text/css" href="{skin_url}/plugins/countdown/css/countdown.css" media="screen" />
+<script src="{skin_url}/plugins/countdown/js/countdown.min.js"></script>
+ <script>
+      $(function(){
+
+$('[data-countdown]').each(function() {
+var $this = $(this), finalDate = $(this).data('countdown');
+$this.countdown(finalDate, function(event) {
+$this.html(event.strftime('%D days %H:%M:%S'));
+});
+});
+
+});
+    </script>
+<div class="container" style="margin-bottom:40px;">
+<div class="row">    
+<div id="product_view">    
+{exp:channel:entries channel="products" limit="1"}    
+{exp:cartthrob:add_to_cart_form
+entry_id="{entry_id}"
+return="/shopping-cart"
+}
+    <div class="col-xs-12">
+    {embed="widgets/breadcrumbs"  crumb1="{title}"}
+    </div>
+        
+    <div class="col-xs-12 col-sm-5">
+    asdf
+    </div>
+
+
+    <div class="col-xs-12 col-sm-7">
+   		<h1>{title}</h1>
+        <div>{product_description}</div>
+        
+        <div class="col-xs-12 col-sm-6 mt50">
+        <div class="">Product Code : {product_sku}</div>
+        <div class="sp">{exp:currency_select:converted price="{op:numeric}"}</div>
+        <div class="stock">In Stock</div>
+        <div class="stock">Delivery : {exp:siteconfig:get item="default_shipping_duration"}</div>
+        
+        {exp:cartthrob:item_options entry_id="{entry_id}" }
+		{select}
+		<option {selected} value="{option_value}">{option_name} {price}</option>
+		{/select}
+		{/exp:cartthrob:item_options}  <br>
+        
+        he Size
+            <input type="text" name="item_options[my_height]" value="" />  <br>
+Salwar Size <input type="text" name="item_options[my_weight]" value="" /> 
+
+
+ 
+ 
+        </div>
+        
+        
+        
+        
+        <div class="col-xs-12 col-sm-6 mt50">
+        <button class="btn btn-danger btn-lg">Add to Cart</button>
+        </div>       
+        <div class="clearfix"></div> 
+    
+    </div>
+{/exp:cartthrob:add_to_cart_form}    
+{/exp:channel:entries}
+</div>
+</div>
+</div>
+

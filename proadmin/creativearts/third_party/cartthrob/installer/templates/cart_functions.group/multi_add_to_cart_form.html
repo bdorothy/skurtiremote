@@ -1,0 +1,19 @@
+{exp:channel:entries channel="products" limit="5"}
+	{if count == 1}
+		{exp:cartthrob:multi_add_to_cart_form return="cart_examples/single_page_checkout"}
+	{/if}
+
+		Product Name: {title} {product_price}
+		<input type="hidden" name="entry_id[{count}]" value="{entry_id}" />
+		<input type="text" name="item_options[{count}][notes]"  />
+		<input type="text" name="quantity[{count}]"  />
+
+	{if count == total_results}
+			<input type="submit" /> 
+		{/exp:cartthrob:multi_add_to_cart_form}
+	{/if}
+{/exp:channel:entries}
+
+<br />Outputs a form that allows you to add multiple items to the cart at the same time.
+<br />NOTE: example requires "products" channel. 
+<br />http://livecart.com/docs/tags_detail/multi_add_to_cart_form/

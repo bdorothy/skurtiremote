@@ -1,0 +1,100 @@
+<?php
+
+$lang = array(
+
+// -------------------------------------------
+//  Module CP
+// -------------------------------------------
+
+'color_picker_plus_module_name' => 'Color Picker Plus',
+'color_picker_plus_module_description' => 'An advanced color picker fieldtype based on jPicker',
+
+'color_picker_plus_no_module' => 'You haven’t installed the Color Picker Plus module yet.',
+
+// Pages
+'color_picker_plus_settings' => 'Settings',
+
+// Settings
+'color_picker_plus_group_save' => 'Can group save new quick colors in picker (via Shift + click)?',
+'color_picker_plus_group_reset' => 'Can group reset quick colors to defaults as defined below?',
+
+'color_picker_plus_urlqc' => 'URL for updating Quick Color preferences',
+
+'color_picker_plus_reset'      => 'Reset Quick Color defaults to Color Picker Plus defaults.',
+'color_picker_plus_reset_btn'  =>'Reset to Default Colors',
+
+'color_picker_plus_qc00'  => 'Default Quick Color 00',
+'color_picker_plus_qc01'  => 'Default Quick Color 01',
+'color_picker_plus_qc02'  => 'Default Quick Color 02',
+'color_picker_plus_qc03'  => 'Default Quick Color 03',
+'color_picker_plus_qc04'  => 'Default Quick Color 04',
+'color_picker_plus_qc05'  => 'Default Quick Color 05',
+'color_picker_plus_qc06'  => 'Default Quick Color 06',
+'color_picker_plus_qc07'  => 'Default Quick Color 07',
+'color_picker_plus_qc08'  => 'Default Quick Color 08',
+'color_picker_plus_qc09'  => 'Default Quick Color 09',
+'color_picker_plus_qc10'  => 'Default Quick Color 10',
+'color_picker_plus_qc11'  => 'Default Quick Color 11',
+'color_picker_plus_qc12'  => 'Default Quick Color 12',
+'color_picker_plus_qc13'  => 'Default Quick Color 13',
+'color_picker_plus_qc14'  => 'Default Quick Color 14',
+'color_picker_plus_qc15'  => 'Default Quick Color 15',
+'color_picker_plus_qc16'  => 'Default Quick Color 16',
+'color_picker_plus_qc17'  => 'Default Quick Color 17',
+'color_picker_plus_qc18'  => 'Default Quick Color 18',
+'color_picker_plus_qc19'  => 'Default Quick Color 19',
+'color_picker_plus_qc20'  => 'Default Quick Color 20',
+'color_picker_plus_qc21'  => 'Default Quick Color 21',
+'color_picker_plus_qc22'  => 'Default Quick Color 22',
+'color_picker_plus_qc23'  => 'Default Quick Color 23',
+'color_picker_plus_qc24'  => 'Default Quick Color 24',
+'color_picker_plus_qc25'  => 'Default Quick Color 25',
+'color_picker_plus_qc26'  => 'Default Quick Color 26',
+'color_picker_plus_qc27'  => 'Default Quick Color 27',
+'color_picker_plus_qc28'  => 'Default Quick Color 28',
+'color_picker_plus_qc29'  => 'Default Quick Color 29',
+'color_picker_plus_qc30'  => 'Default Quick Color 30',
+'color_picker_plus_qc31'  => 'Default Quick Color 31',
+'color_picker_plus_qc32'  => 'Default Quick Color 32',
+'color_picker_plus_qc33'  => 'Default Quick Color 33',
+'color_picker_plus_qc34'  => 'Default Quick Color 34',
+'color_picker_plus_qc35'  => 'Default Quick Color 35',
+'color_picker_plus_qc36'  => 'Default Quick Color 36',
+'color_picker_plus_qc37'  => 'Default Quick Color 37',
+'color_picker_plus_qc38'  => 'Default Quick Color 38',
+'color_picker_plus_qc39'  => 'Default Quick Color 39',
+'color_picker_plus_qc40'  => 'Default Quick Color 40',
+'color_picker_plus_qc41'  => 'Default Quick Color 41',
+'color_picker_plus_qc42'  => 'Default Quick Color 42',
+'color_picker_plus_qc43'  => 'Default Quick Color 43',
+'color_picker_plus_qc44'  => 'Default Quick Color 44',
+'color_picker_plus_qc45'  => 'Default Quick Color 45',
+'color_picker_plus_qc46'  => 'Default Quick Color 46',
+'color_picker_plus_qc47'  => 'Default Quick Color 47',
+'color_picker_plus_qc48'  => 'Default Quick Color 48',
+'color_picker_plus_qc49'  => 'Default Quick Color 49',
+'color_picker_plus_qc50'  => 'Default Quick Color 50',
+'color_picker_plus_qc51'  => 'Default Quick Color 51',
+'color_picker_plus_qc52'  => 'Default Quick Color 52',
+'color_picker_plus_qc53'  => 'Default Quick Color 53',
+'color_picker_plus_qc54'  => 'Default Quick Color 54',
+'color_picker_plus_qc55'  => 'Default Quick Color 55',
+'color_picker_plus_qc56'  => 'Default Quick Color 56',
+'color_picker_plus_qc57'  => 'Default Quick Color 57',
+'color_picker_plus_qc58'  => 'Default Quick Color 58',
+'color_picker_plus_qc59'  => 'Default Quick Color 59',
+'color_picker_plus_qc60'  => 'Default Quick Color 60',
+'color_picker_plus_qc61'  => 'Default Quick Color 61',
+'color_picker_plus_qc62'  => 'Default Quick Color 62',
+'color_picker_plus_qc63'  => 'Default Quick Color 63',
+'color_picker_plus_qc64'  => 'Default Quick Color 64',
+'color_picker_plus_qc65'  => 'Default Quick Color 65',
+'color_picker_plus_qc66'  => 'Default Quick Color 66',
+'color_picker_plus_qc67'  => 'Default Quick Color 67',
+'color_picker_plus_qc68'  => 'Default Quick Color 68',
+'color_picker_plus_qc69'  => 'Default Quick Color 69',
+'color_picker_plus_qc70'  => 'Default Quick Color 70',
+'color_picker_plus_qc71'  => 'Default Quick Color 71',
+
+''=>''
+);

@@ -1,0 +1,60 @@
+{preload_replace:template_group="cart"}
+{preload_replace:template="index"}
+ 
+{embed="{template_group}/_header" title="Shopping Cart" template_group="{template_group}" template="{template}" }
+ 
+</head>
+<body>
+	<div id="container">
+		<div id="main">
+			{embed="{template_group}/_store_header" template_group="{template_group}" template="{template}"}
+
+					<div class="left_column">
+						<h1>Available Products</h1>
+ 
+							{exp:channel:entries channel="products" limit="30"  dynamic="no"}
+  								
+								<div class="product">
+									<h3>{title}</h3>
+									{if product_thumbnail}
+											<a href="{entry_id_path='{template_group}/product_detail'}"><img src="{product_thumbnail}" /></a>
+									{/if}
+									<p>
+									{if product_original_price && product_original_price > product_price}
+										Regular Price: {product_original_price}<br />
+											<span class="sale_price">Sale Price: {product_price}</span> 
+									{if:else}
+										Regular Price: {product_price} 
+									{/if}
+									{if no_tax !="Yes"}<br />including tax: {product_price:plus_tax}{/if}
+									
+									<br /><a href="{entry_id_path={template_group}/product_detail}">Learn more &raquo;</a></p>
+											
+								</div>
+  							{/exp:channel:entries}
+
+						<h1>Available Packages</h1>
+						{exp:channel:entries channel="store_packages" limit="30"  dynamic="no"}
+							<div class="product">
+								<h3>{title}</h3>
+								{if packages_images}
+										<a href="{entry_id_path='{template_group}/package_detail'}"><img src="{packages_images}" /></a>
+								{/if}
+								<p>
+									Regular Price: {packages_price}<br />
+									including tax: {packages_price:plus_tax}
+								<br /><strong><a href="{entry_id_path={template_group}/package_detail}">Learn more &raquo;</a></strong></p>
+ 								<p><strong>Package Features: </strong><br />
+								{packages_packages}
+					 				- {title}<br /> 
+ 								{/packages_packages}
+								</p>
+							</div>
+						{/exp:channel:entries}
+					</div>
+					<div class="right_column">
+ 						{embed="{template_group}/_right_column" template_group="{template_group}" template="{template}"}
+					</div>
+					<div class="clear_both"></div>
+
+ 	{embed=cart/_footer_nav template="{template}" template_group="{template_group}"}

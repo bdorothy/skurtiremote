@@ -1,0 +1,12 @@
+{exp:channel:entries channel="products" limit="10" }
+title: {title}<br />
+	{product_size}
+		{option_name}-{option_value}-{price}<br />
+	{/product_size}
+<hr />
+{/exp:channel:entries}
+
+
+<br />Generates a select box based on the contents of a CartThrob Price Modifiers custom fieldtype
+<br />NOTE: example requires "products" channel and "product_color" price modifier field
+http://livecart.com/docs/tags_detail/price_modifiers/

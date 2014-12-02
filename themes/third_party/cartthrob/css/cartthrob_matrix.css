@@ -1,0 +1,64 @@
+table.cartthrobMatrix th {
+  cursor: default;
+  position: relative;
+  white-space: nowrap;
+}
+table.cartthrobMatrix th a.remove_column {
+  position: absolute;
+  top: 7px;
+  right: 8px;
+}
+/*
+	CSS hack for getting the delete icon to show up in
+	price modifiers
+*/
+@-moz-document url-prefix() {
+	table.cartthrobMatrix th span{
+		float:left;
+	}
+	table.cartthrobMatrix th a.remove_column{
+		position:relative;
+		float: right;
+		top: 0;
+		right: 0;
+		padding:0;
+		margin: 0;
+	}
+}
+/* end FF CSS hack */
+
+table.cartthrobMatrix td {
+  padding-right: 18px;
+}
+table.cartthrobMatrix td.drag_handle {
+  padding: 0 8px;
+  width: 12px;
+  cursor: move;
+  background: transparent url(../images/ct_drag_handle.gif) no-repeat center;
+}
+table.cartthrobMatrix td.remove {
+  padding: 0 0 0 6px;
+  width: 26px;
+}
+div.cartthrobMatrixControls {
+  margin: 8px 0 0;
+}
+ul.cartthrobMatrixButtons {
+  list-style: none;
+  float: left;
+  margin: 0;
+  padding: 0;
+}
+ul.cartthrobMatrixButtons li {
+  float: left;
+  margin: 0 8px 0 0;
+  padding: 0;
+}
+ul.cartthrobMatrixPresets {
+  float: right;
+}
+ul.cartthrobMatrixPresets li {
+  float: left;
+  margin: 0 0 0 8px;
+  padding: 0;
+}

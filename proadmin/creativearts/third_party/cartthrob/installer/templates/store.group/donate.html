@@ -1,0 +1,76 @@
+{preload_replace:template_group="store"}
+{preload_replace:template="index"}
+ 
+{embed="{template_group}/_header" title="Make a Donation" template_group="{template_group}" template="{template}" }
+
+</head>
+<body>
+	{embed="{template_group}/_navbar" template_group="{template_group}" template="{template}"}
+
+	{embed="{template_group}/_subhead" template_group="{template_group}" template="{template}"}
+
+	{!-- since we're using twitter bootstrap, the main content area is designated "container", or some other specific classes depending on your requirements--}
+	<div class="container">
+		{!-- twitter bootstrap breaks up content into rows. The main section of this template is all one row. Rows can also be broken up into more rows --}
+		<div class="row">
+
+			{!-- twitter bootstrap breaks up (by default) pages into a 12 column grid. span3, span9 designate how much space these sections will take up --}
+			<div class="span3">
+				<div class="bs-docs-sidenav">
+					{embed="{template_group}/_leftnav" template_group="{template_group}" template="{template}"}
+			{!-- we're going to load the "also purchased" info for the last item added to the cart--}
+			{exp:cartthrob:cart_items_info limit="1" order_by="entry_id" sort="desc"}
+				{embed="{template_group}/_also_purchased" template_group="{template_group}" template="{template}" entry_id="{entry_id}"}
+			{/exp:cartthrob:cart_items_info}
+				</div>
+			
+			</div>
+
+			<div class="span9">
+			    <section id="donation">
+					<h1>Make a donation</h1>
+					<p>Thank you for your donation. Please feel free to leave a note with your donation</p>
+					{!-- you can manually add items to the cart using on_the_fly options. You can either set prices as a parameter, or allow_user_price if you'd like the user to be able to set the price--}
+ 					{exp:cartthrob:add_to_cart_form 
+					    return="{template_group}/view_cart" 
+						class='form-horizontal' 
+						allow_user_price="yes"
+						title="Donation"
+						no_shipping="yes"
+						no_tax="yes"
+					    on_the_fly="true"  
+
+						}
+ 
+						<div class="control-group">
+					 		<label for="add_donation" class="control-label">Donation Amount</label>
+						    <div class="controls">
+								<div class="input-prepend">
+								  <span class="add-on">{exp:cartthrob:view_setting prefix="yes"}</span>
+									<input type="text" maxlength="7"  class="input-medium"  name="price">
+ 								</div>
+								
+ 							</div>
+						</div>
+						
+						<div class="control-group">
+					 		<label for="add_donation" class="control-label">Donation Note</label>
+						    <div class="controls">
+								{!-- you can add anything to item options. Just use item_options[your_option_name]  when adding items to the cart --}
+								<input type="text" value="" name="item_options[donation_note]"  /> 
+  							</div>
+						</div>
+						
+						<div class="control-group">
+							<div class="form-actions">
+								<button type="submit" class="btn btn-primary">Add to Cart</button>
+				      		</div>
+						</div>
+						
+					{/exp:cartthrob:add_to_cart_form}
+				</section>
+				</div>
+		</div>
+	</div>
+
+ 	{embed="{template_group}/_footer" template="{template}" template_group="{template_group}"}

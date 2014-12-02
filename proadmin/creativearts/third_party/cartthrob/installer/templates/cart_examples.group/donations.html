@@ -1,0 +1,66 @@
+{preload_replace:template_group="cart_examples"}
+{preload_replace:template="donations"}
+{embed=cart_examples/include_header title="Taking Donations" }
+</head>
+<body>
+	
+	<h1>Taking Donations</h1>
+	<p>This page shows an example of how to take donations of any amount</p>
+
+	{!-- ADD A PRODUCT --}
+    <div class="store_block">
+	<h2>Make a Donation</h2>
+{!-- 
+	This "product" is created on the fly. The parameters below all relate to 
+	adding products to the cart that aren't stored in a channel
+	
+	parameters
+	return: the redirect location
+	allow_user_price: allows the user to set a price. If not set, user price is ignored for security's sake 
+	title: adds a title to this dynamic product
+	no_shipping: controls whether shipping is applied to this product
+	no_tax: controls whether tax is applied
+	on_the_fly: creates a dynamic product 
+--}
+	{exp:cartthrob:add_to_cart_form 
+	    return="{template_group}/{template}" 
+		allow_user_price="yes"
+		title="Donation"
+		no_shipping="yes"
+		no_tax="yes"
+	    on_the_fly="true"  
+		}
+		<p>
+			Donation Amount:  <input type="text" maxlength="7" size="5" name="price"> 
+			
+			{!-- Adding a personal_message to the donation. No field called personal_message exists,
+				but if you are using the "Cartthrob Order Items" custom field type in your Orders channel... 
+				this message will still be dynamically added to the order data. 
+				See the add_to_cart_form documentation for more details
+				 --}
+			Donation Note: {item_options:input:personal_message value="" }<br />
+		</p>
+	    <input type="submit" value="Submit" />
+	{/exp:cartthrob:add_to_cart_form}
+	</div>
+
+	{embed="cart_examples/include_view_cart" template_group="{template_group}" template="{template}" }
+
+	<div class="store_block">
+		<h2>Tags used in this template</h2>
+		<ul>
+			<li><a href="http://livecart.com/docs/tags_detail/add_to_cart_form">add_to_cart_form</a></li>
+		</ul>
+		
+		<h2>Concepts used in this template</h2>
+		<ul>
+			<li><a href="http://livecart.com/docs/sub_pages/purchased_items_overview">Purchased Items channel</a></li>
+			<li><a href="http://livecart.com/docs/sub_pages/orders_overview">Orders channel</a></li>
+		</ul>
+	</div>
+	<div class="store_block">
+		{embed=cart_examples/include_footer}
+	</div>
+
+</body>
+</html>

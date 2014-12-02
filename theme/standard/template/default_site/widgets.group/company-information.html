@@ -1,0 +1,27 @@
+<div class="our-standards" >
+<!-- our-standards -->
+{exp:channel:entries channel="store_design" limit="1"}
+{if company_information}
+{company_information}
+ <!-- company-informationes -->
+    	<div class="col-xs-12">
+			<div class="company-information">							
+				<div class="icon">
+					<div class="image"><i class="icon i-{company_information:icon}"></i></div>
+					<div class="info">
+						<h3 class="title">{company_information:title}</h3>
+						<p>
+							{company_information:body}
+						</p>
+					
+					</div>
+				</div>
+				<div class="space"></div>
+			</div> 
+		</div>
+{/company_information}
+{/if}     
+{/exp:channel:entries}        
+
+<!-- our-standards -->
+</div>

@@ -1,0 +1,120 @@
+{preload_replace:template_group="store"}
+{preload_replace:template="index"}
+
+
+{exp:channel:entries 
+	channel="products" 
+	limit="1"}
+	 
+{embed="{template_group}/_header" title="{title} - Product Detail" template_group="{template_group}" template="{template}" entry_id="{entry_id}" }
+ 
+</head>
+<body data-spy="scroll" data-target=".bs-docs-sidebar">
+	{embed="{template_group}/_navbar" template_group="{template_group}" template="{template}"}
+
+	{embed="{template_group}/_subhead" template_group="{template_group}" template="{template}"}
+
+	{!-- since we're using twitter bootstrap, the main content area is designated "container", or some other specific classes depending on your requirements--}
+	<div class="container">
+		{!-- twitter bootstrap breaks up content into rows. The main section of this template is all one row. Rows can also be broken up into more rows --}
+		<div class="row">
+
+			{!-- twitter bootstrap breaks up (by default) pages into a 12 column grid. span3, span9 designate how much space these sections will take up --}
+			<div class="span3">
+				<div class="bs-docs-sidenav">
+					{embed="{template_group}/_leftnav" template_group="{template_group}" template="{template}"}
+					{embed="{template_group}/_also_purchased" template_group="{template_group}" template="{template}" entry_id="{entry_id}" }
+				</div>
+			</div>
+
+			<div class="span9">
+				<section id="product-info">
+					<div class="row">
+						<div class="span6">
+										<h1>{title}</h1>
+										{if product_sku}#{product_sku}{/if}
+										{product_description}
+										{if product_original_price && product_original_price > product_price}
+											<h4>{product_price} <small><strong>Sale Price</strong> <i class="icon-tags"></i></small></h4>
+												<div class="alert alert-info">
+													<del><small>Regular Price: <strong>{product_original_price}</strong></small></del>
+												</div>
+										{if:else}
+										<h4>{product_price} <small><strong>Regular Price</strong></small></h4>
+										{/if}
+											{if no_tax !="Yes"}<p>Price including tax <strong>{product_price:plus_tax}</strong></p>{/if}
+
+										{!-- using twitter bootstrap here to lay out the form niceley... hence the form-horizontal class set here --}
+										{exp:cartthrob:add_to_cart_form 
+											class='form-horizontal' 
+											entry_id="{entry_id}" 
+											no_tax="{no_tax}"
+											no_shipping = "{no_shipping}"
+											return="{template_group}/view_cart"} 
+												{exp:cartthrob:item_options entry_id="{entry_id}"}
+											  	  {if dynamic}
+										          <div class="control-group">
+										                <label class="control-label" for="{option_field}">{option_label}</label>
+										                <div class="controls">
+													    {input}
+														</div>
+													</div>
+										            {if:else}
+										                {if options_exist}
+											          <div class="control-group">
+										
+										                    <label class="control-label" for="{option_field}">{option_label}</label>
+														    <div class="controls">
+										                    {select class="input-medium"} 
+										                        <option {selected} value="{option_value}">
+										                            {option_name}{if option_price_numeric != 0} +{option_price}{/if}
+										                        </option>
+										                    {/select}
+															</div>
+														</div>
+										                {/if}
+										            {/if}
+										        {/exp:cartthrob:item_options}
+
+											<div class="control-group">
+											{if "{inventory}" == "0" }
+												<p><strong>This item is out of stock</strong></p>
+										 	{if:else}
+										 		<label for="product_quantity" class="control-label">Quantity</label>
+											    <div class="controls">
+													<input type="text" id="product_quantity" class="input-medium"  placeholder='1' name="quantity" size="8"  />
+												</div>
+											{/if}
+											</div>
+
+											<div class="control-group">
+												<div class="form-actions">
+													<button type="submit" class="btn btn-primary">Add to Cart</button>
+									      		</div>
+											</div>
+										{/exp:cartthrob:add_to_cart_form}
+						</div>
+						<div class="span3">
+							<ul class="thumbnails">
+								<li class="span3">						
+									<div class="thumbnail">
+									{if product_detail_image}
+										<img src="{product_detail_image}" />
+									{if:else}
+										<img src="{theme_folder_url}third_party/cartthrob/store_themes/basic_white/images/main_pic.jpg" />
+									{/if}
+									</div>
+								</li>
+							</ul>
+							
+						</div>
+					</div>
+	
+				</section>
+				</div>
+		</div>
+	</div>
+
+	 	{embed="{template_group}/_footer" template="{template}" template_group="{template_group}" entry_id="{entry_id}"}
+
+	{/exp:channel:entries}

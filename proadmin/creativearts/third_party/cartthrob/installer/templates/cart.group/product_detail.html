@@ -1,0 +1,125 @@
+{preload_replace:template_group="cart"}
+{preload_replace:template="product_detail"}
+
+{exp:channel:entries 
+	channel="products" 
+	limit="1"}
+{embed="{template_group}/_header" title="{title} - Product Detail" template_group="{template_group}" template="{template}" }
+{/exp:channel:entries}
+ 
+</head>
+<body>
+	<div id="container">
+		<div id="main">
+			{embed="{template_group}/_store_header" template_group="{template_group}" template="{template}"}
+			{exp:channel:entries 
+				channel="products" 
+				limit="1"}
+				<div class="product">
+					<div class="left_column">
+						<h1>{title}</h1>
+						#{product_sku}
+						{product_description}
+						{if product_original_price && product_original_price > product_price}
+							<p>Regular Price: {product_original_price}<br />
+								<span class="sale_price">Sale Price: {product_price}</span> </p>
+						{if:else}
+							<p>Regular Price: {product_price}</p>
+						{/if}
+							{if no_tax !="Yes"}<p>Price including tax {product_price:plus_tax}</p>{/if}
+						
+						{exp:cartthrob:add_to_cart_form 
+							entry_id="{entry_id}" 
+							no_tax="{no_tax}"
+							no_shipping = "{no_shipping}"
+							return="{template_group}/view_cart"} 
+							<p>
+								{exp:cartthrob:item_options entry_id="{entry_id}"}
+						            {if dynamic}
+						                <label>{option_label}</label>
+						                {input}
+						            {if:else}
+						                {if options_exist}
+						                    <label>{option_label}</label>
+						                    {select} 
+						                        <option {selected} value="{option_value}">
+						                            {option_name}{if option_price_numeric > 0} +{option_price}{/if}
+						                        </option>
+						                    {/select}
+						                {/if}
+						            {/if}
+						        {/exp:cartthrob:item_options}
+							
+							</p>
+							<p>
+							{if "{inventory}" == "0" }
+								<strong>This item is out of stock</strong>
+						 	{if:else}
+						 		<label for="product_quantity">Quantity</label>
+								<input type="text" id="product_quantity" name="quantity" size="8"  />
+							{/if}
+							</p>
+							<input type="submit" value="Add to Cart" />
+
+						{/exp:cartthrob:add_to_cart_form}
+								
+					</div>
+					<div class="right_column">
+						{if product_detail_image}
+							<img src="{product_detail_image}" />
+						{if:else}
+							<img src="{theme_folder_url}third_party/cartthrob/store_themes/basic_white/images/main_pic.jpg" />
+						{/if}
+					</div>
+					<div class="clear_both"></div>
+				</div>
+				<div class="related_products">
+					<div class="left_column">
+						{if product_related_1 OR product_related_2 OR product_related_3}
+							<h3>You Might Also Like</h3>
+						{/if}
+						{related_entries id="product_related_1"}
+							<div class="related_item">
+								<a href="{entry_id_path='{template_group}/{template}'}">
+									<img src="{product_thumbnail}" />
+									{title}<br />
+									{product_price} &raquo;
+								</a>
+							</div>
+						{/related_entries}
+						
+						{related_entries id="product_related_2"}
+							<div class="related_item">
+								<a href="{entry_id_path='{template_group}/{template}'}">
+									<img src="{product_thumbnail}" />
+									{title}<br />
+									{product_price} &raquo;
+								</a>
+							</div>
+						{/related_entries}
+						
+						{related_entries id="product_related_3"}
+							<div class="related_item">
+								<a href="{entry_id_path='{template_group}/{template}'}">
+									<img src="{product_thumbnail}" />
+									{title}<br />
+									{product_price} &raquo;
+								</a>
+							</div>
+						{/related_entries}
+						
+						<div class="clear_both"></div>
+					</div>
+					<div class="right_column">
+						<h3>Customers Also Purchased</h3>
+						<ul>
+							{exp:cartthrob:also_purchased entry_id="{entry_id}" limit="7" variable_prefix="also_purchased_"}
+ 									<li><a href="{path="{template_group}/{template}/{also_purchased_entry_id}"}">{also_purchased_title}
+									</a></li>
+ 							{/exp:cartthrob:also_purchased}
+ 						</ul>
+					</div>
+					<div class="clear_both"></div>
+				</div>
+			{/exp:channel:entries}
+		{embed=cart/_footer_nav template="{template}" template_group="{template_group}"}
