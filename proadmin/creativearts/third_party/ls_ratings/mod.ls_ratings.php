@@ -42,17 +42,18 @@ class Ls_ratings {
 	
 	// Checks to see if already rated?
 	public function already_rated(){
+	
 	$entry_id = ee()->TMPL->fetch_param('entry_id');
-	$is_author = $this->logged_in_is_author($entry_id);
+	//$is_author = $this->logged_in_is_author($entry_id);
 	$member_id = ee()->session->userdata('member_id');
 	// search if this non - author has already rated this teacher
-	if ($is_author == "n"){
+	if ($member_id != 0){
 	ee()->db->where('entry_id',$entry_id);
 	ee()->db->where('author_id',$member_id);
 	$count = ee()->db->count_all_results('exp_comments');	
 	if($count > 0){
 		return 'y';
-	}else{return 'n';}
+	}else{return 'n';}	
 	}
 	}
 	
@@ -85,13 +86,11 @@ class Ls_ratings {
 	
 	public function avg_score(){
 	$entry_id = ee()->TMPL->fetch_param('entry_id');
-
 	$query = ee()->db->query("Select AVG(rating) as rating from exp_ls_ratings where entry_id = ".$entry_id." AND rating != '0' AND rating != 'NULL' GROUP BY entry_id");
-	
 	if ($query->num_rows() > 0)	{
 	$row = $query->row();
-	$parameter = round($row->rating,1);
-	return number_format(rating,1);
+	$rating = round($row->rating,1);
+	return 'Avg Rating : '. number_format($rating,1).'/5';
 	}	
 	else{
 	return 'No Ratings';

@@ -1,0 +1,149 @@
+{if logged_out}
+<div class="alert alert-success">Please <span class="logpop"><a href="#">login</a></span> to review this product.</div>
+{if:else}
+{if "{exp:ls_ratings:already_rated entry_id='{embed:entry_id}'}" == "y"}
+<div class="alert alert-success">You have already reviewed for this product.</div>
+{if:else}
+<!-- reviews -->
+<div id="rev">
+{exp:comment:form channel="products"  entry_id="{embed:entry_id}" form_id="comment"}
+
+	<h2>We are glad to recieve your review for this product.</h2>
+    <p>Please fill in the information below.</p>
+    <div class="alert" style="display:none"></div>
+
+	<div class="form-group">
+    
+    <div class="col-sm-12">
+    <label class="col-sm-12">Rating</label>
+     <div class="col-sm-12">
+    <input id="input-21e" value="5" name="rating" type="number" class="rating" min=1 max=5 step=1 data-size="lg">
+    </div>
+    </div>
+    
+     {if logged_out}
+    <div class="col-sm-12">
+        <label class="col-sm-12">Name</label>
+        <div class="col-sm-12">
+            <input type="text" class="form-control  input-lg" name="name" value="{name}"
+                required
+                data-bv-notempty-message="Name is required" />
+        </div>
+    </div>
+
+    
+    
+    <div class="col-sm-12 mt10">
+        <label class="col-sm-12">Email Address</label>
+        <div class="col-sm-12">
+            <input type="text" class="form-control  input-lg" name="email" value="{email}"
+                required
+                data-bv-notempty-message="Email Address is required"
+                data-bv-emailaddress="true"
+                data-bv-emailaddress-message="The value is not a valid email address"                
+                 />
+        </div>
+    </div>
+    
+    
+    <!-- Address -->
+     <div class="col-sm-12 mt10">
+        <label class="col-sm-12">Location</label>
+        <div class="col-sm-12">
+            <input type="text" class="form-control  input-lg" name="location" value="{location}"
+                required
+                data-bv-notempty-message="Location is required" />
+        </div>
+    </div>
+    {/if}
+    
+    
+     <div class="col-sm-12 mt10">
+        <label class="col-sm-12">Your Review/Comment</label>
+        <div class="col-sm-12">
+            <textarea name="comment" class="form-control" rows="3"
+                required
+                data-bv-notempty-message="Please write a review for this product" style="resize:none" />{comment}</textarea>   
+        </div>
+    </div>
+    
+    {if captcha}
+    <div class="col-sm-12 mt10">
+    
+                <label for="captcha">Please enter the word you see in the image below:</label><br />
+                <p>{captcha}<br />
+                <input type="text" name="captcha" value="{captcha_word}" maxlength="20" /></p>
+      
+    </div>
+    {/if}
+  
+
+    <div class="col-sm-12 mt10">
+        <div class="col-sm-6">
+            <button type="submit" class="btn btn-success pull-left btn-lg">Submit Review</button>
+             <div class="loader pull-left ml20 mt5" style="display:none"></div>  
+             <div class="clearfix"></div>
+        </div>
+    </div>
+   </div> 
+   <div class="clearfix"></div>
+
+{/exp:comment:form}
+
+
+</div>
+<!-- reviews -->
+{/if}
+<style>
+.loader{width:25px; height:25px; background:url({skin_url}/images/global/spinner.gif) no-repeat;}
+</style>
+<script>
+$(document).ready(function(e) {   
+
+$('#comment').bootstrapValidator(
+	{
+		feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        }
+	}
+	);
+	
+	
+		 
+$('#profile').ajaxForm({
+	dataType: 'json',
+	beforeSubmit: function () {
+	$(".loader").css("display","block");
+	//$(".spinner").html("Processing .... ");
+	},
+	success: function(data) {	
+	$(".loader").css("display","none");
+	window.scrollTo(0,0);
+	//$("#progress").removeClass("spinner");	
+	//alert(data.errors.toSource());
+	 if (data.success) {
+	// alert the message
+	$('.alert').removeClass('alert-danger');
+	$('.alert').addClass('alert-success');
+	$('.alert').html('<strong>Profile Uploaded Successfully</strong>');
+	$(".alert").show();
+	$(".alert").fadeOut(3000); 	 
+	} 		 
+	 else{	
+	$.each( data.errors, function( i, v ) {	
+	$("input[name=XID]").val(data.XID);			 			
+	$('.alert').html('<strong>'+v+'</strong>');
+	$('.alert').removeClass('alert-success');
+	$('.alert').addClass('alert-danger');
+	$('.alert').show();	
+	});
+	
+		 }
+	}	
+	});
+
+});
+</script>
+{/if}

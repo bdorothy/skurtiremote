@@ -118,37 +118,16 @@ class Ls_ratings_ext {
 	'comment_id' 				=> $comment_id,
 	'rating'					=> $rating,	
 	);
-	ee()->db->insert('ls_ratings', $data); 
-	$this->update_ratings_stats($entry_id);
+	ee()->db->insert('exp_ls_ratings', $data); 
+	
 	
 	// do not throw ajax for rating box
-	if($parent_id != 0){
+	
 	return $this->EE->output->send_ajax_response(array('success' => true,
 	'field_errors' => 'Thanks for your reviews. We shall check and update it very soon.'));
-	}
-	}
-	
-	
-	
-	
-	ee()->db->where('entry_id',$entry_id);
-	if (ee()->db->count_all_results('exp_ls_ratings_stats') == 0) {
-    $query = ee()->db->insert('exp_ls_ratings_stats', $records);
-    } else {
-      // A record does exist, update it.
-    $query = ee()->db->update('exp_ls_ratings_stats', $records, array('entry_id'=>$entry_id));
-    }
-
-	
-	// NO ALSO UPDATE THE CUSTOM FIELD OVERALL RATINGS FOR THIS ENTRY ID
-	$cfrecords = array(
-	'entry_id'					=> $entry_id,
-	'field_id_28'				=> $records['overall_ratings'],
-	'field_id_29'				=> $records['total_ratings'],
-	);
-	$query = ee()->db->update('exp_channel_data', $cfrecords, array('entry_id'=>$entry_id));
 	ee()->db->flush_cache();
 	}
+	
 	
 	
 	public function overall_ratings($entry_id){

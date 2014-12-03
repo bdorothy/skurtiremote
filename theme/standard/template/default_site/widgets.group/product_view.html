@@ -1,14 +1,39 @@
-{exp:channel:entries channel="products" limit="1"}    
+{exp:channel:entries channel="products" limit="1" track_views="one"}    
 <div class="container mb50" id="product_view">
 <div class="row">
 {embed="widgets/breadcrumbs"  crumb1="{title}"}
 </div>
 <div class="row">
-        <div class="col-md-5">
-        {pi}
-        <img id="product" src='{pi:image}' data-zoom-image="images/large/image1.jpg" class="img-responsive"/>
-        {/pi}  
-        </div>
+      
+      <div class="col-md-4">
+      {pi limit="1"}
+      <img src='{pi:image}' data-zoom-image="{pi:image}" class="img-responsive img-thumbnail" id="prd"/>
+      {/pi}       
+      <div id="gallery" class="mt10">
+      {pi}
+       <a href="#" data-image="{pi:image}" data-zoom-image="{pi:image}"> 
+      <img id="prd" src="{pi:image:thumbs}" class="img-thumbnail" />
+      </a> 
+      {/pi}     
+      </div>
+      </div>
+        
+      <div class="hidden-xs col-md-1">
+      <div class="views" style="border:1px solid #ccc; width:70px; height:70px; position:absolute;top:5px; left:-16px; text-align:center; border-left:0px; border-radius:0px 3px 3px 0px; box-shadow:3px 3px 3px #ddd; font-size:12px;">
+      <i class="icon i-eye" style="font-size:20px; color:#ccc"></i><br>
+      ({view_count_one})<br>
+      Views
+      </div>
+      
+      <div class="views" style="border:1px solid #ccc; width:70px; height:70px; position:absolute;top:100px; left:-16px; text-align:center; border-left:0px; border-radius:0px 3px 3px 0px; box-shadow:3px 3px 3px #ddd; font-size:12px;">
+      <i class="icon i-pencil" style="font-size:20px; color:#ccc"></i><br>
+      ({comment_total})<br>
+      Reviews
+      </div>
+      
+      </div>  
+        
+        
         <div class="col-md-7">
         <h1>{title}</h1>
        	<!-- Attributes -->
@@ -55,7 +80,7 @@
             
             </div>
             <!-- Add to Wishlist -->
-            <div class="pull-left" style="font-size:11px; margin-top:3px">| {exp:ls_ratings:avg_score entry_id="{entry_id}"}</div>
+            <div class="pull-left" style="font-size:11px; margin-top:3px">| <span class="glyphicon glyphicon-star" style="color:#FF8600"></span> {exp:ls_ratings:avg_score entry_id="{entry_id}"}</div>
             <div class="clearfix"></div>
             
             
@@ -68,7 +93,12 @@
             
        		<div class="stock">In Stock</div>
         	<div class="stock">Delivery : {exp:siteconfig:get item="default_shipping_duration"}</div>
+            <div class="info mt10">Share this product with your friends</div>
+            <div>{exp:ls_socialshare sites="Facebook|Google+|Twitter|LinkedIn|Pinterest" entry_id="{entry_id}" field_name="entry_id" pinterest_media="{pi}{pi:image}{/pi}"}</div>
+            <div class="clearfix"></div>
             </div>
+            
+           
             
             {exp:cartthrob:add_to_cart_form
 			entry_id="{entry_id}"
@@ -99,26 +129,35 @@
              </div>
             
             </div>            
-			{/exp:cartthrob:add_to_cart_form}   
-            
-            
+			{/exp:cartthrob:add_to_cart_form}  
           </div>
-        </div>
+          
+          
+           <!-- Tabs -->
+            <div id="tabs">
+<ul>
+<li><a href="#tabs-1">Product Description</a></li>
+<li><a href="#tabs-2">Reviews</a></li>
+<li><a href="#reviews">Write a Review</a></li>
+</ul>
+<div id="tabs-1">
+<p>{product_description}</p>
+</div>
+<div id="tabs-2">
+<p>{embed="widgets/product_reviews" entry_id="{entry_id}"}</p>
+</div>
+<div id="reviews">
+<p>{embed="widgets/f_commentform" entry_id="{entry_id}"}</p>
+</div>
+</div>
+           <!-- Tabs -->
+          
+          </div>
 </div>
 </div> 
 {/exp:channel:entries}
 <script>
-
-    $('#product').elevateZoom({
-    zoomType: "inner",
-cursor: "crosshair",
-zoomWindowFadeIn: 500,
-zoomWindowFadeOut: 750
-   }); 
-
 $(document).ready(function(e) { 
-
-
 /* Wishlist */		 
 $('#wishlist').ajaxForm({
 	dataType: 'json',
@@ -136,12 +175,14 @@ $('#wishlist').ajaxForm({
 	val = bt.val();
 	bt.val(val === "Remove from Wishlist" ? "Add to Wishlist" : "Remove from Wishlist");
 	} 		 
-	 else{			
-	alert('Something went wrong');
+	 else if (data.error){			
+	//alert('Something went wrong');
+	$('#loginform').modal() 
 	};			 
 	}	
 	});
 /* Wishlist */
 
+ $( "#tabs" ).tabs();
 });
 </script>

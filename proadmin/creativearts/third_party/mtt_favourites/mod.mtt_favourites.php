@@ -299,7 +299,9 @@ class Mtt_favourites {
 	);
 	$this->EE->output->show_message($data); 
 	*/
-	ee()->functions->redirect($this->EE->functions->fetch_site_index().'login/user','refresh');
+	
+	//ee()->functions->redirect($this->EE->functions->fetch_site_index().'login/user','refresh');
+	return $this->EE->output->send_ajax_response(array('error'=>True));
     }
 	
 	// PROCESS THE FAVORITE REQUEST

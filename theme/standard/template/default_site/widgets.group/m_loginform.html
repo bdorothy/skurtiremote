@@ -1,0 +1,88 @@
+<div class="logins">
+<div class="modal fade" id="loginform" tabindex="-1" role="dialog" aria-labelledby="loginformLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    
+    <div class="panel panel-default" style="box-shadow:none">
+   <div class="panel-heading" style="box-shadow:none; border:none"><i class="icon i-key"></i> <strong>Please login with your credentials</strong>
+    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+   </div>
+  
+   
+</div>
+    
+    
+      
+      <div class="modal-body">      
+
+{exp:freemember:login form_id="loggin"  error_handling="inline"}
+    <div class="form-group">
+        <label class="col-xs-12">Email Address</label>
+        <div class="col-xs-12">
+            <input type="text" class="form-control" name="email"
+                required
+                data-bv-notempty-message="Email address is required" />
+                <div class="error error_email" id=""></div>
+        </div>
+    </div>
+
+    <div class="form-group mt10">
+        <label class="col-xs-12 mt20">Password</label>
+        <div class="col-xs-12">
+            <input type="password" class="form-control" name="password"
+                required
+                data-bv-notempty-message="Password is required"                
+                 />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-xs-12 mt20">
+            <button type="submit" class="btn btn-default">Sign in</button>
+           <div class="loader mt10 mr20 pull-left" style="display:none;"></div>
+            <a href="{site_url}register" class="ml20 registerpop">Not a member? Register Now</a> | 
+            <a href="{site_url}register" class="ml5 forgot-passwordpop">Forgot Password?</a>
+            <div class="clearfix"></div>
+            
+        </div>
+    </div>
+{/exp:freemember:login}
+<div class="clearfix"></div>
+      </div>
+     
+    </div>
+  </div>
+</div>
+</div>
+
+<script>
+$(document).ready(function(e) {   
+		 
+$('#loggin').ajaxForm({
+	dataType: 'json',
+	beforeSubmit: function () {
+	$(".loader").css("display","block");
+	},
+	success: function(data) {	
+	$(".loader").css("display","none");
+	//alert(data.errors.toSource());
+	 if (data.success) {
+	$.modal.close();	 
+	 $("#logger").load(data.loader1);
+	 if(data.return_url){	
+	// alert(data.toSource());
+	 window.location.href = data.return_url; 
+	 }	 	 
+	 } 		 
+	 else{	
+	$.each( data.errors, function( i, v ) {	
+	$("input[name=XID]").val(data.XID);	
+	$('.error_'+i).empty(); 		 			
+	$('.error_'+i).html('<p>'+v+'</p>');		
+	 });
+		 }
+	}	
+	});
+
+});
+</script>

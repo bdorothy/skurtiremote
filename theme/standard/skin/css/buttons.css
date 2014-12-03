@@ -1,0 +1,103 @@
+@import url(http://fonts.googleapis.com/css?family=Oswald);
+
+.btn{
+    margin: 4px;
+    box-shadow: 1px 1px 5px #888888;
+	 font-family: 'Oswald', sans-serif;
+}
+
+.btn-xs{
+    font-weight: 300;
+}
+   
+.btn-danger {
+color: #fff;
+background-color: #db5566;
+border-bottom:2px solid #af4451;
+}
+
+.btn-danger:hover, .btn-primary.active:focus, .btn-danger:focus, .open>.dropdown-toggle.btn-danger {
+color: #fff;
+background-color: #df6a78;
+border-bottom:2px solid #b25560;
+outline: none;}
+
+
+.btn-danger:active, .btn-danger.active {
+color: #fff;
+background-color: #c04b59;
+border-top:2px solid #9a3c47;
+margin-top: 2px;
+}
+
+.btn-warning {
+color: #fff;
+background-color: #f4ad49;
+border-bottom:2px solid #c38a3a;
+}
+
+.btn-warning:hover, .btn-primary.active:focus, .btn-warning:focus, .open>.dropdown-toggle.btn-warning {
+color: #fff;
+background-color: #f5b75f;
+border-bottom:2px solid #c4924c;
+outline: none;
+}
+
+
+.btn-warning:active, .btn-warning.active {
+color: #fff;
+background-color: #d69840;
+border-top:2px solid #ab7a33;
+margin-top: 2px;
+}
+
+.btn-success {
+color: #fff;
+background-color: #51bf87;
+border-bottom:2px solid #41996c;
+}
+
+.btn-success:hover, .btn-primary.active:focus, .btn-success:focus, .open>.dropdown-toggle.btn-success {
+color: #fff;
+background-color: #66c796;
+border-bottom:2px solid #529f78;
+outline: none;
+}
+
+
+.btn-success:active, .btn-success.active {
+color: #fff;
+background-color: #47a877;
+border-top:2px solid #39865f;
+outline: none;
+outline-offset: none;
+margin-top: 2px;
+}
+
+.btn-primary {
+color: #fff;
+background-color: #0bacd3;
+border-bottom:2px solid #098aa9;
+}
+
+.btn-primary:hover,.btn-primary.active:focus, .btn-primary:focus, .open>.dropdown-toggle.btn-primary {
+color: #fff;
+background-color: #29b6d8;
+border-bottom:2px solid #2192ad;
+outline: none;
+}
+
+.btn-primary:active, .btn-primary.active {
+color: #fff;
+background-color: #0a97b9;
+border-top:2px solid #087994;
+outline-offset: none;
+margin-top: 2px;
+}
+
+.btn:focus,
+.btn:active:focus,
+.btn.active:focus {
+    outline: none;
+    outline-offset: 0px;
+}

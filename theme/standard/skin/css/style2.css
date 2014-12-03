@@ -36,6 +36,16 @@ ul{list-style:none}
 .panel-default > .panel-heading{background:#FFE500;}
 h4, h5, h6{margin-top:0px}
 
+ul.hj_social_bookmarks{padding-left:0px}
+ul.hj_social_bookmarks li{float:left; padding-left:4px; }
+
+
+
+/*-------------------------------------------------------*/
+/******* MISC*******/
+/*-------------------------------------------------------*/
+#loginform, #loginform a {color:#000 !important}
+#loginform .panel{margin-bottom:0px;}
 
 /*-------------------------------------------------------*/
 /*******TOP BAR*******/
