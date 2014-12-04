@@ -15,7 +15,7 @@
       
       <div class="modal-body">      
 
-{exp:freemember:login form_id="loggin"  error_handling="inline"}
+{exp:freemember:login form_id="login_form" return="{current_url}"  error_handling="inline"}
     <div class="form-group">
         <label class="col-xs-12">Email Address</label>
         <div class="col-xs-12">
@@ -58,7 +58,7 @@
 <script>
 $(document).ready(function(e) {   
 		 
-$('#loggin').ajaxForm({
+$('#login_form').ajaxForm({
 	dataType: 'json',
 	beforeSubmit: function () {
 	$(".loader").css("display","block");
@@ -67,11 +67,12 @@ $('#loggin').ajaxForm({
 	$(".loader").css("display","none");
 	//alert(data.errors.toSource());
 	 if (data.success) {
-	$.modal.close();	 
-	 $("#logger").load(data.loader1);
-	 if(data.return_url){	
+	//$.modal.close();	 
+	// $("#logger").load(data.loader1);
+	$('#loginform').modal('hide');
+	 if(data.ret){	
 	// alert(data.toSource());
-	 window.location.href = data.return_url; 
+	 window.location.href = data.ret; 
 	 }	 	 
 	 } 		 
 	 else{	

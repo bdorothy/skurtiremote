@@ -181,6 +181,49 @@ class Currency_select {
 	return ($this->converted_prefix().' '.$this->converted_numeric());
 	}
 	
+	// wholesale converted_numeric
+	public function wholesale_converted(){
+	$wp = ee()->TMPL->fetch_param('wp');
+	if ($wp != 0 && $wp != ""){
+	return ($this->converted_prefix().' '.$this->converted_numeric($wp));
+	}else{
+	// calculate all the related products price total	
+	$entry_id = ee()->TMPL->fetch_param('entry_id');
+	$query = ee()->db->query('
+	select sum(ls_channel_data.field_id_2) as wp
+	from exp_relationships, ls_channel_data
+	where exp_relationships.parent_id = 121 
+	and exp_channel_data.entry_id = ls_relationships.child_id');
+	if ($query->num_rows() > 0){	
+	$row = $query->row(); 
+	$wp =  $row->wp;
+	} 	
+	return ($this->converted_prefix().' '.$this->converted_numeric($wp));
+	}
+	}
+	
+	
+	// wholesale converted_numeric
+	public function wholesale_converted_numeric(){
+	$wp = ee()->TMPL->fetch_param('wp');
+	if ($wp != 0 && $wp != ""){
+	return ($this->converted_numeric($wp));
+	}else{
+	// calculate all the related products price total	
+	$entry_id = ee()->TMPL->fetch_param('entry_id');
+	$query = ee()->db->query('
+	select sum(ls_channel_data.field_id_2) as wp
+	from exp_relationships, ls_channel_data
+	where exp_relationships.parent_id = 121 
+	and exp_channel_data.entry_id = ls_relationships.child_id');
+	if ($query->num_rows() > 0){	
+	$row = $query->row(); 
+	$wp =  $row->wp;
+	} 	
+	return ($this->converted_numeric($wp));
+	}
+	}
+	
 	
 	
 	

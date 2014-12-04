@@ -1,5 +1,5 @@
 {if logged_out}
-<div class="alert alert-success">Please <span class="logpop"><a href="#">login</a></span> to review this product.</div>
+<div class="alert alert-success">Please <span class="logpop"><a href="#"  data-toggle="modal" data-target="#loginform">login</a></span> to review this product.</div>
 {if:else}
 {if "{exp:ls_ratings:already_rated entry_id='{embed:entry_id}'}" == "y"}
 <div class="alert alert-success">You have already reviewed for this product.</div>

@@ -420,10 +420,10 @@ class Freemember
 		$data['success'] = TRUE;
 		$data['loader1'] = ee()->config->item('site_url')."common/login_status";
 		$data['loader2'] = ee()->config->item('site_url')."common/login_welcome";
-		$return_url = ee()->input->get_post('return_url');
-		if($return_url != 0 || $return_url != ""){
-		$data['return_url'] = ee()->config->item('site_url').$return_url;		
-		}
+		$return_url = ee()->input->get_post('return_url');		
+		//if($return_url != 0 || $return_url != ""){
+		$data['ret'] = $return_url;		
+		//}
 		return ee()->output->send_ajax_response($data);
         } 
 		

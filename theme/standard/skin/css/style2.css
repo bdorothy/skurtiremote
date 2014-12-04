@@ -250,7 +250,7 @@ opacity:1;
 transform: scale(1);
 	}
 
-
+.project-overlay a{color:#fff; padding:5px}
 
 
 /*-------------------------------------------------------*/
@@ -460,6 +460,8 @@ ul li {
 .price{background:#ffdd00; float:left;height:30px;}
 .inactive{background:#fff8c9; color:#666; text-decoration:line-through}
 .savings{position:absolute;top:0px; right:5px; box-shadow: 5px 3px 5px -5px #333; width:53px; height:81px;background:url(/theme/standard/skin/images/global/savings.png) no-repeat;}
+.catalogtag{position:absolute;top:0px; right:5px; box-shadow: 5px 3px 5px -5px #333; width:53px; height:58px;background:#000; padding:3px; text-align:center; color:#FFF000; font-size:12px; border-radius:0px 0px 3px 3px;}
+.minqty{position:absolute;bottom:120px; right:10px; box-shadow: 5px 3px 5px -5px #333; width:50px; height:50px;background:#008CFF; padding:5px; text-align:center; color:#fff; font-size:12px; border-radius:50%;}
 .percent{position:absolute; top:40px; color:#fff; font-size:10px; text-align:center; left:5px}
 .percent span{font-size:15px}
 .timer{position:absolute;left:0px; bottom:0px; background:#000; color:#00FF05; padding:3px; font-size:9px; box-shadow: 5px 0 5px -5px #333;}

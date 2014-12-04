@@ -1,0 +1,30 @@
+{embed="common/head_open"
+title='Wholesale Area'
+{if segment_2_category_description}
+description = '{segment_2_category_description}'
+{if:else}
+description ="
+Exclusive {segment_2_category_name} and latest designs at economic price only at {site_name}. {current_time format='%Y'} latest collection for {segment_2_category_name} is out. Browse our new catalogs for {segment_2_category_name} in designer fabrics and trendy patterns."
+{/if}
+
+}
+
+{embed="common/head_close"}
+{embed="common/topbar"}
+{embed="common/logobar"}
+{embed="common/mainnav"}
+
+{embed="widgets/category_header"}
+<hr>
+<div class="container">
+<div class="row">
+{embed="widgets/layered_navigation"}
+{embed="widgets/wholesale_list"}
+</div>
+</div>
+
+
+
+{embed="common/subfooter"}
+{embed="common/footer"}
+{embed="common/foot"}

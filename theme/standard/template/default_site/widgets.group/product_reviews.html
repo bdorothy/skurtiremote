@@ -1,4 +1,44 @@
-{exp:comment:entries sort="asc" limit="20" entry_id="{embed:entry_id}"}
-        {comment}
-        <p>By {name} on {comment_date format="%Y %m %d"}</p>
-{/exp:comment:entries}
+   <style>
+   .widget .panel-body { padding:0px; }
+   .widget p{font-size:13px; font-style:italic; color:#555}
+.widget .list-group { margin-bottom: 0; }
+.widget .panel-title { display:inline }
+.widget .label-info { float: right; }
+.widget li.list-group-item {border-radius: 0;border: 0;border-top: 1px solid #ddd;}
+.widget li.list-group-item:hover { background-color: rgba(86,61,124,.1); }
+.widget .mic-info { color: #666666;font-size: 11px; }
+.widget .action { margin-top:5px; }
+.widget .comment-text { font-size: 12px; }
+.widget .btn-block { border-top-left-radius:0px;border-top-right-radius:0px; }
+   </style>
+   
+    <div class="row">
+        <div class="panel panel-default widget">
+            <div class="panel-heading">
+                <span class="glyphicon glyphicon-comment"></span>
+                <h3 class="panel-title">
+                    Recent Comments</h3>
+                
+            </div>
+            <div class="panel-body">
+                <ul class="list-group">
+                {exp:comment:entries sort="asc" limit="20" entry_id="{embed:entry_id}"}
+                    <li class="list-group-item">
+                        <div class="row">
+                            
+                            <div class="col-xs-12">
+                                <div>{comment}
+                                    <div class="mic-info">
+                                        By: <strong>{name}</strong> on {comment_date format="%d-%M-%Y"}
+                                    </div>
+                                </div>
+                               
+                            </div>
+                        </div>
+                    </li>
+                  {/exp:comment:entries}
+                </ul>
+               
+            </div>
+        </div>
+    </div>
