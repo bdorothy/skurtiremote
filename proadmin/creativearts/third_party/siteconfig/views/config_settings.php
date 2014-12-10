@@ -144,7 +144,12 @@
                                                                
                                 
                                 <tr>
-                                   <td>Default Currency Conversions</td>
+                                   <td>Default Currency Conversions<br>
+								   <h3 style="line-height:1.2em; color:red">NOTE : Only use .00 and .50 as fractions <br> if not, Checkout will fail at times.</h3>
+								   <h4 style="color:#f90">Wrong Usage Examples: 12.36, 72.69, 62.20, 85.05</h4>								   
+								   <h4 style="color:green">Correct Usage Examples: 12.00, 72.50, 62.00, 85.00, </h4>
+								   
+								   </td>
                                    <td><table width="100%" border="1">
                                      <tr>
                                        <td width="46%" align="center">CURRENCY</td>

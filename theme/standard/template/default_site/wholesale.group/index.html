@@ -1,3 +1,7 @@
+{if logged_out}
+{redirect="/login/?u=w"}
+{/if}
+
 {embed="common/head_open"
 title='Wholesale Area'
 {if segment_2_category_description}
@@ -12,13 +16,11 @@ Exclusive {segment_2_category_name} and latest designs at economic price only at
 {embed="common/head_close"}
 {embed="common/topbar"}
 {embed="common/logobar"}
-{embed="common/mainnav"}
-
 {embed="widgets/category_header"}
 <hr>
 <div class="container">
 <div class="row">
-{embed="widgets/layered_navigation"}
+{embed="widgets/layered_navigation_wholesale"}
 {embed="widgets/wholesale_list"}
 </div>
 </div>

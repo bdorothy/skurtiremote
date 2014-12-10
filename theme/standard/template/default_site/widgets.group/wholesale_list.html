@@ -38,12 +38,12 @@ category="{segment_2_category_id}"
 {/if}
 orderby="{exp:storecat:filter}{orderby}{/exp:storecat:filter}"
 sort="{exp:storecat:filter}{sort}{/exp:storecat:filter}"
+limit="{exp:ls_layered_navigation:get_limit}"
 parse="inward"
-limit="5"
 status="Wholesale Only"
 }
 	
-   
+
    
     <div id="">
      {paginate}
@@ -81,9 +81,8 @@ status="Wholesale Only"
  	<!-- Grid View -->  
     <div class="col-xs-12 col-sm-4">    
     <a href="#">
-            <div class="img-overlay">          
-            	{if channel_name == "wholesale"}
-            	
+            <div class="img-overlay">  
+            	{if channel_name == "wholesale"}                        	
                 {if wholesale_cover_image}
                 <img src="{wholesale_cover_image:medium}" class="img-responsive  img-thumbnail"/> 
                 {if:else}               
@@ -105,8 +104,7 @@ status="Wholesale Only"
                  <div class="pricetag sp">
                 <div class="tag"></div>
               	<div class="price">                
-                 <div class="mt5 mr10">Bulk Price :
-                 {exp:currency_select:wholesale_converted wp='{wp:numeric}' entry_id='{entry_id}'}
+                 <div class="mt5 mr10">Bulk Price : {exp:currency_select:converted price="{wp:numeric}"}                
                  </div>
                 </div>
                 <div class="clearfix"></div>
@@ -138,9 +136,9 @@ status="Wholesale Only"
                 
                 
                 <div class="project-overlay">
-                <p class="mb10"><a href="{site_url}view/{url_title}">{exp:char_limit total="50"}{title}{/exp:char_limit}</a><br></p>
+                <p class="mb10"><a href="{site_url}wholesale/view/{url_title}">{exp:char_limit total="50"}{title}{/exp:char_limit}</a><br></p>
                 <p style="padding:4px; opacity:0.8; color:#ff0; font-size:100%">
-                {exp:currency_select:wholesale_converted wp='{wp:numeric}' entry_id='{entry_id}'}
+                {exp:currency_select:converted price="{wp:numeric}"}
                 </p>
                 <button type="submit" class="btn btn-default mb5">
  				 <i class="icon i-heart"></i>Add to Wishlist
@@ -148,12 +146,10 @@ status="Wholesale Only"
                 {exp:cartthrob:add_to_cart_form
                 entry_id="{entry_id}"
                 return="/shopping-cart"                
-                
-                allow_user_price="yes"
+                price="{exp:currency_select:converted price='{wp:numeric}'}"               
                 }    
                 
-                <input name="price" type="hidden" value="{exp:currency_select:wholesale_converted_numeric wp='{wp:numeric}' entry_id='{entry_id}'}" />
-                <input type="hidden" name="quantity" size="5" value="{if minimum_wholesale_quantity && minimum_wholesale_quantity < wholesale_inventory}{minimum_wholesale_quantity}{if:else}1{/if}" />
+                <input type="hidden" name="quantity" size="5" value="10" />
                 <button type="submit" class="btn btn-warning mb10">
                 <i class="icon i-cart"></i>Add to Cart
                 </button>

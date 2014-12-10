@@ -34,7 +34,7 @@ class Carthrob_gridimage_fix {
 		
 		$this->EE->db->select($grid_col_id);	
 		$this->EE->db->where('entry_id',$entry_id);	
-	
+		$this->EE->db->limit(1);
 		$query = $this->EE->db->get('exp_channel_grid_field_'.$grid_field_id);									
 		
 		if ($query->num_rows() == 0)

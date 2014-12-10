@@ -1,0 +1,31 @@
+{if logged_out}
+{redirect="/login/?u=w"}
+{/if}
+{embed="common/head_open"
+{if segment_1 == 'search' && segment_2 =='results'}
+title='Search Results'	
+{/if}
+}
+<link rel="canonical" href="{site_url}search/results" />
+
+{embed="common/head_close"}
+{embed="common/topbar"}
+{embed="common/logobar"}
+{embed="common/mainnav"}
+
+{embed="widgets/category_header"}
+<hr>
+<div class="container">
+<div class="row">
+{embed="widgets/layered_navigation_wholesale"}
+{embed="widgets/wholesale_list"}
+</div>
+<div class="clearfix"></div>
+</div>
+
+
+
+{embed="common/subfooter"}
+{embed="common/footer"}
+{embed="common/foot"}
+

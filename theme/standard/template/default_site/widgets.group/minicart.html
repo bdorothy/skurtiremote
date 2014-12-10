@@ -24,7 +24,17 @@
     {/if}
         <tr>
         <td>
-        <a href="{site_url}view/{url_title}"><img src="{exp:carthrob_gridimage_fix:image entry_id='{entry_id}' grid_field_id ='72' grid_col_id='1' type='thumbs'}{image}{/exp:carthrob_gridimage_fix:image}" ></a></td>
+        <a href="{site_url}view/{url_title}">
+        {if channel_name == "products"}
+                            <img src="{exp:carthrob_gridimage_fix:image entry_id='{entry_id}' grid_field_id ='72' grid_col_id='1' type='thumbs'}{image}{/exp:carthrob_gridimage_fix:image}" >
+                            {if:elseif channel_name == "wholesale"}
+                            {if wholesale_cover_image}
+                            <img src="{wholesale_cover_image:thumbs}" >
+                            {if:else}                                     
+                            <img src="{skin_url}/images/global/wholesale.png" >                          
+                            {/if}
+        {/if}        
+        </a></td>
           <td><a href="{site_url}view/{url_title}">{title}</a>
           <p> 
           <small>
@@ -41,7 +51,9 @@
       </tbody>
 	</table>
     <li class="divider"></li>
-    <div class="text-center">   
+    <div class="text-center">
+    <div class="m20"><a href="{site_url}shopping-cart" class="btn btn-success"><i class="icon i-cart"></i> View Shopping Cart</a></div>
+       
     <div class="m20"><a href="{site_url}checkout" class="btn btn-success"><i class="icon i-cart"></i> Proceed to Checkout</a></div>
     </div>
     

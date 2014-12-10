@@ -82,7 +82,7 @@ class Cartthrob_shipping_table_rates extends Cartthrob_shipping
 				array(
 					'name' => '6kg',
 					'short_name' => '6kg',
-					'note' => '6+kg',
+					'note' => '6kg',
 					'type' => 'text'
 				),
 				array(
@@ -112,13 +112,13 @@ class Cartthrob_shipping_table_rates extends Cartthrob_shipping
 				array(
 					'name' => '11kg',
 					'short_name' => '11kg',
-					'note' => '11+kg',
+					'note' => '<span style="color:#FF0">11+/per Kg</span>',
 					'type' => 'text'
 				),
 				array(
 					'name' => '21kg',
 					'short_name' => '21kg',
-					'note' => '21+kg',
+					'note' => '<span style="color:#FF0">21+/per Kg</span>',
 					'type' => 'text'
 				)
 			)
@@ -185,10 +185,31 @@ class Cartthrob_shipping_table_rates extends Cartthrob_shipping
 			$shipping =  $threshold_setting['5kg'];
 			break;			
 			
-			// if weight 6kg to 10.99kg
-			case $weight > 5.99 AND $weight < 10.99:
-			$shipping =  $threshold_setting['6kg'] * round($weight);
+			// if weight 5kg to 6.99kg
+			case $weight > 5.99 AND $weight < 6.99:
+			$shipping =  $threshold_setting['6kg'];
 			break;	
+			
+			
+			// if weight 6kg to 7.99kg
+			case $weight > 6.99 AND $weight < 7.99:
+			$shipping =  $threshold_setting['7kg'];
+			break;
+			
+			// if weight 7kg to 8.99kg
+			case $weight > 7.99 AND $weight < 8.99:
+			$shipping =  $threshold_setting['8kg'];
+			break;
+			
+			// if weight 8kg to 9.99kg
+			case $weight > 8.99 AND $weight < 9.99:
+			$shipping =  $threshold_setting['9kg'];
+			break;
+			
+			// if weight 9kg to 10.99kg
+			case $weight > 9.99 AND $weight < 10.99:
+			$shipping =  $threshold_setting['10kg'];
+			break;
 			
 			// if weight 11kg to 20.99kg
 			case $weight > 10.99 AND $weight < 20.99:
@@ -232,10 +253,31 @@ class Cartthrob_shipping_table_rates extends Cartthrob_shipping
 			$shipping =  $threshold_setting['5kg'];
 			break;			
 			
-			// if weight 6kg to 10.99kg
-			case $weight > 5.99 AND $weight < 10.99:
-			$shipping =  $threshold_setting['6kg'] * round($weight);
+			// if weight 5kg to 6.99kg
+			case $weight > 5.99 AND $weight < 6.99:
+			$shipping =  $threshold_setting['6kg'];
 			break;	
+			
+			
+			// if weight 6kg to 7.99kg
+			case $weight > 6.99 AND $weight < 7.99:
+			$shipping =  $threshold_setting['7kg'];
+			break;
+			
+			// if weight 7kg to 8.99kg
+			case $weight > 7.99 AND $weight < 8.99:
+			$shipping =  $threshold_setting['8kg'];
+			break;
+			
+			// if weight 8kg to 9.99kg
+			case $weight > 8.99 AND $weight < 9.99:
+			$shipping =  $threshold_setting['9kg'];
+			break;
+			
+			// if weight 9kg to 10.99kg
+			case $weight > 9.99 AND $weight < 10.99:
+			$shipping =  $threshold_setting['10kg'];
+			break;
 			
 			// if weight 11kg to 20.99kg
 			case $weight > 10.99 AND $weight < 20.99:
@@ -245,7 +287,7 @@ class Cartthrob_shipping_table_rates extends Cartthrob_shipping
 			// if weight 21+ kg
 			case $weight > 20.99:
 			$shipping =  $threshold_setting['21kg'] * round($weight);
-			break;			
+			break;		
 		}
 		}
 		

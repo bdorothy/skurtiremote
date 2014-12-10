@@ -1,0 +1,148 @@
+/* statistics */
+.google_accounts {
+  float: left;
+  margin: -30px 0 0 22px;
+}
+
+.analytics_last_updated {
+  float: right;
+  margin: -27px 15px 0 0;
+  opacity: 0.5;
+  text-shadow: 0 -1px 0 #fff;
+}
+
+
+/* reset default styles */
+table.mainTable thead {
+  background-color: transparent;
+  background-image: none;
+}
+table.mainTable th {
+  background-color: transparent;
+  background-image: none;
+}
+#mainContent .pageContents {
+  padding-top: 0;
+}
+
+.status_msg {
+  text-align: center;
+  font-weight: bold;
+  color: rgba(0,0,0,0.2);
+  text-shadow: 0 1px 0 rgba(255,255,255,0.2);
+}
+
+/* chart */
+#analytics_data {
+  margin-bottom: 30px;
+}
+#googleTable {
+  float: right;
+}
+
+/* table widths and layout */
+#mainContent table.mainTable {
+  border-collapse: collapse;
+  float: left;
+  font: 10px/18px "Lucida Grande","Lucida Sans Unicode",Arial,Verdana,sans-serif;
+}
+#mainContent table.mainTable th:last-child {
+  border: 0 !important;
+}
+#mainContent table.mainTable td {
+  border: 0 !important;
+}
+#mainContent table.mainTable.sources {
+  width: 48%;
+  margin: 0 1% 20px 1%
+}
+#mainContent table.mainTable.pages {
+  width: 48%;
+  margin: 0 1% 20px 1%
+}
+#mainContent table.mainTable.today,
+#mainContent table.mainTable.yesterday,
+#mainContent table.mainTable.week,
+#mainContent table.mainTable.month {
+  border: 0;
+  width: 23%;
+  margin: 0 1%
+}
+
+/* table headings */
+#mainContent table.mainTable tr th {
+  background-color: transparent;
+  background-image: none;
+  border: 0;
+  border-bottom: 1px solid #000;
+  color: #000;
+  text-transform: none;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+  padding: 2px 10px;
+}
+#mainContent table.mainTable th:last-child {
+  border-bottom: 1px solid #000 !important;
+}
+
+
+/* table content */
+#mainContent table.mainTable tr {
+  border: 0;
+}
+#mainContent table.mainTable tr td {
+  padding: 3px 10px;
+  border: 0;
+  color: #666;
+}
+
+#mainContent table.mainTable.pages tr td:nth-child(1) {
+  width: 50%;
+}
+#mainContent table.mainTable.sources tr td:nth-child(1) {
+  width: 50%;
+}
+#mainContent table.mainTable.today tr td:nth-child(1),
+#mainContent table.mainTable.yesterday tr td:nth-child(1),
+#mainContent table.mainTable.week tr td:nth-child(1),
+#mainContent table.mainTable.month tr td:nth-child(1) {
+  width: 70%;
+}
+#mainContent table.mainTable tr:hover td {
+  background-color: rgba(0,0,0,0.05);
+}
+
+
+
+#mainContent table.mainTable tr th.republic_analytics_browser {
+  padding-top: 20px;
+}
+#mainContent table.mainTable tr th.republic_analytics_os {
+  padding-top: 20px;
+}
+/* toggle more stats */
+#mainContent table.mainTable tr.browser-sub {
+  display: none;
+}
+#mainContent table.mainTable tr.browser-sub td.version {
+  padding-left: 20px
+}
+#mainContent table.mainTable tr.browser-sub td {
+  font-size: 10px;
+  padding: 2px 10px;
+  color: #333;
+}
+
+
+.format_number { text-align: right; }
+.format_percent { text-align: right; }
+.format_time { text-align: right; }
+
+
+
+/* introduction */
+.introduction { padding: 20px 230px 50px 30px; margin: 0 20px 0 0; font-size: 1.2em; background: url(../images/republic-analytics.png) no-repeat right 10px; }
+.introduction h3 { margin: 10px 0 30px 0; text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6); }
+.introduction h4 { margin: 50px 0 20px 0; font-size: 1.1em; text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6); }
+.introduction ul { padding-top: 20px; }
+.introduction li { list-style-type: disc; padding-right: 10px; margin-left: 0px; margin-bottom: 20px; text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4); }
+.introduction p { text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4); }

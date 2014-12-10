@@ -1,0 +1,186 @@
+{if logged_in}
+{redirect="/myaccount"}
+{/if}
+{embed="common/head_open" title="Register" description="Register free and get access to your account and wholesale prices"}
+{embed="common/head_close"}
+{embed="common/topbar"}
+{embed="common/logobar"}
+
+<div class="container">
+
+<div class="row mb50">
+    <div class="col-sm-8 col-sm-offset-2">
+		   {exp:freemember:register form_id="register" error_handling="inline" require="first_name|last_name|primary_phone|country|accept_terms"}
+
+			<h2>Please Sign Up <small>Provide your details below to register now.</small></h2>
+			<hr class="colorgraph">
+			<h2>Profile Information</h2>
+    <p>Inorder for us to serve you better. Please provide accurate and all information below.</p>
+    <div class="alert" style="display:none"></div>
+
+	<div class="form-group">
+    
+    <div class="col-sm-6 mt20">
+        <label class="col-sm-12">First Name</label>
+        <div class="col-sm-12">
+            <input type="text" class="form-control  input-lg" name="first_name" 
+                required
+                data-bv-notempty-message="First Name is required" />
+        </div>
+    </div>
+
+    <div class="col-sm-6 mt20">
+        <label class="col-sm-12">Last Name</label>
+        <div class="col-sm-12">
+            <input type="text" class="form-control  input-lg" name="last_name" 
+                required
+                data-bv-notempty-message="Last Name is required" />
+        </div>
+    </div>
+    
+    
+    <div class="col-sm-12 mt20">
+        <label class="col-sm-12">Email Address</label>
+        <div class="col-sm-12">
+            <input type="text" class="form-control  input-lg" name="email" 
+                required
+                data-bv-notempty-message="Email Address is required"
+                data-bv-emailaddress="true"
+                data-bv-emailaddress-message="The value is not a valid email address"                
+                 />
+         <div class="help-block error error_email"></div>        
+        </div>
+    </div>
+    
+    
+    
+    
+      <div class="col-sm-6 mt20">
+        <label class="col-sm-12">Country</label>
+        <div class="col-sm-12">
+            <input type="text" class="form-control  input-lg" name="country" 
+                required
+                data-bv-notempty-message="Country Name is required" />
+         <div class="help-block error error_country"></div>        
+        </div>
+    </div>
+    
+    
+      <div class="col-sm-6 mt20">
+        <label class="col-sm-12">Primary Phone</label>
+        <div class="col-sm-12">
+            <input type="text" class="form-control  input-lg" name="primary_phone" 
+                required
+                data-bv-notempty-message="Primary Phone is required" />
+          <div class="help-block error error_primary_phone"></div>       
+        </div>
+    </div>
+     <div class="clearfix"></div>
+    
+    
+     <div class="col-sm-6 mt20">
+        <label class="col-sm-12">Password</label>
+        <div class="col-sm-12">
+            <input type="password" class="form-control  input-lg" name="password" 
+                required
+                data-bv-notempty-message="Password is required" />
+          <div class="help-block error error_password"></div>          
+        </div>
+    </div>
+    
+     <div class="col-sm-6 mt20">
+        <label class="col-sm-12">Confirm Password</label>
+        <div class="col-sm-12">
+            <input type="password" class="form-control  input-lg" name="password_confirm" 
+             required
+             data-bv-notempty-message="Confirm Password is required" 
+             data-bv-identical="true"
+             data-bv-identical-field="password"
+             data-bv-identical-message="Password and Confirm Password does not match"
+            />
+          <div class="help-block error error_password_confirm"></div>      
+        </div>
+    </div>
+     <div class="clearfix"></div>
+    
+   <!-- Address -->
+    
+
+    <div class="col-sm-12 mt20">
+    
+    	<div class="col-sm-8">
+        <input type="checkbox" name="accept_terms" value="1" 
+        required
+        data-bv-notempty-message="Acceptance to terms and conditions is required" 
+        >
+        <label for="accept_terms">I have read the terms and conditions and accept them.</label><br />
+        
+        <div class="help-block error error_accept_terms"></div>
+        </div>
+        <div class="col-sm-4">
+            <button type="submit" class="btn btn-success pull-left">Create Account</button>
+             <div class="loader pull-left ml20 mt5" style="display:none"></div>  
+             <div class="clearfix"></div>
+        </div>
+    </div>
+   </div> 
+
+		{/exp:freemember:register}
+	</div>
+</div>
+<!-- Modal -->
+
+</div>
+
+
+<!-- Login -->
+<script>
+$(document).ready(function(e) {   
+		 
+$('#register').bootstrapValidator(
+	{
+		feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        }
+	}
+	);
+	
+		 
+$('#register').ajaxForm({
+	dataType: 'json',
+	beforeSubmit: function () {
+	$(".loader").css("display","block");
+	},
+	success: function(data) {	
+	$(".loader").css("display","none");	
+	//alert(data.errors.toSource());
+	 if (data.success) {
+	 if(data.ret){	
+	// alert(data.toSource());
+	 window.location.href = data.ret; 
+	 }else{
+	 window.location.href = "{site_url}"; 	 
+	 }
+		 } 
+		 
+	 else{	
+	$.each( data.errors, function( i, v ) {	
+	$("input[name=XID]").val(data.XID);	
+	$('.error_'+i).empty(); 		 			
+	$('.error_'+i).html('<p>'+v+'</p>');		
+	 });
+		 }
+	}	
+	});
+
+});
+</script>
+
+{embed="common/subfooter"}
+{embed="common/footer"}
+{embed="common/foot"}
+
+
+ 

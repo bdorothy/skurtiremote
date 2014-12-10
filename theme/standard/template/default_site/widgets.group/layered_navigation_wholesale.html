@@ -1,0 +1,182 @@
+<link rel="stylesheet" type="text/css" href="{skin_url}/css/colors.css" media="screen" />
+<div class="col-xs-12 col-sm-3">
+{exp:mtt_search:form 
+collection="products|wholesale" 
+result_page="wholesale/results"
+form_id = "layered_navigation"
+query="{segment_3}"
+secure="no"
+require_all="category"
+} 
+
+<div class="panel">
+<div class="panel-body">
+  <select name="view">
+  <option value="grid" {if mtt_search_filter == "rp|asc"}selected{/if}>Grid View</option>
+  <option value="list">List View</option>
+  </select>
+  
+ | Per Page
+
+ <select name="limit">
+  <option value="32" {if mtt_search_limit == "32"}selected{/if}>32</option>
+  <option value="64" {if mtt_search_limit == "64"}selected{/if}>64</option>
+  <option value="128" {if mtt_search_limit == "128"}selected{/if}>128</option>
+  </select>
+</div>
+</div>
+
+
+{!-- //if there is any parent category id fetched from url than display all child categories of it.// --}
+{if "{exp:storecat:total parent='{segment_3_category_id}{mtt_search_mc}'}" >= 1}
+<div class="panel panel-default mt20">
+   <div class="panel-heading"><i class="icon i-coin"></i> <strong>More in {exp:storecat:category_heading cat_id="{segment_2_category_id}{mtt_search_mc}"}{cat_name}{/exp:storecat:category_heading}</strong></div>
+    <div class="panel-body scroll"> 
+<div class="child_categories">
+<!-- Child Categories -->
+{exp:storecat:subcategory parent="{segment_3_category_id}{mtt_search_mc}" parse="inward"}      
+{if child_category} 
+<input type="checkbox" name="category[]" value="{child_cat_id}" {exp:storecat:needlehaystack needle="{child_cat_id}" haystack="{mtt_search_category}"} /> <span class="ml10">{child_category}</span><br />
+<input type="hidden" name="mc" value="{segment_2_category_id}{mtt_search_mc}" />
+{/if}
+{/exp:storecat:subcategory}  
+</div>
+</div>
+</div>
+<!-- Child Categories --> 
+{/if}
+{/if}   
+{!-- // --}
+
+
+	
+
+
+<!-- Price Slider -->
+<div class="panel panel-default mt20">
+   <div class="panel-heading"><i class="icon i-coin"></i> <strong>Single Product Range: ({exp:currency_select:converted_prefix})</strong></div>
+    <div class="panel-body">
+    {exp:currency_select:converted_prefix} <input type="text" id="amount" name="r:rp" style="border:0; color:#f6931f; font-weight:bold; width:150px">
+
+    <div class="clearfix"></div>
+  <div id="slider-range" style="width:180px" class="pull-left"></div><input type="submit" name="go" value="Go" class="pull-right">
+    </div>
+</div>
+<!-- Price Slider -->
+
+
+
+<!-- Price Slider Wholesale -->
+<div class="panel panel-default mt20">
+   <div class="panel-heading"><i class="icon i-coin"></i> <strong>Bulk Product Range: ({exp:currency_select:converted_prefix})</strong></div>
+    <div class="panel-body">
+    {exp:currency_select:converted_prefix} <input type="text" id="amount-wholesale" name="r:wp" style="border:0; color:#f6931f; font-weight:bold; width:150px">
+
+    <div class="clearfix"></div>
+  <div id="slider-range-wholesale" style="width:180px" class="pull-left"></div><input type="submit" name="go" value="Go" class="pull-right">
+    </div>
+</div>
+<!-- Price Slider Wholesale -->
+
+
+
+
+
+<!-- Sort By -->
+<div class="panel panel-default mt20">
+   <div class="panel-heading"><i class="icon i-stack"></i> <strong>Sort By{exp:currency_select:price_to wholesale="yes"}</strong></div>
+    <div class="panel-body">
+  <select name="filter">
+  <option value="rp|asc" {if mtt_search_filter == "rp|asc"}selected{/if}>Single Price (Low to High)</option>
+  <option value="rp|desc"  {if mtt_search_filter == "rp|desc"}selected{/if}>Single Price (High to Low)</option>
+  <option value="wp|asc" {if mtt_search_filter == "wp|asc"}selected{/if}>Bulk Price (Low to High)</option>
+  <option value="wp|desc"  {if mtt_search_filter == "wp|desc"}selected{/if}>Bulk Price (High to Low)</option>
+  <option value="entry_date|desc"  {if mtt_search_filter == "entry_date|desc"}selected{/if}>Most Recent</option>
+  <option value="bestseller|desc"  {if mtt_search_filter == "bestseller|desc"}selected{/if}>BestSellers</option>  
+  </select>
+  
+    </div>
+</div>
+<!-- Sort By -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Extra Filters -->
+
+
+
+</div>   
+
+
+<script>
+$(document).ready(function(e) {
+	
+$("#layered_navigation").change(function(){
+$("form#layered_navigation").submit();	   
+}); 
+   
+   
+/* price slider */
+
+});
+
+
+	$(function() {
+		var wto;
+		$( "#slider-range").slider({
+			range: true,
+			min: 0,
+			max: '{exp:currency_select:price_max}',
+			values: ['{exp:currency_select:price_from}','{exp:currency_select:price_to}'],
+			slide: function( event, ui ) {
+			$("#amount").val( "" + ui.values[ 0 ] + "|" + ui.values[ 1 ] );
+			}
+       		
+     
+		
+		});
+		$("#amount").val($( "#slider-range" ).slider( "values", 0 )+ '|' +$( "#slider-range" ).slider( "values", 1 ) );
+	});  
+	
+	
+	
+	$(function() {
+		var wto;
+		$( "#slider-range-wholesale").slider({
+			range: true,
+			min: 0,
+			max: '{exp:currency_select:price_max wholesale="yes"}',
+			values: ['{exp:currency_select:price_from wholesale="yes"}','{exp:currency_select:price_to wholesale="yes"}'],
+			slide: function( event, ui ) {
+			$("#amount-wholesale").val( "" + ui.values[ 0 ] + "|" + ui.values[ 1 ] );
+			}       		
+		});
+		$("#amount-wholesale").val($( "#slider-range-wholesale" ).slider( "values", 0 )+ '|' +$( "#slider-range-wholesale" ).slider( "values", 1 ) );
+	  });
+	
+	 
+</script>
+
+<style>
+.scroll{overflow-y: scroll; max-height: 150px; border:1px solid #ccc; padding:5px 20px 10px 20px}
+</style>
+
+{/exp:mtt_search:form}

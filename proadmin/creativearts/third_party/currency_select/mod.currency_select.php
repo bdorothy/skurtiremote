@@ -84,16 +84,16 @@ class Currency_select {
 	$num1= $this->EE->TMPL->fetch_param('num1');
 	$num2= $this->EE->TMPL->fetch_param('num2');
 	$price = $num1*$num2;	
-	return intval($price);
+	return floatval($price);
 	}
 	
 	// this is for price slider setting max price as per customers currency
 	public function price_max($wholesale="no",$retail="yes"){
-	$show_wholesale = $this->EE->TMPL->fetch_param('show_wholesale');
+	$wholesale = $this->EE->TMPL->fetch_param('wholesale');
 	$show_retail = $this->EE->TMPL->fetch_param('show_retail');
 	
 	if ($wholesale == "yes"){
-	ee()->db->select('GREATEST(MAX(field_id_2), MAX(field_id_83)) as max_price'); // to change this later with site config library
+	ee()->db->select('GREATEST(MAX(field_id_2), MAX(field_id_83)) as field_id_2'); // to change this later with site config library
 	}else{
 	ee()->db->select_max('field_id_2'); 
 	}
@@ -110,8 +110,13 @@ class Currency_select {
 	
 	
 	
-	public function price_to(){
-	$price = explode('|',ee()->input->get_post('r:rp'));
+	public function price_to(){	
+	$wholesale = $this->EE->TMPL->fetch_param('wholesale');
+	if ($wholesale == "yes"){
+	$price = explode('|',ee()->input->get_post('r:wp'));	
+	}else{
+	$price = explode('|',ee()->input->get_post('r:rp'));	
+	}
 	
 	if(isset($price[1])){
 	$price_to = $this->converted_numeric($price[1]);
@@ -122,7 +127,12 @@ class Currency_select {
 	}
 	
 	public function price_from(){
+	$wholesale = $this->EE->TMPL->fetch_param('wholesale');
+	if ($wholesale == "yes"){
+	$price = explode('|',ee()->input->get_post('r:wp'));	
+	}else{
 	$price = explode('|',ee()->input->get_post('r:rp'));
+	}
 	$price_from = $this->converted_numeric($price[0]);
 	return $price_from;
 	}
@@ -133,21 +143,15 @@ class Currency_select {
 	// the customers currency currently selected.		
 	$current_currency = strtolower($this->get_currency_code());	
 	$base_currency = "inr";
-	
-	
 
 	if($number == ""){
 	$number = $this->EE->TMPL->fetch_param('price');
 	}
-	
-	
 	$number = sanitize_number($number);
-	
-	
+
 	// get the site config library
 	$this->EE->load->add_package_path(PATH_THIRD.'siteconfig/');
 	$this->EE->load->library('siteconfig');
-	
 	
 	if($current_currency == "inr"){
 	$conversion_rate = 1;
@@ -155,11 +159,9 @@ class Currency_select {
 	$conversion_rate = $this->EE->siteconfig->item($current_currency.'_'.$base_currency);	
 	}
 	
-	$conversion_rate = intval($conversion_rate);
-	
+	$conversion_rate = floatval($conversion_rate);
 	$price = $number/$conversion_rate;
-	
-	$price = round($price,2);
+	$price = round($price,2);//round($price * 1)/1; number_format((float)(round($price * 2)/2), 2, '.', '')
 	//$price = ceil($price / 10) * 10;
 	return $price;
 	}
@@ -207,7 +209,7 @@ class Currency_select {
 	public function wholesale_converted_numeric(){
 	$wp = ee()->TMPL->fetch_param('wp');
 	if ($wp != 0 && $wp != ""){
-	return ($this->converted_numeric($wp));
+	return $wp;
 	}else{
 	// calculate all the related products price total	
 	$entry_id = ee()->TMPL->fetch_param('entry_id');
@@ -220,7 +222,7 @@ class Currency_select {
 	$row = $query->row(); 
 	$wp =  $row->wp;
 	} 	
-	return ($this->converted_numeric($wp));
+	return $wp;
 	}
 	}
 	

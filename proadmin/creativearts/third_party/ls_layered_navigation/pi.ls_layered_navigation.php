@@ -100,7 +100,15 @@ class Ls_layered_navigation {
 	
 	}	 
 	
-	
+	public function get_limit(){
+	$limit = ee()->input->get('limit');
+	if (isset($limit)){
+	$limit = ee()->input->get('limit');
+	}else{
+	$limit = 32;
+	}
+	return $limit;
+	}
 	
 	
 	public function get_colors(){	

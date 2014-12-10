@@ -13,16 +13,19 @@
    </style>
    
     <div class="row">
-        <div class="panel panel-default widget">
-            <div class="panel-heading">
+       
+                {exp:comment:entries sort="asc" limit="20" entry_id="{embed:entry_id}"}
+               	{if count == 1}
+                 <div class="panel panel-default widget">
+                 <div class="panel-heading">
                 <span class="glyphicon glyphicon-comment"></span>
                 <h3 class="panel-title">
                     Recent Comments</h3>
                 
-            </div>
-            <div class="panel-body">
-                <ul class="list-group">
-                {exp:comment:entries sort="asc" limit="20" entry_id="{embed:entry_id}"}
+           		 </div>
+                <div class="panel-body">
+                  <ul class="list-group">
+                {/if}
                     <li class="list-group-item">
                         <div class="row">
                             
@@ -35,10 +38,15 @@
                                
                             </div>
                         </div>
-                    </li>
+                    </li>  
+                  {if count == total_results}                    
+                    </ul>               
+           		  </div> 
+        		</div>
+            	  {/if}
+                  {if no_results}
+                 <div class="alert alert-warning">No Reviews available for this product</div>
+                  {/if}
                   {/exp:comment:entries}
-                </ul>
-               
-            </div>
-        </div>
+         
     </div>

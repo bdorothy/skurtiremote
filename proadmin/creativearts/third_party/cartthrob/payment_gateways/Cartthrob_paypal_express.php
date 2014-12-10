@@ -226,7 +226,7 @@ class Cartthrob_paypal_express extends Cartthrob_payment_gateway
 			$this->API_Signature = urlencode($this->plugin_settings('test_signature'));
 			$this->API_Subject = urlencode($this->plugin_settings('test_subject'));
 			$this->endpoint = "https://svcs.sandbox.paypal.com"; 
-			$this->application_id = "APP-80W284485P519543T"; // testing. 
+			$this->application_id = "APP-80W284485P519543T-RAJ"; // testing. 
 		}
 		else
 		{
@@ -409,7 +409,7 @@ class Cartthrob_paypal_express extends Cartthrob_payment_gateway
 	}
 	
 	function assemble_post_array($method="SetExpressCheckout", $version = "65.1", $token = NULL, $payer_id= NULL)
-	{
+	{	ee()->load->library('ls_currency_calculator');
 		if ($this->plugin_settings('allow_note')=="yes")
 		{
 			$allow_note = 1; 
@@ -419,6 +419,7 @@ class Cartthrob_paypal_express extends Cartthrob_payment_gateway
 			$allow_note = 0; 
 		}
 
+			
 		// added to handle situations when a person has an alternate total and goes to PayPal. 
 		if ($method == "DoExpressCheckoutPayment" && $this->order('pp_alt_total'))
 		{
@@ -428,18 +429,96 @@ class Cartthrob_paypal_express extends Cartthrob_payment_gateway
 		{
 			if ($this->total())
 			{
+				
 				$total = $this->total();
+				// raj sadh
+				// calculate the order totals based on our schema
+				
+				$total = ee()->ls_currency_calculator->converted_numeric($total);
+			
 			}
 			else
 			{
+			
 				$total = $this->order('total');
+				$total = ee()->ls_currency_calculator->converted_numeric($total);
 			}
+			
+		
+		// OTHER CALCULATIONS FOR THE ORDER
+		$subtotal = $this->order('subtotal');
+		$subtotal = ee()->ls_currency_calculator->converted_numeric($subtotal);
+		$subototal = round($subtotal,2);
+		
+		$tax = $this->order('tax');
+		$tax = ee()->ls_currency_calculator->converted_numeric($tax);
+		$tax = round($tax,2);
+		
+		$shipping = $this->order('shipping');
+		$shipping = ee()->ls_currency_calculator->converted_numeric($shipping);
+		$shipping = round($shipping,2);
+		
+		
+		
+	
+
+		$item_array = array(); 
+
+		foreach ($this->order('items') as $row_id => $item)
+		{
+			if ($item['price'] == 0) // paypal doesn't like 0 priced items, but it doesn't mind negative items
+			{
+				continue; 
+			}
+			if (!isset($count))
+			{
+				$count=0;
+			}	
+			
+			$item_price = $item['price'];
+			$item_price = ee()->ls_currency_calculator->converted_numeric($item_price);
+			$item_price = $item_price;
+							
+			$item_array["L_PAYMENTREQUEST_0_NAME".$count]			= substr($item['title'], 0, 126);
+ 			$item_array["L_PAYMENTREQUEST_0_AMT".$count]			= $item_price; 
+			$item_array["L_PAYMENTREQUEST_0_QTY".$count] 			= $item['quantity']; 
+
+			if ( $this->plugin_settings('show_item_options') == "yes" && !empty($item['item_options']))
+			{
+				$item_options = ""; 
+				foreach($item['item_options'] as $key=> $value)
+				{
+					$item_options .= $key.": ". $value. ", "; 
+				}
+				$item_array["L_PAYMENTREQUEST_0_DESC".$count] 		= substr($item_options, 0, 126);  
+			}
+			if ($this->plugin_settings('show_item_id') == "yes")
+			{
+				if (empty($item['entry_id']))
+				{
+					$item_array["L_PAYMENTREQUEST_0_NUMBER".$count] 		= "000"; 
+				}
+				else
+				{
+					$item_array["L_PAYMENTREQUEST_0_NUMBER".$count] 		= $item['entry_id']; 
+				}
+ 			}
+			$count++;
+
+		}	
+
+		
+		
+			$total = $subtotal + $tax + $shipping;
+		
+		
+			
 		}
 		$info = array(
-			'PAYMENTREQUEST_0_AMT'					=> round($total,2), 
-			'PAYMENTREQUEST_0_ITEMAMT'				=> round($this->order('subtotal'),2),
-			'PAYMENTREQUEST_0_TAXAMT'				=> round($this->order('tax'),2),
-	 		'PAYMENTREQUEST_0_SHIPPINGAMT'			=> round($this->order('shipping'),2),
+			'PAYMENTREQUEST_0_AMT'					=> $total, 
+			'PAYMENTREQUEST_0_ITEMAMT'				=> $subtotal,
+			'PAYMENTREQUEST_0_TAXAMT'				=> $tax,
+	 		'PAYMENTREQUEST_0_SHIPPINGAMT'			=> $shipping,
 			'PAYMENTREQUEST_0_SHIPTONAME'			=> substr(($this->order('shipping_first_name') 		? $this->order('shipping_first_name') . " ". $this->order('shipping_last_name') : $this->order('first_name') ." ". $this->order('last_name')),0, 31),
 			'PAYMENTREQUEST_0_SHIPTOSTREET'			=> substr(($this->order('shipping_address') 			? $this->order('shipping_address') : $this->order('address')), 0, 99),
 			'PAYMENTREQUEST_0_SHIPTOSTREET2'		=> substr(($this->order('shipping_address2') 			? $this->order('shipping_address2') : $this->order('address2')), 0, 99),
@@ -567,7 +646,7 @@ class Cartthrob_paypal_express extends Cartthrob_payment_gateway
 		
 		if ($this->plugin_settings('header_image_url'))
 		{
-			$post_array['HDRIMG'] = $this->plugin_settings('header_image_url'); 
+			$post_array['HDRIMG'] = ee()->config->item('site_url').$this->plugin_settings('header_image_url'); 
 		}
 		if ($this->plugin_settings('header_background_color'))
 		{
@@ -590,52 +669,15 @@ class Cartthrob_paypal_express extends Cartthrob_payment_gateway
 			unset($post_array['PAYMENTREQUEST_0_ALLOWEDPAYMENTMETHOD']); 
 		}
 
-		$item_array = array(); 
-
-		foreach ($this->order('items') as $row_id => $item)
-		{
-			if ($item['price'] == 0) // paypal doesn't like 0 priced items, but it doesn't mind negative items
-			{
-				continue; 
-			}
-			if (!isset($count))
-			{
-				$count=0;
-			}
-
-			$item_array["L_PAYMENTREQUEST_0_NAME".$count]			= substr($item['title'], 0, 126);
- 			$item_array["L_PAYMENTREQUEST_0_AMT".$count]			= round($this->round($item['price']), 2); 
-			$item_array["L_PAYMENTREQUEST_0_QTY".$count] 			= $item['quantity']; 
-
-			if ( $this->plugin_settings('show_item_options') == "yes" && !empty($item['item_options']))
-			{
-				$item_options = ""; 
-				foreach($item['item_options'] as $key=> $value)
-				{
-					$item_options .= $key.": ". $value. ", "; 
-				}
-				$item_array["L_PAYMENTREQUEST_0_DESC".$count] 		= substr($item_options, 0, 126);  
-			}
-			if ($this->plugin_settings('show_item_id') == "yes")
-			{
-				if (empty($item['entry_id']))
-				{
-					$item_array["L_PAYMENTREQUEST_0_NUMBER".$count] 		= "000"; 
-				}
-				else
-				{
-					$item_array["L_PAYMENTREQUEST_0_NUMBER".$count] 		= $item['entry_id']; 
-				}
- 			}
-			$count++;
-		}	
-
-		if ($this->order('discount') > 0)
+		
+		$discount = round($this->order('discount'),2);
+		
+		if ($discount > 0)
 		{
 			// oh god, the discount's greater than the subtotal. WHAT DO WE DO NOW!?!?!
 			// oh that's right paypal can't handle it. so we'll just send one line item with the
 			// entire cart contents *sigh*
-			if ($this->order('discount') > $this->order('subtotal'))
+			if ($discount > $subtotal)
 			{
 				// killing off item array, shipping and tax. 
 				$item_array= array(); 
@@ -645,10 +687,10 @@ class Cartthrob_paypal_express extends Cartthrob_payment_gateway
 	 		}
 			else
 			{ 
-				$post_array['PAYMENTREQUEST_0_ITEMAMT']				= round(($this->order('subtotal')-$this->order('discount')), 2); 
+				$post_array['PAYMENTREQUEST_0_ITEMAMT']				= ($subtotal-$discount); 
 			
 				$item_array["L_PAYMENTREQUEST_0_NAME".$count]			= $this->lang('discount'); 
-	 			$item_array["L_PAYMENTREQUEST_0_AMT".$count]			= -round($this->order('discount'), 2);
+	 			$item_array["L_PAYMENTREQUEST_0_AMT".$count]			= -$discount;
 				$item_array["L_PAYMENTREQUEST_0_QTY".$count] 			= 1;
 				if ($this->plugin_settings('show_item_id') == "yes")
 				{

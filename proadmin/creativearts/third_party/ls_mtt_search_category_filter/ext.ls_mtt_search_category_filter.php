@@ -153,6 +153,42 @@ class Ls_mtt_search_category_filter_ext {
 	//
 	
 	
+	
+	if (isset($data['r:wp'])){
+	// NOW MANIPULATE THE PRICE
+	
+	// which currency code the customer is using?
+	$this->EE->load->add_package_path(PATH_THIRD.'cartthrob');		
+	$this->EE->load->model('customer_model');		
+	//load the settings into CI
+	$this->EE->load->model('cartthrob_settings_model');				
+	//load the session
+	$this->EE->load->library('cartthrob_session');				
+	//get the cart id from the session
+	$cart_id = $this->EE->cartthrob_session->cart_id();			
+	$this->EE->load->model('cart_model');				
+	$params['cart'] = $this->EE->cart_model->read_cart($cart_id);				
+	$existing_customer_info = (isset($params['cart']['customer_info'])) ? $params['cart']['customer_info'] : NULL;
+	$params['cart']['customer_info'] = $this->EE->customer_model->get_customer_info($existing_customer_info);		
+	//normally we'd want to instantiate with a config array,
+	//but the Cartthrob_core_ee driver overrides the use of the config array and uses the cartthrob_settings_model's config cache
+
+	$currency_code = $params['cart']['customer_info']['currency_code'];
+	$price = $data['r:wp'];
+	$price = explode('|',$price);
+	
+	$from = $price[0];
+	$to = $price[1];
+	
+	$from = $this->converted_numeric($currency_code,$from);
+	$to = $this->converted_numeric($currency_code,$to);
+	
+	$new_price = implode('|',array($from,$to));
+	$data['r:wp'] = $new_price;
+	}
+	//
+	
+	
 	// unset the submit button
 	if(isset($data['go'])){	
 	unset($data['go']);

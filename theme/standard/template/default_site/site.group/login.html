@@ -1,0 +1,99 @@
+{if logged_in}
+{redirect="/myaccount"}
+{/if}
+{embed="common/head_open" title="Login" description="If you already a member, login with your credentials or register free and get access to your account and wholesale prices"}
+{embed="common/head_close"}
+{embed="common/topbar"}
+{embed="common/logobar"}
+
+
+<div id="login-overlay" class="col-md-6 col-md-offset-3 mb50">
+      <div class="">
+          <div class="modal-header">           
+              <h4 class="modal-title" id="myModalLabel">If you are already a member login now or <a href="{site_url}register" style="color:#055A83">Register</a> here</h4>
+          </div>
+          <div class="modal-body">
+              <div class="row">
+                  <div class="col-xs-12 col-md-6">
+                      <div class="well">
+                          {exp:freemember:login form_id="lloginform" return="{current_url}"  error_handling="inline"}
+                              <div class="form-group">
+                                  <label for="username" class="control-label">Email</label>
+                                  <input type="text" class="form-control" id="username" name="username" value="" required="" title="Please enter you username" placeholder="Email registered with us">
+                                  <span class="help-block"></span>
+                              </div>
+                              <div class="form-group">
+                                  <label for="password" class="control-label">Password</label>
+                                  <input type="password" class="form-control" id="password" name="password" value="" required="" title="Please enter your password" placeholder="Your Password">
+                                  <span class="help-block"></span>
+                              </div>
+                              <div class="error_username alert-danger hide" style="padding:1px 0px 0px 5px"></div>
+                              <div class="checkbox">
+                                  <label>
+                                      <input type="checkbox" name="remember" id="remember"> Remember login
+                                      
+                                  </label>
+                                  <div class="loader" style="display:none"></div>
+                                 
+                              </div>
+                              
+                              <button type="submit" class="btn btn-success btn-block">Login</button>
+                              <a href="/forgot-password" class="btn btn-default btn-block">Forgot Password</a>
+                         {/exp:freemember:login}
+                      </div>
+                  </div>
+                  <div class="col-xs-12 col-md-6">
+                      <p class="lead">Register now for <span class="text-success">FREE</span></p>
+                      <ul class="list-unstyled" style="line-height: 2">
+                          <li><span class="fa fa-check text-success"></span> Track all your orders</li>
+                          <li><span class="fa fa-check text-success"></span> Fast re-order</li>
+                          <li><span class="fa fa-check text-success"></span> Save your favorite Products</li>
+                          <li><span class="fa fa-check text-success"></span> Fast checkout</li>  
+                          <li><span class="fa fa-check text-success"></span> Get Updates (Optional)</li>                         
+                          {if "{exp:siteconfig:get item='allow_wholesale'}" == 'yes'}
+                          <li><div style="font-size:10px; line-height:1.2em; color:#115700">We have wholesale area with special price list for our wholesale customers. If you want to buy in bulk, you may also request wholesale access while registering.</div></li>
+                          {/if}
+                      </ul>
+                      <p><a href="/register" class="btn btn-info btn-block">Yes please, register now!</a></p>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+<div class="clearfix"></div>
+
+{embed="common/subfooter"}
+{embed="common/footer"}
+<script>
+$(document).ready(function(e) {   
+		 
+$('#lloginform').ajaxForm({
+	dataType: 'json',
+	beforeSubmit: function () {
+	$(".loader").css("display","block");
+	},
+	success: function(data) {	
+	$(".loader").css("display","none");
+	if (data.success) {
+	if(data.ret){	
+	// alert(data.toSource());
+	 window.location.href = data.ret; 
+	 }	 	 
+	 } 		 
+	 else{	
+	$.each( data.errors, function( i, v ) {	
+	$("input[name=XID]").val(data.XID);	
+	$('.error_'+i).empty(); 
+	$('.error_'+i).removeClass("hide");		 			
+	$('.error_'+i).html('<p>'+v+'</p>');		
+	 });
+		 }
+	}	
+	});
+
+});
+</script>
+{embed="common/foot"}
+
+
+ 

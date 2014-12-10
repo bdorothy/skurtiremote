@@ -1,0 +1,87 @@
+/* page layout */
+#mainContent .pageContents {
+  padding-top: 0;
+}
+.contents .heading {
+  margin-bottom: 0
+}
+
+/* chart */
+#analytics_data {
+  margin-bottom: 30px;
+}
+#googleTable {
+  float: right;
+}
+
+/* table widths and layout */
+#mainContent table.mainTable {
+  border-collapse: collapse;
+  float: left;
+  font: 10px/18px "Lucida Grande","Lucida Sans Unicode",Arial,Verdana,sans-serif;
+}
+#mainContent table.mainTable th:last-child {
+  border: 0 !important;
+}
+#mainContent table.mainTable td {
+  border: 0 !important;
+}
+#mainContent table.mainTable.sources {
+  width: 48%;
+  margin: 0 1% 20px 1%
+}
+#mainContent table.mainTable.pages {
+  width: 48%;
+  margin: 0 1% 20px 1%
+}
+#mainContent table.mainTable.today,
+#mainContent table.mainTable.yesterday {
+  border: 0;
+  width: 23%;
+  margin: 0 1%
+}
+
+/* table headings */
+#mainContent table.mainTable tr th {
+  border: 0;
+  border-bottom: 1px solid #000;
+  color: #000;
+  text-transform: none;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+}
+#mainContent table.mainTable th:last-child {
+  border-bottom: 1px solid #000 !important;
+}
+
+
+/* table content */
+#mainContent table.mainTable tr {
+  border: 0;
+}
+#mainContent table.mainTable tr td {
+  padding: 3px 10px;
+  border: 0;
+  color: #666;
+}
+#mainContent table.mainTable tr th.republic_analytics_browser {
+  padding-top: 20px;
+}
+#mainContent table.mainTable tr th.republic_analytics_os {
+  padding-top: 20px;
+}
+/* toggle more stats */
+#mainContent table.mainTable tr.browser-sub {
+  display: none;
+}
+#mainContent table.mainTable tr.browser-sub td.version {
+  padding-left: 20px
+}
+#mainContent table.mainTable tr.browser-sub td {
+  font-size: 10px;
+  padding: 2px 10px;
+  color: #333;
+}
+
+#mainContent .jqplot-highlighter-tooltip {
+
+}

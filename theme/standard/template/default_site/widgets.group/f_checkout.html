@@ -1,0 +1,382 @@
+
+            <!-- 1C -->
+                        
+            <div class="col-xs-12">
+                      
+   			<div class="form-process">
+<!-- form-process -->
+<div class="bs-wizard"> 
+		  <div class="col-xs-4 bs-wizard-step complete">
+                  <div class="text-center bs-wizard-stepnum">Select Country</div>
+                  <div class="progress"><div class="progress-bar"></div></div>
+                  <a href="#" class="bs-wizard-dot"></a>
+                  
+                </div>
+                
+                <div class="col-xs-4 bs-wizard-step complete"><!-- complete -->
+                  <div class="text-center bs-wizard-stepnum">Review Your Order</div>
+                  <div class="progress"><div class="progress-bar"></div></div>
+                  <a href="#" class="bs-wizard-dot"></a>
+                  
+                </div>
+                
+                
+                
+                <div class="col-xs-4 bs-wizard-step complete"><!-- active -->
+                  <div class="text-center bs-wizard-stepnum">Checkout</div>
+                  <div class="progress"><div class="progress-bar"></div></div>
+                  <a href="#" class="bs-wizard-dot"></a>
+                  
+                </div>
+            </div>
+		</div>
+        <style>
+.bs-wizard {margin-top: 40px;}
+
+/*Form Wizard*/
+.bs-wizard { padding: 0 0 10px 0;}
+.bs-wizard > .bs-wizard-step {padding: 0; position: relative;}
+.bs-wizard > .bs-wizard-step + .bs-wizard-step {}
+.bs-wizard > .bs-wizard-step .bs-wizard-stepnum {color: #595959; font-size: 16px; margin-bottom: 5px;}
+.bs-wizard > .bs-wizard-step .bs-wizard-info {color: #999; font-size: 14px;}
+.bs-wizard > .bs-wizard-step > .bs-wizard-dot {position: absolute; width: 30px; height: 30px; display: block; background: #fbe8aa; top: 45px; left: 50%; margin-top: -15px; margin-left: -15px; border-radius: 50%;} 
+.bs-wizard > .bs-wizard-step > .bs-wizard-dot:after {content: ' '; width: 14px; height: 14px; background: #fbbd19; border-radius: 50px; position: absolute; top: 8px; left: 8px; } 
+.bs-wizard > .bs-wizard-step > .progress {position: relative; border-radius: 0px; height: 8px; box-shadow: none; margin: 20px 0;}
+.bs-wizard > .bs-wizard-step > .progress > .progress-bar {width:0px; box-shadow: none; background: #fbe8aa;}
+.bs-wizard > .bs-wizard-step.complete > .progress > .progress-bar {width:100%;}
+.bs-wizard > .bs-wizard-step.active > .progress > .progress-bar {width:50%;}
+.bs-wizard > .bs-wizard-step:first-child.active > .progress > .progress-bar {width:0%;}
+.bs-wizard > .bs-wizard-step:last-child.active > .progress > .progress-bar {width: 100%;}
+.bs-wizard > .bs-wizard-step.disabled > .bs-wizard-dot {background-color: #f5f5f5;}
+.bs-wizard > .bs-wizard-step.disabled > .bs-wizard-dot:after {opacity: 0;}
+.bs-wizard > .bs-wizard-step:first-child  > .progress {left: 50%; width: 50%;}
+.bs-wizard > .bs-wizard-step:last-child  > .progress {width: 50%;}
+.bs-wizard > .bs-wizard-step.disabled a.bs-wizard-dot{ pointer-events: none; }
+/*END Form Wizard*/
+</style>
+<!-- form-process -->
+</div>
+    		
+       
+            <!-- 2CL -->
+
+{exp:cartthrob:checkout_form 
+    create_user="yes"
+    group_id="6"
+    return="order_info" 
+    gateway="paypal_express"
+    }
+<div class="container">
+    <div class="row mt50">
+       
+      <div class="col-sm-12">    
+        
+        {if "{exp:cartthrob:total_items_count}" < 1}
+        <div class="alert alert-danger"><h2>Your shopping cart is empty</h2></div>      
+        {/if} 
+        
+     
+       	
+        <div class="panel panel-default">
+            <div class="panel-heading">
+              <h2 class="panel-title"><i class="icon i-cart-2"></i>Checkout</h2>
+            </div>
+            
+            
+            
+		<div class="panel-body">
+            
+            
+            <!--Total -->
+            <div class="col-xs-12 col-sm-4">
+            
+            
+            <div class="col-xs-12 col-sm-6">
+            Subtotal
+            </div>            
+            <div class="col-xs-12 col-sm-6 text-right">
+            {exp:currency_select:converted price='{exp:cartthrob:cart_subtotal:numeric}' parse="inward"}
+            </div>
+         
+            
+            <div class="col-xs-12 col-sm-6">
+            Shipping
+            </div>            
+            <div class="col-xs-12 col-sm-6 text-right">
+            {exp:currency_select:converted price='{exp:cartthrob:cart_shipping:numeric}' parse="inward"}
+            </div>
+            
+            
+            <div class="col-xs-12 col-sm-6">
+            Discount
+            </div>            
+            <div class="col-xs-12 col-sm-6 text-right">
+            {exp:currency_select:converted price='{exp:cartthrob:cart_discount:numeric}' parse="inward"}
+            </div>
+            
+            
+            <div class="col-xs-12 col-sm-6">
+            <strong>Total</strong>
+            </div>            
+            <div class="col-xs-12 col-sm-6 text-right">
+            <strong>{exp:currency_select:converted price='{exp:cartthrob:cart_total:numeric}' parse="inward"}</strong>
+            </div>
+        
+        	{if country_code == "IN"}
+    		<img src="{skin_url}/images/global/ccavenue.png">
+   			{if:else}
+            <img src="{skin_url}/images/global/paypal.gif">
+            {/if}
+            </div>
+            <!-- Total -->
+            
+            
+            
+            <!--Checkout -->
+            <div class="col-xs-12 col-sm-8">
+            <h2>Please fill in your details</h2>
+            
+            <div id="myaccount-profile">
+
+    <div class="alert" style="display:none"></div>
+    
+    {if country_code == "IN"}
+	<input type="hidden" name="gateway" value="tiI3Xwb2/0qR3xgoNvZK4c93ArCXgGLoB7QFwAOsrOT6wqnT8NxUh+VtxPCuvL2AubD++HHARps67HIs34y3Ug==" />
+    {if:else}
+    <input type="hidden" name="gateway" value="1WeIJSLqDc0TyRrm4AwjBKbrO2XBM0QC8dUP5PeGpoYH+rXWQ6mr938wjMKBnh9IeY0jXWsih0t3H98zPz0TOQ==" />
+    {/if}
+    
+    
+	<div class="">
+    
+    <div class="col-sm-6 mt20">
+        <label class="col-sm-12">First Name</label>
+        <div class="col-sm-12">
+            <input type="text" class="form-control  input-lg" name="first_name" value="{first_name}"
+                required
+                data-bv-notempty-message="First Name is required" />
+        </div>
+    </div>
+
+    <div class="col-sm-6 mt20">
+        <label class="col-sm-12">Last Name</label>
+        <div class="col-sm-12">
+            <input type="text" class="form-control  input-lg" name="last_name" value="{customer_last_name}"
+                required
+                data-bv-notempty-message="Last Name is required" />
+        </div>
+    </div>
+    
+    
+    <div class="col-sm-12 mt20">
+        <label class="col-sm-12">Email Address</label>
+        <div class="col-sm-12">
+            <input type="text" class="form-control  input-lg" name="email_address" value="{email_address}"
+                required
+                data-bv-notempty-message="Email Address is required"
+                data-bv-emailaddress="true"
+                data-bv-emailaddress-message="The value is not a valid email address"                
+                 />
+        </div>
+    </div>
+    
+    
+    <!-- Address -->
+     <div class="col-sm-6 mt20">
+        <label class="col-sm-12">Address Line 1</label>
+        <div class="col-sm-12">
+            <input type="text" class="form-control  input-lg" name="address" value="{address}"
+                required
+                data-bv-notempty-message="Address is required" />
+        </div>
+    </div>
+    
+     <div class="col-sm-6 mt20">
+        <label class="col-sm-12">Address Line 2</label>
+        <div class="col-sm-12">
+            <input type="text" class="form-control  input-lg" name="address2" value="{address2}"/>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    
+      <div class="col-sm-6 mt20">
+        <label class="col-sm-12">City</label>
+        <div class="col-sm-12">
+            <input type="text" class="form-control  input-lg" name="city" value="{city}"
+                required
+                data-bv-notempty-message="City Name is required" />
+        </div>
+    </div>
+    
+    
+     <div class="col-sm-6 mt20">
+        <label class="col-sm-12">State</label>
+        <div class="col-sm-12">
+            <input type="text" class="form-control  input-lg" name="state" value="{state}"
+                required
+                data-bv-notempty-message="State Name is required" />
+        </div>
+    </div>
+     <div class="clearfix"></div>
+    
+    
+      <div class="col-sm-6 mt20">
+        <label class="col-sm-12">Country</label>
+        <div class="col-sm-12">
+        <input type="hidden" name="country_code" value="{country_code}"/>
+            {country_code}
+            <img src="{site_url}images/flags/{country_code}.gif"> <a href="#" id="changecountry">Change Country</a>
+        </div>
+    </div>
+    
+    
+      <div class="col-sm-6 mt20">
+        <label class="col-sm-12">Zip Code</label>
+        <div class="col-sm-12">
+            <input type="text" class="form-control  input-lg" name="zip" value="{zip}"
+                required
+                data-bv-notempty-message="Zip/Pin Code is required" />
+        </div>
+    </div>
+     <div class="clearfix"></div>
+    
+    
+     <div class="col-sm-12 mt20">
+        <label class="col-sm-12">Primary Phone Number</label>
+        <div class="col-sm-12">
+            <input type="text" class="form-control  input-lg" name="phone" value="{phone}"
+                required
+                data-bv-notempty-message="Primary Phone Number is required" />
+        </div>
+    </div>    
+     <div class="clearfix"></div>
+    
+   <!-- Address -->
+    
+	
+    <div class="col-sm-12 mt20">
+    <div class="col-sm-6 mt20">       
+            <button type="submit" class="btn btn-success pull-left">Proceed to Payment <i class="glyphicon glyphicon-play"></i></button>   
+    </div>
+    <div class="col-sm-6 mt20">
+   
+        	{if country_code == "IN"}
+    		<img src="{skin_url}/images/global/ccavenue.png">
+   			{if:else}
+            <img src="{skin_url}/images/global/paypal.gif">
+            {/if}
+    </div>
+    </div>
+    
+    
+   </div> 
+
+
+</div>
+
+<script>
+$(document).ready(function(e) {   
+
+$('#profile').bootstrapValidator(
+	{
+		feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        }
+	}
+	);
+	
+	
+		 
+$('#profile').ajaxForm({
+	dataType: 'json',
+	beforeSubmit: function () {
+	$(".loader").css("display","block");
+	//$(".spinner").html("Processing .... ");
+	},
+	success: function(data) {	
+	$(".loader").css("display","none");
+	window.scrollTo(0,0);
+	//$("#progress").removeClass("spinner");	
+	//alert(data.errors.toSource());
+	 if (data.success) {
+	// alert the message
+	$('.alert').removeClass('alert-danger');
+	$('.alert').addClass('alert-success');
+	$('.alert').html('<strong>Profile Uploaded Successfully</strong>');
+	$(".alert").show();
+	$(".alert").fadeOut(3000); 	 
+	} 		 
+	 else{	
+	$.each( data.errors, function( i, v ) {	
+	$("input[name=XID]").val(data.XID);			 			
+	$('.alert').html('<strong>'+v+'</strong>');
+	$('.alert').removeClass('alert-success');
+	$('.alert').addClass('alert-danger');
+	$('.alert').show();	
+	});
+	
+		 }
+	}	
+	});
+
+});
+</script>
+            
+           
+            </div>
+            <!-- Checkout -->
+       </div>
+       
+       
+       
+            
+        </div>   
+        
+        
+     
+        
+      </div>
+    </div>
+</div>
+{/exp:cartthrob:checkout_form}
+
+
+
+
+{exp:cartthrob:save_customer_info_form return="/checkout" id="country"}
+
+<div class="modal fade" id="selectcountry" tabindex="-1" role="dialog" aria-labelledby="loginformLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">    
+    <div class="panel-default" style="box-shadow:none">
+   <div class="panel-heading" style="box-shadow:none; border:none"><i class="icon i-globe"></i> <strong>Please select your country</strong>  
+   </div>
+</div>
+      <div class="modal-body" style="padding:0px 10px 10px 10px"> 
+    <div class="form-group">
+        <label class="col-xs-12">Please select your country to procced to checkout</label>
+        <div class="col-xs-12">
+          		<div class="col-xs-12 col-sm-6">
+  				  {exp:cartthrob:country_select name="country_code" alpha2="yes" selected="{customer_country_code}" extra="class='form-control'" add_blank="yes"}
+                  </div>
+                 <div class="col-xs-12 col-sm-6">  
+                  <input type="submit" value="Update Your Country" class="btn btn-primary"/>
+                 </div> 
+				   
+        </div>
+    </div>
+<div class="clearfix"></div>
+      </div>     
+    </div>
+  </div>
+</div>
+<script>
+$(document).ready(function(e) {
+$( "#changecountry" ).click(function() {
+$('#selectcountry').modal();
+});
+});
+</script>
+{/exp:cartthrob:save_customer_info_form} 

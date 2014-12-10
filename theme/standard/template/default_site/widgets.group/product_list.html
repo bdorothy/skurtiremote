@@ -39,7 +39,7 @@ category="{segment_2_category_id}"
 orderby="{exp:storecat:filter}{orderby}{/exp:storecat:filter}"
 sort="{exp:storecat:filter}{sort}{/exp:storecat:filter}"
 parse="inward"
-limit="2"
+limit="{exp:ls_layered_navigation:get_limit}"
 }
 	
    
@@ -138,7 +138,7 @@ limit="2"
     return="site/index"
     price = "{exp:currency_select:converted price='{rp:numeric}'}"
     }     
-    <input type="hidden" name="quantity" size="5" value="1" />
+    <input type="hidden" name="quantity" size="5" value="5" />
     <button type="submit" class="btn btn-warning mb10">
  				 <i class="icon i-cart"></i>Add to Cart
 	</button>

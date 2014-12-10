@@ -1,0 +1,10 @@
+/* dashEE Module CSS */
+
+.rightNav { padding:0; }
+.pageContents caption a.dashLayoutHelp { 
+	display:block; 
+	float:right; 
+	padding-top:2px; 
+	color:#FFF; 
+	font-size:12px; 
+	}

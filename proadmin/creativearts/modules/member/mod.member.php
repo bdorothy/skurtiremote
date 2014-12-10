@@ -308,6 +308,7 @@ class Member {
 		$left = ( ! in_array($this->request, $this->no_menu)) ? $this->profile_menu() : '';
 
 		// Validate the request
+		/*
 		$methods = array(
 			'public_profile',
 			'memberlist',
@@ -353,6 +354,8 @@ class Member {
 			'messages',
 			'delete'
 		);
+		*/ //raj sadh removed all member area access
+		$methods = array();
 
 
 		if ( ! in_array($this->request, $methods))

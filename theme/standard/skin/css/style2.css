@@ -33,7 +33,7 @@ ul{list-style:none}
 .well{background:#FFF9E2}
 
 .panel{ border-radius:0px; box-shadow:5px 5px 5px #CCC}
-.panel-default > .panel-heading{background:#FFE500;}
+.panel-default > .panel-heading{background:#FFE500; font-size:13px;}
 h4, h5, h6{margin-top:0px}
 
 ul.hj_social_bookmarks{padding-left:0px}

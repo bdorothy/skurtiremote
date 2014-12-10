@@ -11,10 +11,18 @@
         {embed="widgets/search"}
         </div>
         
-        <div class="col-md-3 mt20">
-        <h2><span class="btn btn-danger" style="cursor:default"><i class="icon i-stack"></i>  You are in Wholesale Area</span></h2>
-        </div>
-        
+        {if segment_1 == "wholesale"}
+        {if logged_in}
+            {if group_id ==1 && "{exp:siteconfig:get item='allow_wholesale'}" == "yes"}
+            <div class="col-md-3 mt20">
+                <h2><span class="btn btn-danger" style="cursor:default"><i class="icon i-stack"></i>  You are in Wholesale Area</span></h2> 	
+                <div class="mt10"><a href="{site_url}list/"><i class="icon i-arrow-left"></i>Back to Retail Area</a></div> 
+                </div>
+                
+            {/if}
+        {/if}
+        {/if}
+              
         
     </div>
 </div>
